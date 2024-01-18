@@ -45,21 +45,13 @@ fn setup_lua(lua: &mut Lua) {
     let t = lua.create_table().unwrap();
     lua.globals().set("orm64_options", t);
     
-    let mut t = lua.create_table().unwrap();
+    let t = lua.create_table().unwrap();
+    lua.globals().set("orm64_data", t); 
+    
     
     macro_rules! set_orm64_data_value {
-        ($key:expr, $value:expr) => {
-            t.set($key, $value); 
+        ($lua:expr, $key:expr, $value:expr) => {
+            $lua.globals().get::<&str, LuaTable>("orm64_data").unwrap().set($key, $value); 
         };
     }
-    
-    set_orm64_data_value!("user", "");
-    let f = lua.create_function_mut(|lua, user: String|{
-        
-        
-        return Ok(());
-    }).unwrap();
-
-    lua.globals().set("orm64_data", t.clone()); 
-
 }

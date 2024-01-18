@@ -11,6 +11,6 @@ Because I had enough of making FizzBuzz projects!
 ## Features
 
 - [X] Lua REPL
-- [-] Application and game creation
+- [ ] Application and game creation
 - [ ] Libraries
 - [ ] Package manager (To install apps and libraries)
