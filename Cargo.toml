@@ -1,0 +1,12 @@
+[package]
+name = "orm64"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+
+mlua = { version = "0.9.4", features = ["luajit", "macros"] }
+nix = { version = "0.27.1", features = ["env"] }
+rustyline = "13.0.0"
