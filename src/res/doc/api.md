@@ -19,11 +19,3 @@ The whole reason I made Orm64 was to make a simple game console that runs on you
 So of course we need graphics and multimedia.
 
 Unless you want to make graphics from scratch using the CPU, you should use this API for graphics.
-
-## The Lua in Lua API
-
-If you interpreted that title correctly, you may be questioning: Why should we embed Lua in Lua?
-
-The answer is: y e s. (this is a very good manual by the way.)
-
-

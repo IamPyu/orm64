@@ -11,6 +11,6 @@ orm64_options.prompt = "> " --[[
 
 -- Packages
 orm64_options.packages = {} -- Manage packages by git repo, with the Orm64 Package Manager!
-  -- Simply insert a string with the git repo URI.
-  -- ex. "https://git.example.com/gitLover69/myAwesomeOrm64Program"
+  -- Simply insert a string with the git repo URI with a key name.
+  -- ex. {awesome = "https://git.example.com/gitLover69/myAwesomeOrm64Program"}
   -- A more powerful way to manage packages may be added in the future, or you could make your own package manager!

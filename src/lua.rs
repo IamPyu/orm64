@@ -1,4 +1,4 @@
-use std::path::Path;
+use std::{path::Path, process::Command};
 
 use mlua::prelude::*;
 
@@ -77,5 +77,17 @@ fn setup_lua(lua: &mut Lua) {
         } 
 
         return Ok(path_str);
+    }).unwrap());
+
+    set_orm64_value!(lua, "install_packages", lua.create_function(|l, _:()|{
+        let packages = l.globals().get::<&str, LuaTable>("orm64_options").unwrap().get::<&str, LuaTable>("packages").unwrap();
+
+        for pair in packages.pairs::<String, String>() {
+            let (name, url) = pair.unwrap_or(("orm64_no_git_repo_found".to_string(), "https://gitlab.com/pyudev/orm64_no_git_repo_found".to_string()));
+            let path = super::util::orm64_directory()+"software/"+&name;
+
+        }
+
+        return Ok(());
     }).unwrap());
 }
