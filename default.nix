@@ -5,5 +5,6 @@ pkgs.mkShell {
     pkg-config
     luajit
     libiconv
+    SDL2
   ];
 }

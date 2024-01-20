@@ -1,7 +1,8 @@
-#![allow(unused)]
+// #![allow(unused)]
 
 pub mod core;
 pub mod lua;
+pub mod api;
 
 pub mod util {
     use std::{fs::{read_to_string, create_dir, File}, path::Path, io::Write};
@@ -10,26 +11,27 @@ pub mod util {
     pub fn orm64_directory() -> String {
         let p = format!("{}/.orm64.d/", std::env::var("HOME").unwrap());
         if !Path::new(&p).exists() {
-            create_dir(&p);
+            create_dir(&p).unwrap();
             File::create(p.clone() + "config.lua")
                 .unwrap()
                 .write_all(DEFAULT_CONFIG.as_bytes())
                 .unwrap();
 
             for dir in ORM64_DIRECTORIES {
-                create_dir(p.clone() + dir);
+                create_dir(p.clone() + dir).unwrap();
             }
         }
         return p;
     }
 
     /// Returns the contents of a configuration file or any file in $HOME/.orm64.d
-    /// If the file does not exist or failed to be read it will create the file and an empty string is returned.
+    /// 
+    /// If the file does not exist it will create the file and an empty string is returned.
     pub fn get_config_file_contents(file: &str) -> String {
         let mut value = "".to_string();
 
         if !Path::new(&orm64_directory()).exists() {
-            create_dir(orm64_directory());
+            create_dir(orm64_directory()).unwrap();
         }
 
         if !Path::new(&(orm64_directory()+file)).exists() {
@@ -37,7 +39,6 @@ pub mod util {
         }
 
         let path = orm64_directory() + file;
-
         let res = read_to_string(path);
 
         match res {
@@ -48,48 +49,25 @@ pub mod util {
         return value;
     }
 
-    pub const ORM64_DIRECTORIES: [&str;2] = ["apps", ""];
+    pub const ORM64_DIRECTORIES: [&str;3] = ["software", "data", "home"];
 
     /*
     Application structure:
-    Apps live in the `apps` directory. An app is just another file or directory.
+    Apps and Libraries live in the `software` directory. An app is just another directory.
 
-    A file app would look like: hi.lua
     A directory app would look like: hi/init.lua
 
     As you saw above by the file extensions "*.lua" apps are written in Lua.
     */
-    
-pub const DEFAULT_CONFIG: &str = r#"--Orm64 config
 
--- Startup Message!
-orm64_options.startup_message = "welcome to orm64, edit your configuration in $HOME/.orm64.d/config.lua"
+    /// Default Orm64 configuration
+    /// 
+    /// This gets loaded before the user configuration so anything unset in the user configuration
+    /// gets its default values
+    pub const DEFAULT_CONFIG: &str = include_str!("res/default.lua");
 
--- Prompt
-orm64_options.prompt = "> " -- The prompt! Its like the PS1 variable in GNU Bash.
-    -- It is that text that is printed before your cursor in a normal terminal shell.
-    -- Pretty cool right?
-"#;
-
-pub const HELP_MESSAGE: &str = r#"Welcome to Orm64!
-
-### SHELL ###
-It seems like you need help! You might be questioning why is this shell not working?
-Thats because its not a shell for your system. Its a Lua REPL to control Orm64!
-
-Anything that is not a reserved command Orm64 uses (like this help command) will be passed to Lua to evaluate and execute.
-
-Here is a list of reserved commands: [
-    exit
-    help
-    srtupmsg
-]
-
-### CONFIGURATION ###
-
-If you are running Orm64 for the first time, a directory would've been created at: $HOME/.orm64.d
-
-There are a few files in there
-
-"#;
+    /// Orm64 manual
+    pub const HELP_MESSAGE: &str = include_str!("res/doc/help.md");
+    /// Orm64 API manual
+    pub const API_MESSAGE: &str = include_str!("res/doc/api.md");
 }

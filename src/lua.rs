@@ -1,8 +1,10 @@
+use std::path::Path;
+
 use mlua::prelude::*;
-use std::collections::HashMap;
 
 pub struct Orm64Lua {
-    pub lua: Lua,
+    pub lua: Lua, // Why didn't i define it like: pub struct Orm64Lua(pub Lua)? Too late now i guess
+                  // I am not recfactoring this stuff..
 }
 
 impl Orm64Lua {
@@ -13,6 +15,7 @@ impl Orm64Lua {
         // load configuration (default and user config combined.)
         lua.load(super::util::DEFAULT_CONFIG).exec().unwrap();
         let config = super::util::get_config_file_contents("config.lua");
+
         match lua.load(&config).exec() {
             Ok(_) => eprintln!("Loaded configuration"),
             Err(e) => eprintln!("Error in configuration: {}", e)
@@ -42,16 +45,37 @@ impl Orm64Lua {
 }
 
 fn setup_lua(lua: &mut Lua) {
+    lua.load(format!("package.path = package.path .. ';{}software/?/init.lua'",
+        super::util::orm64_directory()))
+    .exec().unwrap();
+
     let t = lua.create_table().unwrap();
-    lua.globals().set("orm64_options", t);
+    lua.globals().set("orm64_options", t).unwrap();
     
     let t = lua.create_table().unwrap();
-    lua.globals().set("orm64_data", t); 
-    
-    
-    macro_rules! set_orm64_data_value {
+    lua.globals().set("orm64", t).unwrap();
+
+    #[allow(unused)]
+    /// Sets a key in the orm64 variable to a value
+    macro_rules! set_orm64_value {
         ($lua:expr, $key:expr, $value:expr) => {
-            $lua.globals().get::<&str, LuaTable>("orm64_data").unwrap().set($key, $value); 
+            $lua.globals().get::<&str, LuaTable>("orm64").unwrap().set($key, $value).unwrap(); 
         };
     }
+
+    // Small function to get the directory of a program, its like the get_modpath function for minetest
+    //
+    // This function *will* return nil if the specified program does NOT exist.
+    set_orm64_value!(lua, "get_software_path", lua.create_function(|_, name: String|{
+        let mut path_str = None;
+        let orm64_dir = super::util::orm64_directory();
+        let tmp = orm64_dir + "software/" + name.as_str(); 
+        let path = Path::new(&(tmp));
+
+        if path.exists() && path.is_dir() {
+            path_str = Some(tmp);
+        } 
+
+        return Ok(path_str);
+    }).unwrap());
 }

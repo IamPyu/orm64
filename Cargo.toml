@@ -6,7 +6,8 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+libc = "0.2.152"
 
-mlua = { version = "0.9.4", features = ["luajit", "macros"] }
+mlua = { version = "0.9.4", features = ["luajit", "macros", "vendored"] }
 nix = { version = "0.27.1", features = ["env"] }
 rustyline = "13.0.0"
