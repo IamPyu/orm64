@@ -1,9 +1,9 @@
-use std::{path::Path, process::Command};
+use std::{path::Path, process::Command, fs::create_dir};
 
 use mlua::prelude::*;
 
 pub struct Orm64Lua {
-    pub lua: Lua, // Why didn't i define it like: pub struct Orm64Lua(pub Lua)? Too late now i guess
+    pub lua: Lua, // Why didn't I define it like: pub struct Orm64Lua(pub Lua)? Too late now I guess
                   // I am not recfactoring this stuff..
 }
 
@@ -86,6 +86,43 @@ fn setup_lua(lua: &mut Lua) {
             let (name, url) = pair.unwrap_or(("orm64_no_git_repo_found".to_string(), "https://gitlab.com/pyudev/orm64_no_git_repo_found".to_string()));
             let path = super::util::orm64_directory()+"software/"+&name;
 
+            fn pull_repo(path: &String, url: &String) {
+                   Command::new("git").current_dir(&path)
+                       .arg("init")
+                       .output().unwrap();
+
+                   Command::new("git").current_dir(&path)
+                       .args(vec!["remote", "add", "origin", &url])
+                       .output().unwrap();
+
+
+                   Command::new("git").current_dir(&path)
+                       .args(vec!["branch", "-m", "main"])
+                       .output().unwrap();
+
+                   Command::new("git").current_dir(&path)
+                       .args(vec!["reset", "--hard"])
+                       .output().unwrap();
+
+                   Command::new("git").current_dir(&path)
+                       .args(vec!["pull", "origin", "main", "--force"])
+                       .output().unwrap();
+            } 
+
+            match create_dir(&path) {
+                _ => {
+                    println!("Installing package: {} from {}", &name, &url);
+                    pull_repo(&path, &url);
+                    println!("Installed package: {}!", &name);
+                }
+            }
+
+            // Reload all packages, so you can get the new features from the package during runtime.
+            let loaded = l.globals().get::<&str, LuaTable>("package").unwrap().get::<&str, LuaTable>("loaded").unwrap();
+            for pair in loaded.clone().pairs() {
+                let (key, _) = pair.unwrap_or(("NO PACKAGE FOUND".to_string(), None::<i32>));
+                loaded.set(key, None::<LuaTable>).unwrap_or(());
+            }
         }
 
         return Ok(());
