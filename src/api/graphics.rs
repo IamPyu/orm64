@@ -5,7 +5,7 @@ use super::{set_global_table_value, create_global_table};
 
 pub fn setup_graphics(lua: &Lua) {
     create_global_table!(lua, "orm64_graphics");
-    set_global_table_value!(lua, "orm64_graphics", "new", lua.create_function(move |l, args: ()|{
-        return Ok(());
+    set_global_table_value!(lua, "orm64_graphics", "new", lua.create_function(move |_l, _args: ()|{
+        Ok(())
     }).unwrap());
 }

@@ -8,9 +8,15 @@ pub struct Orm64<> {
     pub lua: Orm64Lua   
 }
 
+impl Default for Orm64 {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl Orm64 {
     pub fn new() -> Self {
-        return Self {
+        Self {
             lua: Orm64Lua::new()
         }
     }
@@ -20,7 +26,7 @@ impl Orm64 {
         println!("{}", self.lua.get_configuration_value::<String>("startup_message").unwrap());
 
         'orm64_loop: loop {
-            match reader.readline(format!("{}", self.lua.get_configuration_value::<String>("prompt").unwrap()).as_str()) {
+            match reader.readline(self.lua.get_configuration_value::<String>("prompt").unwrap().to_string().as_str()) {
                 Ok(cmd) => {
                     reader.add_history_entry(&cmd).unwrap_or(false);
 

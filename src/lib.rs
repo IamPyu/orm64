@@ -22,7 +22,7 @@ pub mod util {
                 create_dir(p.clone() + dir).unwrap();
             }
         }
-        return p;
+        p
     }
 
     /// Returns the contents of a configuration file or any file in $HOME/.orm64.d
@@ -47,7 +47,7 @@ pub mod util {
             Err(_) => {}
         }
         
-        return value;
+        value
     }
 
     pub const ORM64_DIRECTORIES: [&str;3] = ["software", "data", "home"];

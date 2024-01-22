@@ -7,6 +7,12 @@ pub struct Orm64Lua {
                   // I am not recfactoring this stuff..
 }
 
+impl Default for Orm64Lua {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl Orm64Lua {
     pub fn new() -> Self {
         let mut lua = Lua::new();
@@ -21,9 +27,9 @@ impl Orm64Lua {
             Err(e) => eprintln!("Error in configuration: {}", e)
         }
         
-        return Self {
+        Self {
             lua
-        };
+        }
     }
     
     pub fn get_configuration_value<'a, T: FromLua<'a>>(&'a mut self, name: &str) -> Option<T> {
@@ -75,7 +81,7 @@ fn setup_lua(lua: &mut Lua) {
             path_str = Some(tmp);
         } 
 
-        return Ok(path_str);
+        Ok(path_str)
     }).unwrap());
 
     set_orm64_value!(lua, "install_packages", lua.create_function(|l, _:()|{
@@ -86,24 +92,24 @@ fn setup_lua(lua: &mut Lua) {
             let path = super::util::orm64_directory()+"software/"+&name;
 
             fn pull_repo(path: &String, url: &String) {
-                   Command::new("git").current_dir(&path)
+                   Command::new("git").current_dir(path)
                        .arg("init")
                        .output().unwrap();
 
-                   Command::new("git").current_dir(&path)
+                   Command::new("git").current_dir(path)
                        .args(vec!["remote", "add", "origin", &url])
                        .output().unwrap();
 
 
-                   Command::new("git").current_dir(&path)
+                   Command::new("git").current_dir(path)
                        .args(vec!["branch", "-m", "main"])
                        .output().unwrap();
 
-                   Command::new("git").current_dir(&path)
+                   Command::new("git").current_dir(path)
                        .args(vec!["reset", "--hard"])
                        .output().unwrap();
 
-                   Command::new("git").current_dir(&path)
+                   Command::new("git").current_dir(path)
                        .args(vec!["pull", "origin", "main", "--force"])
                        .output().unwrap();
             } 
@@ -121,6 +127,6 @@ fn setup_lua(lua: &mut Lua) {
             loaded.set(name, None::<LuaTable>).unwrap();
         }
 
-        return Ok(());
+        Ok(())
     }).unwrap());
 }
