@@ -1,3 +1,5 @@
+use std::process::Command;
+
 // use std::collections::HashMap;
 use rustyline::DefaultEditor;
 use crate::lua::Orm64Lua;
@@ -30,7 +32,9 @@ impl Orm64 {
                         _ => self.lua.load(cmd)
                     }
                 }
-                Err(e) => println!("Failed to read input! {e}")
+                Err(e) => {
+                    println!("Failed to read input! {e}");
+                }
             }
         }
     }

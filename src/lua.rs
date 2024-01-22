@@ -45,8 +45,7 @@ impl Orm64Lua {
 }
 
 fn setup_lua(lua: &mut Lua) {
-    lua.load(format!("package.path = package.path .. ';{}software/?/init.lua'",
-        super::util::orm64_directory()))
+    lua.load(format!("package.path = package.path .. ';{}software/?/init.lua;?.lua' ", super::util::orm64_directory()))
     .exec().unwrap();
 
     let t = lua.create_table().unwrap();
@@ -119,10 +118,7 @@ fn setup_lua(lua: &mut Lua) {
 
             // Reload all packages, so you can get the new features from the package during runtime.
             let loaded = l.globals().get::<&str, LuaTable>("package").unwrap().get::<&str, LuaTable>("loaded").unwrap();
-            for pair in loaded.clone().pairs() {
-                let (key, _) = pair.unwrap_or(("NO PACKAGE FOUND".to_string(), None::<i32>));
-                loaded.set(key, None::<LuaTable>).unwrap_or(());
-            }
+            loaded.set(name, None::<LuaTable>).unwrap();
         }
 
         return Ok(());
