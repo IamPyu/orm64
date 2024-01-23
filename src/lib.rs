@@ -7,7 +7,7 @@ pub mod api;
 
 pub mod util {
     use std::{fs::{read_to_string, create_dir, File}, path::Path, io::Write};
-    
+     
     /// Returns the Orm64 directory, also creates it if it does not exist.
     pub fn orm64_directory() -> String {
         let p = format!("{}/.orm64.d/", std::env::var("HOME").unwrap());

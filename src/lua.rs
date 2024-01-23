@@ -1,5 +1,4 @@
 use std::{path::Path, process::Command, fs::create_dir};
-
 use mlua::prelude::*;
 
 pub struct Orm64Lua {
@@ -45,7 +44,7 @@ impl Orm64Lua {
     pub fn load<'a, 'b, T: mlua::AsChunk<'a, 'b>>(&'a mut self, chunk: T) {
         match self.lua.load(chunk).exec() {
             Err(e) => println!("Uh oh! Your code ran into an error: {}", e),
-            Ok(_) => {}
+            _ => {}
         }
     }
 }
@@ -71,7 +70,7 @@ fn setup_lua(lua: &mut Lua) {
     // Small function to get the directory of a program, its like the get_modpath function for minetest
     //
     // This function *will* return nil if the specified program does NOT exist.
-    set_orm64_value!(lua, "get_software_path", lua.create_function(|_, name: String|{
+    set_orm64_value!(lua, "get_software_path", lua.create_function(|_, name: String| {
         let mut path_str = None;
         let orm64_dir = super::util::orm64_directory();
         let tmp = orm64_dir + "software/" + name.as_str(); 
@@ -84,11 +83,11 @@ fn setup_lua(lua: &mut Lua) {
         Ok(path_str)
     }).unwrap());
 
-    set_orm64_value!(lua, "install_packages", lua.create_function(|l, _:()|{
+    set_orm64_value!(lua, "install_packages", lua.create_function(|l, _:()| {
         let packages = l.globals().get::<&str, LuaTable>("orm64_options").unwrap().get::<&str, LuaTable>("packages").unwrap();
 
         for pair in packages.pairs::<String, String>() {
-            let (name, url) = pair.unwrap_or(("orm64_no_git_repo_found".to_string(), "https://gitlab.com/pyudev/orm64_no_git_repo_found".to_string()));
+            let (name, url) = pair.unwrap_or(("".to_string(), "".to_string()));
             let path = super::util::orm64_directory()+"software/"+&name;
 
             fn pull_repo(path: &String, url: &String) {
@@ -114,15 +113,12 @@ fn setup_lua(lua: &mut Lua) {
                        .output().unwrap();
             } 
 
-            match create_dir(&path) {
-                _ => {
-                    println!("Installing package: {} from {}", &name, &url);
-                    pull_repo(&path, &url);
-                    println!("Installed package: {}!", &name);
-                }
-            }
-
-            // Reload all packages, so you can get the new features from the package during runtime.
+            let _ = create_dir(&path); // Ignore the result
+            println!("Installing package: {} from {}", &name, &url);
+            pull_repo(&path, &url);
+            println!("Installed package: {}!", &name);
+           
+            // Reload package, so you can get the new features from the package during runtime.
             let loaded = l.globals().get::<&str, LuaTable>("package").unwrap().get::<&str, LuaTable>("loaded").unwrap();
             loaded.set(name, None::<LuaTable>).unwrap();
         }

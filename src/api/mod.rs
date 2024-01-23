@@ -1,5 +1,3 @@
-pub mod graphics;
-
 macro_rules! set_global_table_value {
     ($lua:expr, $table:expr, $key:expr, $value:expr) => {
         $lua.globals().get::<&str, LuaTable>($table).unwrap().set($key, $value).unwrap(); 
@@ -13,3 +11,6 @@ macro_rules! create_global_table {
 }
 
 pub(crate) use {set_global_table_value, create_global_table};
+
+// modules
+pub mod graphics;
