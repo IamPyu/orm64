@@ -16,7 +16,7 @@ impl Orm64Lua {
     pub fn new() -> Self {
         let mut lua = Lua::new();
         setup_lua(&mut lua);
-
+	
         // load configuration (default and user config combined.)
         lua.load(super::util::DEFAULT_CONFIG).exec().unwrap();
         let config = super::util::get_config_file_contents("config.lua");
@@ -25,7 +25,7 @@ impl Orm64Lua {
             Ok(_) => eprintln!("Loaded configuration"),
             Err(e) => eprintln!("Error in configuration: {}", e)
         }
-        
+	
         Self {
             lua
         }
@@ -78,7 +78,7 @@ fn setup_lua(lua: &mut Lua) {
 
         if path.exists() && path.is_dir() {
             path_str = Some(tmp);
-        } 
+        }
 
         Ok(path_str)
     }).unwrap());

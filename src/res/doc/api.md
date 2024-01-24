@@ -1,6 +1,6 @@
 # The API
 
-* you are not limited to this API as Orm64 supports Luarocks.
+* you are not limited to this API.
 
 ## Most used functions and variables: The orm64 table
 
