@@ -1,6 +1,6 @@
 # The API
 
-* you are not limited to this API.
+* You are not limited to this API as users can create their own libraries.
 
 ## Most used functions and variables: The orm64 table
 

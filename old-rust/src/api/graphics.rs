@@ -11,6 +11,4 @@ pub fn setup_graphics(lua: &Lua) {
 
         Ok(())
     }).unwrap());
-
-     
 }
