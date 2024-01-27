@@ -13,7 +13,7 @@ Because I had enough of making FizzBuzz projects!
 In order to use this program you will need the dependencies listed below:
 
 - LuaJIT
-- SDL2
+- Raylib
 - ncurses
 - pkg-config
 - libedit

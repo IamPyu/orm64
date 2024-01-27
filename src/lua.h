@@ -2,7 +2,6 @@
 
 #include <stdlib.h>
 #include <string.h>
-
 #include <luajit-2.1/lualib.h>
 #include <luajit-2.1/lauxlib.h>
 
