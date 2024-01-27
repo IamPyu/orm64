@@ -1,14 +1,20 @@
 return function ()
+    local function printf(text, ...)
+        io.write(string.format(text, ...), io.stdout)
+    end
+
     local graphics = require("graphics")
-    local game = graphics.new(1200, 800, "My game")
+    local game = graphics.new(660, 440, "Game")
 
-    graphics.new(1200, 800, "My game")
-    graphics.new(1200, 800, "My game")
     game:init()
+    game:toggleFullscreen()
 
-    while not game:should_close() do
+    while not game:shouldClose() do
         game:draw(function ()
-            print(32)
+            game:setDrawColor(255, 255, 255, 255)
+            game:clearBackground()
+            game:setDrawColor(0, 0, 0, 255)
+            game:drawCircle(330, 220, 60)
         end)
     end
 

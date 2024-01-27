@@ -1,18 +1,11 @@
 #include <raylib.h>
-#include <pthread.h>
 #include "graphics.h"
-
-typedef struct {
-    lua_Integer width;
-    lua_Integer height;
-    const char *title;
-    lua_CFunction draw;
-} Game;
-
+#include "util.h"
+#include "graphics/functions.h"
 
 static int games = 0;
 static int newGame(lua_State *L) {
-    Game *game = lua_newuserdata(L, sizeof(Game));
+    Graphics *game = lua_newuserdata(L, sizeof(Graphics));
 
     luaL_getmetatable(L, "graphics");
     lua_setmetatable(L, -2);
@@ -24,6 +17,7 @@ static int newGame(lua_State *L) {
     game->width = width;
     game->height = height;
     game->title = title;
+    game->drawColor = BLACK;
     game->draw = NULL;
 
     games++;
@@ -37,13 +31,13 @@ static int listGames(lua_State *L) {
 }
 
 static int initGame(lua_State *L) {
-    Game *game = lua_touserdata(L, -1);
+    Graphics *game = lua_touserdata(L, -1);
     InitWindow(game->width, game->height, game->title);
     return 1;
 }
 
 static int closeGame(lua_State *L) {
-    Game *game = luaL_checkudata(L, 1, "graphics");
+    Graphics *game = luaL_checkudata(L, 1, "graphics");
     
     if (WindowShouldClose()) {
         games--;
@@ -54,13 +48,13 @@ static int closeGame(lua_State *L) {
 }
 
 static int gameShouldClose(lua_State *L) {
-    Game *game = luaL_checkudata(L, 1, "graphics");
+    Graphics *game = luaL_checkudata(L, 1, "graphics");
     lua_pushboolean(L, (int)WindowShouldClose());
     return 1;
 }
 
 static int gameDraw(lua_State *L) {
-    Game *game = luaL_checkudata(L, 1, "graphics");
+    Graphics *game = luaL_checkudata(L, 1, "graphics");
 
     BeginDrawing();
 
@@ -82,12 +76,18 @@ static struct luaL_Reg graphicslib_f[] = {
 };
 
 static struct luaL_Reg graphicslib_m[] = {
+    // Core functions
     {"init", initGame},
     {"close", closeGame},
-    {"should_close", gameShouldClose},
     {"draw", gameDraw},
-    {NULL, NULL}
-};
+    {"shouldClose", gameShouldClose},
+    // All the other functions
+    {"toggleFullscreen", toggleFullscreen},
+    {"setDrawColor", setDrawColor},
+    {"clearBackground", clearBackground},
+    {"drawCircle", drawCircle},
+
+    {NULL, NULL}};
 
 void setupOrm64Graphics(Orm64Lua *lua) {
     luaL_newmetatable(lua->L, "graphics");
