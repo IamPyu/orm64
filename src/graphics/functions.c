@@ -2,7 +2,15 @@
 
 
 int toggleFullscreen(lua_State *L) {
+    luaL_checkudata(L, 1, "graphics");
     ToggleFullscreen();
+    return 0;
+}
+
+int setTargetFPS(lua_State *L) {
+    luaL_checkudata(L, 1, "graphics");
+    int fps = luaL_checkinteger(L, 2);
+    SetTargetFPS(fps);
     return 0;
 }
 
@@ -36,6 +44,17 @@ int drawCircle(lua_State *L) {
     float radius = luaL_checknumber(L, 4);
 
     DrawCircle(xPos, yPos, radius, game->drawColor);
+    return 0;
+}
 
+int drawRect(lua_State *L) {
+    Graphics *game = luaL_checkudata(L, 1, "graphics");
+
+    int xPos = luaL_checkinteger(L, 2);
+    int yPos = luaL_checkinteger(L, 3);
+    int xScale = luaL_checknumber(L, 4);
+    int yScale = luaL_checkinteger(L, 5);
+
+    DrawRectangle(xPos, yPos, xScale, yScale, game->drawColor);
     return 0;
 }

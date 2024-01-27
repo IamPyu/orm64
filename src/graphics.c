@@ -37,7 +37,7 @@ static int initGame(lua_State *L) {
 }
 
 static int closeGame(lua_State *L) {
-    Graphics *game = luaL_checkudata(L, 1, "graphics");
+    luaL_checkudata(L, 1, "graphics");
     
     if (WindowShouldClose()) {
         games--;
@@ -48,13 +48,13 @@ static int closeGame(lua_State *L) {
 }
 
 static int gameShouldClose(lua_State *L) {
-    Graphics *game = luaL_checkudata(L, 1, "graphics");
+    luaL_checkudata(L, 1, "graphics");
     lua_pushboolean(L, (int)WindowShouldClose());
     return 1;
 }
 
 static int gameDraw(lua_State *L) {
-    Graphics *game = luaL_checkudata(L, 1, "graphics");
+    luaL_checkudata(L, 1, "graphics");
 
     BeginDrawing();
 
@@ -83,11 +83,14 @@ static struct luaL_Reg graphicslib_m[] = {
     {"shouldClose", gameShouldClose},
     // All the other functions
     {"toggleFullscreen", toggleFullscreen},
+    {"setTargetFPS", setTargetFPS},
     {"setDrawColor", setDrawColor},
     {"clearBackground", clearBackground},
     {"drawCircle", drawCircle},
+    {"drawRect", drawRect},
 
-    {NULL, NULL}};
+    {NULL, NULL}
+};
 
 void setupOrm64Graphics(Orm64Lua *lua) {
     luaL_newmetatable(lua->L, "graphics");

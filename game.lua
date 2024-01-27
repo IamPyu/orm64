@@ -1,20 +1,36 @@
 return function ()
-    local function printf(text, ...)
-        io.write(string.format(text, ...), io.stdout)
-    end
-
     local graphics = require("graphics")
     local game = graphics.new(660, 440, "Game")
 
     game:init()
-    game:toggleFullscreen()
+
+    game:setTargetFPS(60)
+    -- game:toggleFullscreen()
+
+    local y = 220
+    local yVel = 0
 
     while not game:shouldClose() do
+        yVel = yVel + 0.1
+        print(yVel)
+        y = y + yVel
+
+        if y > 440 + 70 then
+            y = -70
+            
+        end
+
         game:draw(function ()
+            -- Background
             game:setDrawColor(255, 255, 255, 255)
             game:clearBackground()
-            game:setDrawColor(0, 0, 0, 255)
+
+            -- Shapes
+            game:setDrawColor(80, 60, 90, 255)
+
             game:drawCircle(330, 220, 60)
+            game:setDrawColor(40, 140, 200, 255)
+            game:drawRect(440, y, 120, 120)
         end)
     end
 
