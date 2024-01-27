@@ -10,17 +10,19 @@ void repl(Orm64Lua *lua);
 int main(int argc, const char **argv) {
     Orm64Lua *lua = newOrm64Lua();
 
-    if (argc > 2) {
+    if (argc > 1) {
         const char *cmd = argv[1];
         
-        if (strcmp(cmd, "shell") == 0) {
+        if (strcmp(cmd, "run") == 0 && argc > 2) {
+            char code[STRING_SIZE];
+            sprintf(code, "require('%s')", argv[2]);
+            runLua(lua, code);
+        } else {
+            printf("Invalid command. Starting a REPL\n");
             repl(lua);
-        } else if (strcmp(cmd, "run") == 0) {
-            char cmd[STRING_SIZE];
-            
         }
     } else {
-        printf("Commands: shell");
+        printf("Commands: run(PROGRAM)\n");
         repl(lua);
     }
 
@@ -43,14 +45,7 @@ void repl(Orm64Lua *lua) {
         } else if (strcmp(str, "api") == 0) {
             printf("%s\n", getResString(API_FILE));
         } else {
-            luaL_loadstring(lua->L, str);
-
-            if (lua_pcall(lua->L, 0, 0, 0)) {
-                const char *errormsg = lua_tostring(lua->L, -1);
-                printf("Failed to run Lua code: %s\n", errormsg);
-
-
-            }
+            runLua(lua, str);
         }
     }
 }

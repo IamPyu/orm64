@@ -10,3 +10,4 @@ typedef struct {
 } Orm64Lua;
 
 Orm64Lua *newOrm64Lua();
+void runLua(Orm64Lua* lua, const char *code);

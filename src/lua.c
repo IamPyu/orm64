@@ -144,3 +144,12 @@ void setupOrm64Core(Orm64Lua *lua) {
 
     setupOrm64Graphics(lua);
 }
+
+void runLua(Orm64Lua *lua, const char *code) {
+    luaL_loadstring(lua->L, code);
+
+    if (lua_pcall(lua->L, 0, 0, 0)) {
+        const char *errormsg = lua_tostring(lua->L, -1);
+        printf("Failed to run Lua code: %s\n", errormsg);
+    }
+}
