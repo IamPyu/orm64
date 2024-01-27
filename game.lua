@@ -3,9 +3,7 @@ return function ()
     local game = graphics.new(660, 440, "Game")
 
     game:init()
-
     game:setTargetFPS(60)
-    -- game:toggleFullscreen()
 
     local y = 220
     local yVel = 0
@@ -17,7 +15,6 @@ return function ()
 
         if y > 440 + 70 then
             y = -70
-            
         end
 
         game:draw(function ()

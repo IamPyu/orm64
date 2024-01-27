@@ -6,8 +6,7 @@
 #include "res.h"
 
 /// Reads all the contents of `ptr`. If failed the function returns an empty string
-/// @param ptr A pointer the the file
-/// @return 
+/// `ptr` Is a pointer the the file
 char *readEntireFile(FILE* ptr) {
     char *contents = (char*)malloc(STRING_SIZE);
     char ch;
@@ -21,6 +20,7 @@ char *readEntireFile(FILE* ptr) {
     return contents;
 }
 
+/// Returns the Orm64 directory.
 char *orm64Dir() {
     char directory[STRING_SIZE];
     sprintf(directory, "%s/%s", getenv("HOME"), ".orm64.d/");
@@ -29,12 +29,14 @@ char *orm64Dir() {
     return p;
 }
 
-
+/// Creates a directory if it does not already exist.
 void mkdir2(const char* directory, mode_t mode) {
     struct stat st = {0};
     if (stat(directory, &st) == -1) mkdir(directory, mode);
 }
 
+/// Get the contents of a resource file.
+/// Resource files are from `res.h`
 char *getResString(enum ResFile file) {
     char str[STRING_SIZE] = "";
 

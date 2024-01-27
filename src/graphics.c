@@ -1,6 +1,5 @@
 #include <raylib.h>
 #include "graphics.h"
-#include "util.h"
 #include "graphics/functions.h"
 
 static int games = 0;
@@ -55,7 +54,6 @@ static int gameShouldClose(lua_State *L) {
 
 static int gameDraw(lua_State *L) {
     luaL_checkudata(L, 1, "graphics");
-
     BeginDrawing();
 
     if (lua_gettop(L) == 2) {
@@ -65,7 +63,6 @@ static int gameDraw(lua_State *L) {
     }
 
     EndDrawing();
-
     return 1;
 }
 
@@ -88,6 +85,8 @@ static struct luaL_Reg graphicslib_m[] = {
     {"clearBackground", clearBackground},
     {"drawCircle", drawCircle},
     {"drawRect", drawRect},
+    {"isKeyDown", isKeyDown},
+    {"isKeyUp", isKeyUp},
 
     {NULL, NULL}
 };
@@ -96,9 +95,8 @@ void setupOrm64Graphics(Orm64Lua *lua) {
     luaL_newmetatable(lua->L, "graphics");
     
     lua_pushstring(lua->L, "__index");
-    // lua_pushstring(lua->L, "index");
-    lua_pushvalue(lua->L, -2); /* pushes the metatable */
-    lua_settable(lua->L, -1);  /* metatable.__index = metatable */
+    lua_pushvalue(lua->L, -2);
+    lua_settable(lua->L, -1);
 
     luaL_openlib(lua->L, NULL, graphicslib_m, 0);
     luaL_openlib(lua->L, "graphics", graphicslib_f, 0);

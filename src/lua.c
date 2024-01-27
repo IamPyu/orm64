@@ -3,7 +3,6 @@
 #include <string.h>
 #include <unistd.h>
 #include <dirent.h>
-#include <errno.h>
 #include <spawn.h>
 
 #include "lua.h"
@@ -97,10 +96,10 @@ int orm64InstallPackages(lua_State *L) {
     lua_getglobal(L, "orm64_options");
     lua_getfield(L, -1, "packages");
 
-    while (lua_next(L, -2) != 0) {
-        if (lua_type(L, -2) == LUA_TSTRING) {
+    while (lua_next(L, -1) != 0) {
+        if (lua_isstring(L, -2)) {
             const char *key = lua_tostring(L, -2);
-            if (lua_isstring(L, -1)) {
+            if (lua_isstring(L, -2)) {
                 const char *value = lua_tostring(L, -1);
 
                 char path[STRING_SIZE];
@@ -108,7 +107,8 @@ int orm64InstallPackages(lua_State *L) {
                 mkdir2(path, 0700);
 
                 printf("key: %s, value: %s, path: %s\n", key, value, path);
-                // system();
+                chdir(path);
+                system("pwd");
 
             } else {
                 printf("Invalid package value. It must be a string.\n");
@@ -141,8 +141,7 @@ void setupOrm64Core(Orm64Lua *lua) {
     lua_setfield(lua->L, -2, "install_packages");
 
     // External Orm64 libraries
-
-    setupOrm64Graphics(lua);
+    setupOrm64Graphics(lua); // Orm64 Graphics
 }
 
 void runLua(Orm64Lua *lua, const char *code) {

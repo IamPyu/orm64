@@ -1,6 +1,9 @@
 --Orm64 config
 -- Startup Message!
-orm64_options.startup_message = "welcome to orm64, edit your configuration in $HOME/.orm64.d/config.lua"
+orm64_options.startup_message = [[Welcome to orm64, edit your configuration in $HOME/.orm64.d/config.lua.
+If that file does not exist create a configuration with `orm64.setup_config()`
+Reload your configuration with `orm64.reload_config()`
+And run `help` for a documentation.]]
 
 -- Prompt
 orm64_options.prompt = "> " --[[

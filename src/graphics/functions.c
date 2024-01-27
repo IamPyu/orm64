@@ -1,4 +1,5 @@
 #include "functions.h"
+#include "raylib.h"
 
 
 int toggleFullscreen(lua_State *L) {
@@ -57,4 +58,30 @@ int drawRect(lua_State *L) {
 
     DrawRectangle(xPos, yPos, xScale, yScale, game->drawColor);
     return 0;
+}
+
+int isKeyDown(lua_State *L) {
+  luaL_checkudata(L, 1, "graphics");
+  int key = luaL_checkinteger(L, 2);
+
+  if (IsKeyDown(key)) {
+    lua_pushboolean(L, 1);
+  } else {
+    lua_pushboolean(L, 0);
+  }
+
+  return 1;
+}
+
+int isKeyUp(lua_State *L) {
+  luaL_checkudata(L, 1, "graphics");
+  int key = luaL_checkinteger(L, 2);
+
+  if (IsKeyUp(key)) {
+    lua_pushboolean(L, 1);
+  } else {
+    lua_pushboolean(L, 0);
+  }
+
+  return 1;
 }
