@@ -7,64 +7,89 @@ typedef struct {
     lua_Integer height;
     const char *title;
     lua_CFunction draw;
-    lua_CFunction __index;
 
     Color bgColor;
 
 } Game;
 
-int startGame(lua_State *L) {
-    Game *game = lua_touserdata(L, -1);
-    
-    InitWindow(game->width, game->height, game->title);
 
-    while (!WindowShouldClose()) {
-        BeginDrawing();
-
-        if (game->draw != NULL)
-            game->draw(L);
-
-        EndDrawing();
-    }
-
-    CloseWindow();
-
-    return 1;
-}
-
-int indexGameValue(lua_State *L) {
-    Game *game = lua_touserdata(L, -1);
-
-    
-
-    return 1;
-}
-
-int newGame(lua_State *L) {
+static int games = 0;
+static int newGame(lua_State *L) {
     Game *game = lua_newuserdata(L, sizeof(Game));
 
-    game->width = 660;
-    game->height = 440;
-    game->title = "Game";
+    luaL_getmetatable(L, "graphics");
+    lua_setmetatable(L, -2);
+
+    int width = luaL_checkinteger(L, 1);
+    int height = luaL_checkinteger(L, 2);
+    const char *title = luaL_checkstring(L, 3);
+
+    game->width = width;
+    game->height = height;
+    game->title = title;
     game->bgColor = BLACK;
     game->draw = NULL;
-    
 
-    // lua_pushlightuserdata(L, game);
+    games++;
 
     return 1;
 }
 
+static int listGames(lua_State *L) {
+    printf("List of running games: %d\n", games);
+    return 0;
+}
 
+static int initGame(lua_State *L) {
+    Game *game = lua_touserdata(L, -1);
+    InitWindow(game->width, game->height, game->title);
+    return 1;
+}
+
+static int closeGame(lua_State *L) {
+    Game *game = luaL_checkudata(L, 1, "graphics");
+    
+    if (WindowShouldClose()) {
+        games--;
+        CloseWindow();
+    }
+    
+    return 1;
+}
+
+static int gameShouldClose(lua_State *L) {
+    Game *game = luaL_checkudata(L, 1, "graphics");
+    lua_pushboolean(L, (int)WindowShouldClose());
+    return 1;
+}
+
+static int gameDraw(lua_State *L) {
+    Game *game = luaL_checkudata(L, 1, "graphics");
+    return 1;
+}
+
+static struct luaL_Reg graphicslib_f[] = {
+    {"new", newGame},
+    {"games", listGames},
+    {NULL, NULL}
+};
+
+static struct luaL_Reg graphicslib_m[] = {
+    {"init", initGame},
+    {"close", closeGame},
+    {"should_close", gameShouldClose},
+    {"draw", gameDraw},
+    {NULL, NULL}
+};
 
 void setupOrm64Graphics(Orm64Lua *lua) {
-    lua_createtable(lua->L, 0, 0);
-    lua_setglobal(lua->L, "ographics");
+    luaL_newmetatable(lua->L, "graphics");
+    
+    lua_pushstring(lua->L, "__index");
+    // lua_pushstring(lua->L, "index");
+    lua_pushvalue(lua->L, -2); /* pushes the metatable */
+    lua_settable(lua->L, -1);  /* metatable.__index = metatable */
 
-    lua_getglobal(lua->L, "ographics");
-
-    lua_pushcfunction(lua->L, newGame);
-    lua_setfield(lua->L, -2, "new");
-    lua_pushcfunction(lua->L, startGame);
-    lua_setfield(lua->L, -2, "start");
+    luaL_openlib(lua->L, NULL, graphicslib_m, 0);
+    luaL_openlib(lua->L, "graphics", graphicslib_f, 0);
 }

@@ -15,7 +15,7 @@ int main(int argc, const char **argv) {
         
         if (strcmp(cmd, "run") == 0 && argc > 2) {
             char code[STRING_SIZE];
-            sprintf(code, "require('%s')", argv[2]);
+            sprintf(code, "%s", argv[2]);
             runLua(lua, code);
         } else {
             printf("Invalid command. Starting a REPL\n");
