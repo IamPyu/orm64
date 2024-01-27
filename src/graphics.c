@@ -100,4 +100,38 @@ void setupOrm64Graphics(Orm64Lua *lua) {
 
     luaL_openlib(lua->L, NULL, graphicslib_m, 0);
     luaL_openlib(lua->L, "graphics", graphicslib_f, 0);
+
+    lua_newtable(lua->L);
+    lua_setglobal(lua->L, "graphics_keys");
+
+    lua_getglobal(lua->L, "graphics_keys");
+    #define defkey(x) lua_pushinteger(lua->L, x);\
+      lua_setfield(lua->L, -2, #x)
+    
+    defkey(KEY_A);
+    defkey(KEY_B);
+    defkey(KEY_C);
+    defkey(KEY_D);
+    defkey(KEY_E);
+    defkey(KEY_F);
+    defkey(KEY_G);
+    defkey(KEY_H);
+    defkey(KEY_I);
+    defkey(KEY_J);
+    defkey(KEY_K);
+    defkey(KEY_L);
+    defkey(KEY_M);
+    defkey(KEY_N);
+    defkey(KEY_O);
+    defkey(KEY_P);
+    defkey(KEY_Q);
+    defkey(KEY_R);
+    defkey(KEY_S);
+    defkey(KEY_T);
+    defkey(KEY_U);
+    defkey(KEY_V);
+    defkey(KEY_W);
+    defkey(KEY_X);
+    defkey(KEY_Y);
+    defkey(KEY_Z);
 }

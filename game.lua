@@ -5,16 +5,31 @@ return function ()
     game:init()
     game:setTargetFPS(60)
 
+    local x = 330
     local y = 220
-    local yVel = 0
+    local speed = 5
+
+    local function moveX( n)
+        local b = (n == true and speed or -speed)
+        x = x + b
+    end
+    local function moveY( n)
+        local b = (n == true and speed or -speed)
+        y = y + b
+    end
 
     while not game:shouldClose() do
-        yVel = yVel + 0.1
-        print(yVel)
-        y = y + yVel
-
-        if y > 440 + 70 then
-            y = -70
+        if game:isKeyDown(graphics_keys.KEY_D) then
+           moveX(true)
+        end
+        if game:isKeyDown(graphics_keys.KEY_A) then
+            moveX(false)
+        end
+        if game:isKeyDown(graphics_keys.KEY_S) then
+            moveY(true)
+        end
+        if game:isKeyDown(graphics_keys.KEY_W) then
+            moveY(false)
         end
 
         game:draw(function ()
@@ -24,10 +39,7 @@ return function ()
 
             -- Shapes
             game:setDrawColor(80, 60, 90, 255)
-
-            game:drawCircle(330, 220, 60)
-            game:setDrawColor(40, 140, 200, 255)
-            game:drawRect(440, y, 120, 120)
+            game:drawCircle(x, y, 60)
         end)
     end
 

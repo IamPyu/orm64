@@ -1,7 +1,6 @@
 #include "functions.h"
 #include "raylib.h"
 
-
 int toggleFullscreen(lua_State *L) {
     luaL_checkudata(L, 1, "graphics");
     ToggleFullscreen();
