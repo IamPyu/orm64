@@ -7,9 +7,6 @@ typedef struct {
     lua_Integer height;
     const char *title;
     lua_CFunction draw;
-
-    Color bgColor;
-
 } Game;
 
 
@@ -27,7 +24,6 @@ static int newGame(lua_State *L) {
     game->width = width;
     game->height = height;
     game->title = title;
-    game->bgColor = BLACK;
     game->draw = NULL;
 
     games++;
@@ -36,8 +32,8 @@ static int newGame(lua_State *L) {
 }
 
 static int listGames(lua_State *L) {
-    printf("List of running games: %d\n", games);
-    return 0;
+    lua_pushinteger(L, games);
+    return 1;
 }
 
 static int initGame(lua_State *L) {
@@ -65,6 +61,17 @@ static int gameShouldClose(lua_State *L) {
 
 static int gameDraw(lua_State *L) {
     Game *game = luaL_checkudata(L, 1, "graphics");
+
+    BeginDrawing();
+
+    if (lua_gettop(L) == 2) {
+        if (lua_isfunction(L, -1)) {
+            lua_pcall(L, 0, 0, 0);
+        }
+    }
+
+    EndDrawing();
+
     return 1;
 }
 
