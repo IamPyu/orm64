@@ -27,7 +27,7 @@ In order to use this program you will need the dependencies listed below:
 - [X] Application, and Libraries
 - [X] Package manager (To install apps and libraries)
 - [ ] An API with a bunch of modules to create lots of things
-    - [ ] Graphics and Multimedia layer
+    - [X] Graphics and Multimedia layer
     - [ ] Terminal Manipulation library
     - [ ] Networking and HTTP library
 - [ ] Plugin system
