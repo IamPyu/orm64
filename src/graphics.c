@@ -128,6 +128,7 @@ void setupOrm64Graphics(Orm64Lua *lua) {
     defkey(RIGHT_SHIFT);
     defkey(LEFT_BRACKET);
     defkey(RIGHT_BRACKET);
-
     
+    defkey(ONE); defkey(TWO); defkey(THREE); defkey(FOUR); defkey(FIVE);
+    defkey(SIX); defkey(SEVEN); defkey(EIGHT); defkey(NINE); defkey(ZERO);
 }

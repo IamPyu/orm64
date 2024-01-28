@@ -40,8 +40,7 @@ void mkdir2(const char* directory, mode_t mode) {
 char *getResString(enum ResFile file) {
     char str[STRING_SIZE] = "";
 
-    switch (file)
-    {
+    switch (file) {
         case DEFAULT_CONFIG: {
             char *txt = (char *)src_default_lua;
             txt[src_default_lua_len] = '\0';
