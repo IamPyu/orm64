@@ -118,16 +118,8 @@ void setupOrm64Graphics(Orm64Lua *lua) {
     defkey(DOWN);
 
     defkey(ESCAPE);
-    defkey(LEFT_CONTROL);
-    defkey(RIGHT_CONTROL);
-    defkey(LEFT_ALT);
-    defkey(RIGHT_ALT);
-    defkey(LEFT_SUPER);
-    defkey(RIGHT_SUPER);
-    defkey(LEFT_SHIFT);
-    defkey(RIGHT_SHIFT);
-    defkey(LEFT_BRACKET);
-    defkey(RIGHT_BRACKET);
+    defkey(LEFT_CONTROL); defkey(LEFT_ALT); defkey(LEFT_SUPER); defkey(LEFT_SHIFT); defkey(LEFT_BRACKET);
+    defkey(RIGHT_CONTROL); defkey(RIGHT_ALT); defkey(RIGHT_SUPER); defkey(RIGHT_SHIFT); defkey(RIGHT_BRACKET);
     
     defkey(ONE); defkey(TWO); defkey(THREE); defkey(FOUR); defkey(FIVE);
     defkey(SIX); defkey(SEVEN); defkey(EIGHT); defkey(NINE); defkey(ZERO);

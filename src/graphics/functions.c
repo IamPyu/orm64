@@ -26,6 +26,7 @@ int setDrawColor(lua_State *L) {
     game->drawColor.g = green;
     game->drawColor.b = blue;
     game->drawColor.a = alpha;
+
     return 0;
 }
 

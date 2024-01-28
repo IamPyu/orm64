@@ -18,6 +18,8 @@ In order to use this program you will need the dependencies listed below:
 - ncurses
 - pkg-config
 - libedit
+- git
+- sh
 
 ## Features
 
