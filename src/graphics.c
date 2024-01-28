@@ -2,9 +2,9 @@
 #include "graphics.h"
 #include "graphics/functions.h"
 
-static int games = 0;
-static int newGame(lua_State *L) {
-    Graphics *game = lua_newuserdata(L, sizeof(Graphics));
+static int windows = 0;
+static int newWindow(lua_State *L) {
+    Graphics *window = lua_newuserdata(L, sizeof(Graphics));
 
     luaL_getmetatable(L, "graphics");
     lua_setmetatable(L, -2);
@@ -13,46 +13,48 @@ static int newGame(lua_State *L) {
     int height = luaL_checkinteger(L, 2);
     const char *title = luaL_checkstring(L, 3);
 
-    game->width = width;
-    game->height = height;
-    game->title = title;
-    game->drawColor = BLACK;
-    game->draw = NULL;
+    window->width = width;
+    window->height = height;
+    window->title = title;
+    window->drawColor = BLACK;
+    window->draw = NULL;
 
-    games++;
+    windows++;
 
     return 1;
 }
 
-static int listGames(lua_State *L) {
-    lua_pushinteger(L, games);
+static int listWindows(lua_State *L) {
+    lua_pushinteger(L, windows);
     return 1;
 }
 
-static int initGame(lua_State *L) {
-    Graphics *game = lua_touserdata(L, -1);
-    InitWindow(game->width, game->height, game->title);
+static int initWindow(lua_State *L) {
+    Graphics *window = lua_touserdata(L, -1);
+    InitWindow(window->width, window->height, window->title);
+    InitAudioDevice();
+
     return 1;
 }
 
-static int closeGame(lua_State *L) {
+static int closeWindow(lua_State *L) {
     luaL_checkudata(L, 1, "graphics");
     
     if (WindowShouldClose()) {
-        games--;
+        windows--;
         CloseWindow();
     }
     
     return 1;
 }
 
-static int gameShouldClose(lua_State *L) {
+static int windowShouldClose(lua_State *L) {
     luaL_checkudata(L, 1, "graphics");
     lua_pushboolean(L, (int)WindowShouldClose());
     return 1;
 }
 
-static int gameDraw(lua_State *L) {
+static int windowDraw(lua_State *L) {
     luaL_checkudata(L, 1, "graphics");
     BeginDrawing();
 
@@ -67,17 +69,17 @@ static int gameDraw(lua_State *L) {
 }
 
 static struct luaL_Reg graphicslib_f[] = {
-    {"new", newGame},
-    {"games", listGames},
+    {"new", newWindow},
+    {"games", listWindows},
     {NULL, NULL}
 };
 
 static struct luaL_Reg graphicslib_m[] = {
     // Core functions
-    {"init", initGame},
-    {"close", closeGame},
-    {"draw", gameDraw},
-    {"shouldClose", gameShouldClose},
+    {"init", initWindow},
+    {"close", closeWindow},
+    {"draw", windowDraw},
+    {"shouldClose", windowShouldClose},
     // All the other functions
     {"toggleFullscreen", toggleFullscreen},
     {"setTargetFPS", setTargetFPS},

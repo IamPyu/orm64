@@ -15,48 +15,48 @@ int setTargetFPS(lua_State *L) {
 }
 
 int setDrawColor(lua_State *L) {
-    Graphics *game = luaL_checkudata(L, 1, "graphics");
+    Graphics *window = luaL_checkudata(L, 1, "graphics");
 
     int red = luaL_checkinteger(L, 2);
     int green = luaL_checkinteger(L, 3);
     int blue = luaL_checknumber(L, 4);
     int alpha = luaL_checknumber(L, 5);
 
-    game->drawColor.r = red;
-    game->drawColor.g = green;
-    game->drawColor.b = blue;
-    game->drawColor.a = alpha;
+    window->drawColor.r = red;
+    window->drawColor.g = green;
+    window->drawColor.b = blue;
+    window->drawColor.a = alpha;
 
     return 0;
 }
 
 int clearBackground(lua_State *L) {
-    Graphics *game = luaL_checkudata(L, 1, "graphics");
-    ClearBackground(game->drawColor);
+    Graphics *window = luaL_checkudata(L, 1, "graphics");
+    ClearBackground(window->drawColor);
 
     return 0;
 }
 
 int drawCircle(lua_State *L) {
-    Graphics *game = luaL_checkudata(L, 1, "graphics");
+    Graphics *window = luaL_checkudata(L, 1, "graphics");
 
     int xPos = luaL_checkinteger(L, 2);
     int yPos = luaL_checkinteger(L, 3);
     float radius = luaL_checknumber(L, 4);
 
-    DrawCircle(xPos, yPos, radius, game->drawColor);
+    DrawCircle(xPos, yPos, radius, window->drawColor);
     return 0;
 }
 
 int drawRect(lua_State *L) {
-    Graphics *game = luaL_checkudata(L, 1, "graphics");
+    Graphics *window = luaL_checkudata(L, 1, "graphics");
 
     int xPos = luaL_checkinteger(L, 2);
     int yPos = luaL_checkinteger(L, 3);
     int xScale = luaL_checknumber(L, 4);
     int yScale = luaL_checkinteger(L, 5);
 
-    DrawRectangle(xPos, yPos, xScale, yScale, game->drawColor);
+    DrawRectangle(xPos, yPos, xScale, yScale, window->drawColor);
     return 0;
 }
 
