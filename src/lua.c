@@ -8,7 +8,6 @@
 #include "lua.h"
 #include "util.h"
 #include "graphics.h"
-// #include "res.h"
 
 int reloadConfiguration(lua_State *L) {
     FILE *configFile = fopen(strcat(orm64Dir(), "config.lua"), "r");

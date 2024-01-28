@@ -18,12 +18,21 @@ int main(int argc, const char **argv) {
             char code[STRING_SIZE];
             sprintf(code, "%s", argv[2]);
             runLua(lua, code);
+        } else if (strcmp(cmd, "script") == 0 && argc > 2) {
+            char fileName[STRING_SIZE];
+            sprintf(fileName, "%s", argv[2]);
+            FILE *file = fopen(fileName, "r");
+            if (file != NULL) {
+                char *contents = readEntireFile(file);
+                runLua(lua, contents);
+                free(contents);
+            }
         } else {
             printf("Invalid command. Starting a REPL\n");
             repl(lua);
         }
     } else {
-        printf("Commands: run(PROGRAM)\n");
+        printf("Commands: run(PROGRAM), script(FILE)\n");
         repl(lua);
     }
 

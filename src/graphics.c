@@ -101,37 +101,33 @@ void setupOrm64Graphics(Orm64Lua *lua) {
     luaL_openlib(lua->L, NULL, graphicslib_m, 0);
     luaL_openlib(lua->L, "graphics", graphicslib_f, 0);
 
+    // boilerplate 
     lua_newtable(lua->L);
     lua_setglobal(lua->L, "graphics_keys");
-
     lua_getglobal(lua->L, "graphics_keys");
-    #define defkey(x) lua_pushinteger(lua->L, x);\
+    #define defkey(x) lua_pushinteger(lua->L, KEY_##x);\
       lua_setfield(lua->L, -2, #x)
     
-    defkey(KEY_A);
-    defkey(KEY_B);
-    defkey(KEY_C);
-    defkey(KEY_D);
-    defkey(KEY_E);
-    defkey(KEY_F);
-    defkey(KEY_G);
-    defkey(KEY_H);
-    defkey(KEY_I);
-    defkey(KEY_J);
-    defkey(KEY_K);
-    defkey(KEY_L);
-    defkey(KEY_M);
-    defkey(KEY_N);
-    defkey(KEY_O);
-    defkey(KEY_P);
-    defkey(KEY_Q);
-    defkey(KEY_R);
-    defkey(KEY_S);
-    defkey(KEY_T);
-    defkey(KEY_U);
-    defkey(KEY_V);
-    defkey(KEY_W);
-    defkey(KEY_X);
-    defkey(KEY_Y);
-    defkey(KEY_Z);
+    defkey(A);defkey(B);defkey(C);defkey(D);defkey(E);defkey(F);defkey(G);defkey(H);defkey(I);
+    defkey(J);defkey(K);defkey(L);defkey(M);defkey(N);defkey(O);defkey(P);defkey(Q);defkey(R);
+    defkey(S);defkey(T);defkey(U);defkey(V);defkey(W);defkey(X);defkey(Y);defkey(Z);
+    
+    defkey(LEFT);
+    defkey(RIGHT);
+    defkey(UP);
+    defkey(DOWN);
+
+    defkey(ESCAPE);
+    defkey(LEFT_CONTROL);
+    defkey(RIGHT_CONTROL);
+    defkey(LEFT_ALT);
+    defkey(RIGHT_ALT);
+    defkey(LEFT_SUPER);
+    defkey(RIGHT_SUPER);
+    defkey(LEFT_SHIFT);
+    defkey(RIGHT_SHIFT);
+    defkey(LEFT_BRACKET);
+    defkey(RIGHT_BRACKET);
+
+    
 }
