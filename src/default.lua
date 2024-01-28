@@ -6,11 +6,7 @@ Reload your configuration with `orm64.reload_config()`
 And run `help` for a documentation.]]
 
 -- Prompt
-orm64_options.prompt = "> " --[[
-    The prompt! Its like the PS1 variable in GNU Bash.
-    It is that text that is printed before your cursor in a normal terminal shell.
-    Pretty
-]]
+orm64_options.prompt = "> " -- The prompt, its that text that is printed before your cursor.
 
 -- Packages
 orm64_options.packages = {} -- Manage packages by git repo, with the Orm64 Package Manager!

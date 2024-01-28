@@ -10,15 +10,13 @@ OUT:=bin/orm64
 
 all: build
 
-build: setup
+build:
+	@mkdir -p bin
 	@sh setup.sh
 	@$(CC) $(CLFAGS) $(SRC) -o $(OUT)
 
 run: build
 	@$(OUT)
-
-setup:
-	@mkdir -p bin
 
 clean:
 	@rm -rf bin
