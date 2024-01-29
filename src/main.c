@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <editline/readline.h>
+#include <SDL2/SDL.h>
 
 #include "lua.h"
 #include "util.h"
@@ -9,8 +10,9 @@
 void repl(Orm64Lua *lua);
 
 int main(int argc, const char **argv) {
+    SDL_Init(SDL_INIT_EVERYTHING);
     Orm64Lua *lua = newOrm64Lua();
-    
+
     if (argc > 1) {
         const char *cmd = argv[1];
         
@@ -37,6 +39,7 @@ int main(int argc, const char **argv) {
     }
 
     free((void*)lua);
+    SDL_Quit();
     return 0;
 }
 

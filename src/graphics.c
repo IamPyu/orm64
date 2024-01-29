@@ -107,9 +107,9 @@ void setupOrm64Graphics(Orm64Lua *lua) {
     lua_newtable(lua->L);
     lua_setglobal(lua->L, "graphics_keys");
     lua_getglobal(lua->L, "graphics_keys");
-    #define defkey(x) lua_pushinteger(lua->L, KEY_##x);\
-      lua_setfield(lua->L, -2, #x)
     
+    #define defkey(x) lua_pushinteger(lua->L, KEY_##x); lua_setfield(lua->L, -2, #x)
+   
     defkey(A);defkey(B);defkey(C);defkey(D);defkey(E);defkey(F);defkey(G);defkey(H);defkey(I);
     defkey(J);defkey(K);defkey(L);defkey(M);defkey(N);defkey(O);defkey(P);defkey(Q);defkey(R);
     defkey(S);defkey(T);defkey(U);defkey(V);defkey(W);defkey(X);defkey(Y);defkey(Z);
@@ -119,10 +119,13 @@ void setupOrm64Graphics(Orm64Lua *lua) {
     defkey(UP);
     defkey(DOWN);
 
-    defkey(ESCAPE);
+    defkey(ESCAPE); defkey(TAB); defkey(CAPS_LOCK);
     defkey(LEFT_CONTROL); defkey(LEFT_ALT); defkey(LEFT_SUPER); defkey(LEFT_SHIFT); defkey(LEFT_BRACKET);
     defkey(RIGHT_CONTROL); defkey(RIGHT_ALT); defkey(RIGHT_SUPER); defkey(RIGHT_SHIFT); defkey(RIGHT_BRACKET);
     
     defkey(ONE); defkey(TWO); defkey(THREE); defkey(FOUR); defkey(FIVE);
     defkey(SIX); defkey(SEVEN); defkey(EIGHT); defkey(NINE); defkey(ZERO);
+
+    defkey(GRAVE);defkey(SEMICOLON);defkey(BACKSLASH);defkey(SLASH);defkey(APOSTROPHE);
+    defkey(PERIOD);defkey(COMMA);defkey(EQUAL);defkey(MINUS);
 }

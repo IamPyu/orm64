@@ -1,6 +1,6 @@
 CC:=gcc # c compiler
 CLFAGS+=-Wall -std=gnu18 # main flags
-CLFAGS+=-lluajit -lraylib -lSDL2 -lncurses # libraries
+CLFAGS+=-lluajit -lraylib -lSDL2 -lSDl2_net -lncurses # libraries
 CLFAGS+=$(shell pkg-config --libs --cflags libedit) # libraries found by pkg-config
 
 SRC:=$(shell find . -name "*.c")

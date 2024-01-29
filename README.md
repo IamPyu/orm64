@@ -15,6 +15,7 @@ In order to use this program you will need the dependencies listed below:
 - LuaJIT
 - Raylib
 - SDL2
+- SDL2_net
 - ncurses
 - pkg-config
 - libedit
