@@ -1,5 +1,6 @@
 #include "graphics.h"
 #include "graphics/functions.h"
+
 #include <raylib.h>
 
 static int windows = 0;
@@ -90,7 +91,9 @@ static struct luaL_Reg graphicslib_m[] = {
     {"isKeyDown", isKeyDown},
     {"isKeyUp", isKeyUp},
 
-    {NULL, NULL}};
+    {NULL, NULL}
+
+};
 
 void setupOrm64Graphics(Orm64Lua *lua) {
   luaL_newmetatable(lua->L, "graphics");

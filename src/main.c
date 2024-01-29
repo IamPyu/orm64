@@ -45,7 +45,7 @@ void repl(Orm64Lua *lua) {
   lua_getglobal(lua->L, "orm64_options");
   lua_getfield(lua->L, -1, "startup_message");
   printf("%s\n", lua_tostring(lua->L, -1));
-
+  
   for (;;) {
     lua_getglobal(lua->L, "orm64_options");
     lua_getfield(lua->L, -1, "prompt");

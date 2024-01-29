@@ -114,11 +114,18 @@ int orm64InstallPackages(lua_State *L) {
         // printf("key: %s, value: %s, path: %s\n", key, value, path);
         chdir(path);
         char cmd[STRING_SIZE];
+
+	printf("URL: %s, Packagename: %s, Path: %s\n", url, packageName, path);
         sprintf(cmd,
-                "git init; git remote add origin %s; git branch -m main; git "
-                "reset --hard; git pull origin HEAD --force",
-                url);
-        execv("sh", (char *[]){"-c", cmd});
+                "git init; git remote add origin %s; git remote set-url origin %s; git branch -m main; git reset --hard; git pull origin HEAD --force",
+                url, url);
+
+	char fullCmd[STRING_SIZE];
+	sprintf(fullCmd, "sh -c 'cd %s; %s'", path, cmd);
+
+        /* execv("/bin/sh", (char *[]){"-c", fullCmd}); */
+	system(fullCmd); // system fixed my entire package manager lol.
+	printf("%d\n", errno);
       } else {
         printf("Invalid package value. It must be a string.\n");
       }

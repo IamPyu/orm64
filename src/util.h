@@ -1,6 +1,7 @@
 #pragma once
 #include <dirent.h>
 #include <stdio.h>
+#include <sys/stat.h>
 
 #define STRING_SIZE 32767 * 16
 
