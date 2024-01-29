@@ -1,6 +1,6 @@
-#include <raylib.h>
 #include "../graphics.h"
 #include "../lua.h"
+#include <raylib.h>
 
 // Window
 int toggleFullscreen(lua_State *L);

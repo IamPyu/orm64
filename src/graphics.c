@@ -3,6 +3,7 @@
 #include <raylib.h>
 
 static int windows = 0;
+
 static int newWindow(lua_State *L) {
   Graphics *window = lua_newuserdata(L, sizeof(Graphics));
 
@@ -38,12 +39,14 @@ static int initWindow(lua_State *L) {
 }
 
 static int closeWindow(lua_State *L) {
-  luaL_checkudata(L, 1, "graphics");
+  Graphics *window = luaL_checkudata(L, 1, "graphics");
 
   if (WindowShouldClose()) {
     windows--;
     CloseWindow();
   }
+
+  free(window);
 
   return 1;
 }
