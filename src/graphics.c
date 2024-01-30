@@ -47,7 +47,7 @@ static int closeWindow(lua_State *L) {
     CloseWindow();
   }
 
-  free(window);
+  //free(window);
 
   return 1;
 }
