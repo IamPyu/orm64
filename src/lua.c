@@ -14,7 +14,6 @@ int reloadConfiguration(lua_State *L) {
 
   if (configFile != NULL) {
     const char *config = readEntireFile(configFile);
-
     luaL_loadstring(L, config);
     if (lua_pcall(L, 0, 0, 0)) {
       const char *errormsg = lua_tostring(L, -1);
@@ -28,6 +27,8 @@ int reloadConfiguration(lua_State *L) {
     printf("To create your configuration folder run: orm64.setup_config()\n");
     printf("Falling back to default configuration.\n");
   }
+  
+  fclose(configFile);
 
   return 0;
 }

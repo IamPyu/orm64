@@ -1,5 +1,6 @@
 #include "util.h"
 #include "res.h"
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
@@ -8,13 +9,14 @@
 /// Reads all the contents of `ptr`. If failed the function returns an empty
 /// string `ptr` Is a pointer the the file
 char *readEntireFile(FILE *ptr) {
-  char *contents = (char *)malloc(STRING_SIZE);
-  char ch;
+  fseek(ptr, 0, SEEK_END); 
+  long size = ftell(ptr);
+  char *contents = (char *)malloc(size + 1);
 
   if (ptr != NULL) {
-    while ((ch = fgetc(ptr)) != EOF) {
-      strncat(contents, &ch, 1);
-    }
+    fseek(ptr, 0, SEEK_SET); 
+    fread(contents, size, 1, ptr);
+    //contents[size] = '0';
   }
 
   return contents;
