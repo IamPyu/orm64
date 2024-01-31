@@ -1,7 +1,7 @@
 CC:=clang # c compiler
 CLFAGS+=-Wall -std=gnu18 # main flags
 CLFAGS+=-lraylib -lSDL2 -lncurses # libraries
-CLFAGS+=$(shell pkg-config --libs --cflags libedit luajit SDL2_net) # libraries found by pkg-config
+CLFAGS+=$(shell pkg-config --libs --cflags libedit luajit)  # libraries found by pkg-config
 
 SRC:=$(shell find . -name "*.c")
 OUT:=bin/orm64

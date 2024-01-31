@@ -16,25 +16,30 @@ orm64_options.packages = {} -- Manage packages by git repo, with the Orm64 Packa
 
 -- You can also create some functions for yourself and use them in the Orm64 shell
 
-orm64_examples = {}
+MyFuncs = {}
 
-function orm64_examples.greet(name)
-	local str = string.format("Hello, %s!\n", name)
-	io.stdout:write(str)
+function MyFuncs.ls(dir)
+  os.execute("ls " .. dir)
 end
 
-function orm64_examples.game()
-	local graphics = require("graphics")
-	local window = graphics.new(800, 600, "My Window")
-
-	window:init()
-
-	while not window:shouldClose() do
-		window:draw(function()
-			window:setDrawColor(135, 206, 235, 255)
-			window:clearBackground()
-		end)
-	end
-
-	window:close()
+function MyFuncs.touch(path)
+  os.execute("touch " .. path)
 end
+
+function MyFuncs.mkdir(path)
+  os.execute("mkdir " .. path)
+end
+
+-- Here is a cool way to set up your orm64_options
+
+--local opts = {
+--  startup_message = "Hello!",
+--  prompt = "> ",
+--  pacakges = {
+--
+--  }
+--}
+--
+--for k, v in pairs(opts) do
+--  orm64_options[k] = v
+--end

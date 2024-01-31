@@ -11,7 +11,7 @@ void repl(Orm64Lua *lua);
 
 int main(int argc, const char **argv) {
   Orm64Lua *lua = newOrm64Lua();
-
+  
   if (argc > 1) {
     const char *cmd = argv[1];
 
