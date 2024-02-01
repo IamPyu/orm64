@@ -40,14 +40,12 @@ static int initWindow(lua_State *L) {
 }
 
 static int closeWindow(lua_State *L) {
-  Graphics *window = luaL_checkudata(L, 1, "graphics");
+  luaL_checkudata(L, 1, "graphics");
 
   if (WindowShouldClose()) {
     windows--;
     CloseWindow();
   }
-
-  //free(window);
 
   return 1;
 }
