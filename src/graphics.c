@@ -71,7 +71,10 @@ static int windowDraw(lua_State *L) {
 }
 
 static struct luaL_Reg graphicslib_f[] = {
-    {"new", newWindow}, {"games", listWindows}, {NULL, NULL}};
+    {"new", newWindow}, 
+    {"windows", listWindows}, 
+    {NULL, NULL}
+};
 
 static struct luaL_Reg graphicslib_m[] = {
     // Core functions
