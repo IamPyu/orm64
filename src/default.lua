@@ -1,5 +1,6 @@
---Orm64 config
+--Orm64 configuration
 -- Startup Message!
+orm64_options.show_startup_message = true
 orm64_options.startup_message = [[Welcome to orm64, edit your configuration in $HOME/.orm64.d/config.lua.
 If that file does not exist create a configuration with `orm64.setup_config()`
 Reload your configuration with `orm64.reload_config()`

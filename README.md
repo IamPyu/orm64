@@ -4,8 +4,6 @@ A simple, lua-based, fantasy operating system.
 
 It's kinda like those fantasy game consoles, except its meant to be an enitre OS.
 
-* Please note I am taking a small break from the development of Orm64 to work on other projects, Orm64 will be back in production soon. Only small canges will be made for now.
-
 ## Why?
 
 Because I had enough of making FizzBuzz projects!
