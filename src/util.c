@@ -7,7 +7,7 @@
 #include <sys/types.h>
 
 /// Reads all the contents of `ptr`. If failed the function returns an empty
-/// string `ptr` Is a pointer the the file
+/// string. `ptr` Is a pointer the the file
 char *readEntireFile(FILE *ptr) {
   fseek(ptr, 0, SEEK_END); 
   long size = ftell(ptr);
@@ -25,7 +25,7 @@ char *readEntireFile(FILE *ptr) {
 /// Returns the Orm64 directory.
 char *orm64Dir() {
   char directory[STRING_SIZE];
-  sprintf(directory, "%s/%s", getenv("HOME"), ".orm64.d/");
+  sprintf(directory, "%s/%s", getenv("HOME"), ".config/orm64");
 
   char *p = directory;
   return p;

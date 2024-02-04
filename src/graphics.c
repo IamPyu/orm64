@@ -35,7 +35,7 @@ static int initWindow(lua_State *L) {
   Graphics *window = lua_touserdata(L, -1);
   InitWindow(window->width, window->height, window->title);
   InitAudioDevice();
-
+  
   return 1;
 }
 
@@ -93,7 +93,6 @@ static struct luaL_Reg graphicslib_m[] = {
     {"isKeyUp", isKeyUp},
 
     {NULL, NULL}
-
 };
 
 void setupOrm64Graphics(Orm64Lua *lua) {

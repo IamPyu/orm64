@@ -35,9 +35,12 @@ We cant go on about directories without talking about the `home` directory.
 This contains all the files, created by: *drumroll* You!
 An operating system that has a filesystem cannot go without a user directory.
 
+Now lets talk more about the `config.lua` and teach you how to configure Orm64!
+
+
+
 ## APIs
-There are a few APIs for developing apps on Orm64.
-This part of the documentation will document the important ones!
-And the useless ones!
+
+Orm64 has a few APIs to get things done. 
 
 See the API documentation by using the `api` reserved command.

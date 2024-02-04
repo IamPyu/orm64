@@ -1,5 +1,4 @@
 #include <dirent.h>
-#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -35,8 +34,8 @@ int reloadConfiguration(lua_State *L) {
 
 void setupOrm64Core(Orm64Lua *lua);
 
-/// @brief Creates a `Orm64Lua`. Make sure to `free` it when done.
-/// @return `Orm64Lua`
+/// Creates a `Orm64Lua`. Make sure to `free` it when done.
+/// `Orm64Lua`
 Orm64Lua *newOrm64Lua() {
   Orm64Lua *lua = (Orm64Lua *)malloc(sizeof(Orm64Lua));
   lua->L = luaL_newstate();
