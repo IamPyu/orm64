@@ -82,6 +82,7 @@ static struct luaL_Reg graphicslib_m[] = {
     {"close", closeWindow},
     {"draw", windowDraw},
     {"shouldClose", windowShouldClose},
+    
     // All the other functions
     {"toggleFullscreen", toggleFullscreen},
     {"setTargetFPS", setTargetFPS},
