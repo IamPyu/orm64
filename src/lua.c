@@ -1,4 +1,5 @@
 #include <dirent.h>
+#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -111,21 +112,17 @@ int orm64InstallPackages(lua_State *L) {
         sprintf(path, "%s/software/%s", orm64Dir(), packageName);
         mkdir2(path, 0700);
 
-        // printf("key: %s, value: %s, path: %s\n", key, value, path);
         chdir(path);
         char cmd[STRING_SIZE];
 	
-        printf("URL: %s, PackageName: %s, Path: %s\n", url, packageName, path);
-        sprintf(cmd,
-                "git init; git remote add origin %s; git remote set-url origin %s; git branch -m main; git reset --hard; git pull origin HEAD --force",
-                url, url);
+        printf("Package Info{URL: %s, PackageName: %s, Path: %s}\n", url, packageName, path);
+        sprintf(cmd, 
+"git init; git remote add origin %s; git remote set-url origin %s; git branch -m main; git reset --hard; git pull origin HEAD --force", url, url);
 
         char fullCmd[STRING_SIZE];
-        sprintf(fullCmd, "sh -c 'cd %s; %s'", path, cmd);
+        sprintf(fullCmd, "cd %s; %s", path, cmd);
 
-        /* execv("/bin/sh", (char *[]){"-c", fullCmd}); */
         system(fullCmd); // system fixed my entire package manager lol.
-      
       } else {
         printf("Invalid package value. It must be a string.\n");
       }
