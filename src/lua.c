@@ -9,7 +9,7 @@
 #include "util.h"
 
 int reloadConfiguration(lua_State *L) {
-  FILE *configFile = fopen(strcat(orm64Dir(), "config.lua"), "r");
+  FILE *configFile = fopen(strcat(orm64Dir(), "/config.lua"), "r");
 
   if (configFile != NULL) {
     const char *config = readEntireFile(configFile);
@@ -43,7 +43,7 @@ Orm64Lua *newOrm64Lua() {
 
   char package_code[128];
   sprintf(package_code,
-          "package.path = package.path .. ';%ssoftware/?/init.lua;?.lua'",
+          "package.path = package.path .. ';%s/software/?/init.lua;?.lua'",
           orm64Dir());
   luaL_dostring(lua->L, package_code);
 
@@ -62,9 +62,9 @@ Orm64Lua *newOrm64Lua() {
 
 int orm64DirectorySetup(lua_State *L) {
   mkdir2(orm64Dir(), 0700);
-  mkdir2(strcat(orm64Dir(), "software"), 0700);
+  mkdir2(strcat(orm64Dir(), "/software"), 0700);
 
-  FILE *configFile = fopen(strcat(orm64Dir(), "config.lua"), "w");
+  FILE *configFile = fopen(strcat(orm64Dir(), "/config.lua"), "w");
 
   if (configFile != NULL) {
     char *config = getResString(DEFAULT_CONFIG);
@@ -78,7 +78,7 @@ int orm64DirectorySetup(lua_State *L) {
 
 int orm64GetSoftwarePath(lua_State *L) {
   char path[STRING_SIZE];
-  sprintf(path, "%s%s/%s", orm64Dir(), "software", lua_tostring(L, -1));
+  sprintf(path, "%s/software/%s", orm64Dir(), lua_tostring(L, -1));
 
   if (access(path, F_OK) == 0) {
     DIR *directory = opendir(path);
@@ -108,7 +108,7 @@ int orm64InstallPackages(lua_State *L) {
         lua_pop(L, 1);
 
         char path[STRING_SIZE];
-        sprintf(path, "%ssoftware/%s", orm64Dir(), packageName);
+        sprintf(path, "%s/software/%s", orm64Dir(), packageName);
         mkdir2(path, 0700);
 
         // printf("key: %s, value: %s, path: %s\n", key, value, path);

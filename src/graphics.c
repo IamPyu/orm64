@@ -42,10 +42,8 @@ static int initWindow(lua_State *L) {
 static int closeWindow(lua_State *L) {
   luaL_checkudata(L, 1, "graphics");
 
-  if (WindowShouldClose()) {
-    windows--;
-    CloseWindow();
-  }
+  windows--;
+  CloseWindow();
 
   return 1;
 }

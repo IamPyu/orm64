@@ -8,7 +8,7 @@ echo "#endif" >> src/res.h
 
 CC="clang"
 CFLAGS+="-Wall -std=gnu18 "
-CFLAGS+=$(pkg-config --libs --cflags libedit luajit SDL2 ncurses raylib)
+CFLAGS+=$(pkg-config --libs --cflags libedit luajit sdl2 ncurses raylib)
 
 SRC=$(find src -name "*.c")
 OUT="bin/orm64"
