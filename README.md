@@ -10,17 +10,17 @@ Because I had enough of making FizzBuzz projects!
 
 ## Dependencies
 
+
 In order to use this program you will need the dependencies listed below:
 
+- Unix based system, (MacOS and Linux tested, unsure about BSDs)
 - LuaJIT
 - Raylib
-- SDL2
 - ncurses
 - pkg-config
 - libedit
 - git
 - sh
-- luarocks (Optional)
 
 ## Features
 
