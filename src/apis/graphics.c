@@ -56,6 +56,7 @@ static int windowShouldClose(lua_State *L) {
 
 static int windowDraw(lua_State *L) {
   luaL_checkudata(L, 1, "graphics");
+  
   BeginDrawing();
 
   if (lua_gettop(L) == 2) {
