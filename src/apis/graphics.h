@@ -1,5 +1,5 @@
 #pragma once
-#include "lua.h"
+#include "../lua.h"
 #include <raylib.h>
 
 typedef struct {

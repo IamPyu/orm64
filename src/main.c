@@ -37,6 +37,9 @@ void repl(Orm64Lua *lua) {
     add_history(str);
 
     if (strcmp(str, "exit") == 0) {
+      lua_getglobal(lua->L, "orm64_options");
+      lua_getfield(lua->L, -1, "exit_message");
+      printf("%s\n", lua_tostring(lua->L, -1));
       break;
     } else if (strcmp(str, "help") == 0) {
       printf("%s\n", getResString(HELP_FILE));
