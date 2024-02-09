@@ -1,4 +1,6 @@
 #include <dirent.h>
+#include <luajit-2.1/lauxlib.h>
+#include <luajit-2.1/lua.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -77,6 +79,29 @@ int orm64GetSoftwarePath(lua_State *L) {
   return 1;
 }
 
+int luaCreateUser(lua_State *L) {
+  const char *login = lua_tostring(L, -2);
+  char *password = (char*)lua_tostring(L, -1);
+
+  char userDirectory[STRING_SIZE];
+  sprintf(userDirectory, "%s/home/%s", orm64Dir(), login);
+  mkdir2(userDirectory, 0700);
+
+  if (password != NULL) {
+    char *p = userDirectory;
+    FILE *file = fopen(strcat(p, "/.password"), "w");
+    
+    if (file != NULL) {
+      fwrite(password, strlen(password)-1, 1, file);
+      fflush(file);
+    }
+    
+    fclose(file);
+  }
+
+  return 0;
+}
+
 int orm64InstallPackages(lua_State *L) {
   lua_getglobal(L, "orm64_options");
   lua_getfield(L, -1, "packages");
@@ -135,6 +160,9 @@ void setupOrm64Core(Orm64Lua *lua) {
   lua_pushcfunction(lua->L, orm64InstallPackages);
   lua_setfield(lua->L, -2, "install_packages");
 
+  lua_pushcfunction(lua->L, luaCreateUser);
+  lua_setfield(lua->L, -2, "create_user");
+  
   // External Orm64 libraries
   setupOrm64Graphics(lua); // Orm64 Graphics
 }
