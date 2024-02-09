@@ -1,5 +1,6 @@
 #include "util.h"
 #include "res.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -71,4 +72,25 @@ char *getResString(enum ResFile file) {
 
   char *p = str;
   return p;
+}
+
+int orm64DirectorySetup(lua_State *L) {
+  mkdir2(orm64Dir(), 0700);
+  mkdir2(strcat(orm64Dir(), "/software"), 0700);
+  mkdir2(strcat(orm64Dir(), "/home"), 0700);
+
+  char defaultUserPath[STRING_SIZE];
+  sprintf(defaultUserPath, "/home/%s", DEFAULT_USER);
+  mkdir2(strcat(orm64Dir(), defaultUserPath), 0700);
+
+  FILE *configFile = fopen(strcat(orm64Dir(), "/config.lua"), "w");
+
+  if (configFile != NULL) {
+    char *config = getResString(DEFAULT_CONFIG);
+    fwrite(config, strlen(config), 1, configFile);
+  }
+
+  printf("Setup new configuration. You can find it in: %s\n", orm64Dir());
+
+  return 0;
 }

@@ -1,5 +1,6 @@
 #include "../graphics.h"
 #include "../../lua.h"
+
 #include <raylib.h>
 
 // Window

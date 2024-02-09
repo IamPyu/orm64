@@ -9,6 +9,6 @@ typedef struct {
 
   lua_CFunction draw;
   Color drawColor;
-} Graphics;
+} GraphicsWindow;
 
 void setupOrm64Graphics(Orm64Lua *lua);

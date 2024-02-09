@@ -42,7 +42,7 @@ Orm64Lua *newOrm64Lua() {
 
   char package_code[128];
   sprintf(package_code,
-          "package.path = package.path .. ';%s/software/?/init.lua;?.lua'",
+          "package.path = package.path .. ';%s/software/?/init.lua'",
           orm64Dir());
   luaL_dostring(lua->L, package_code);
 
@@ -57,22 +57,6 @@ Orm64Lua *newOrm64Lua() {
   reloadConfiguration(lua->L);
 
   return lua;
-}
-
-int orm64DirectorySetup(lua_State *L) {
-  mkdir2(orm64Dir(), 0700);
-  mkdir2(strcat(orm64Dir(), "/software"), 0700);
-
-  FILE *configFile = fopen(strcat(orm64Dir(), "/config.lua"), "w");
-
-  if (configFile != NULL) {
-    char *config = getResString(DEFAULT_CONFIG);
-    fwrite(config, strlen(config), 1, configFile);
-  }
-
-  printf("Setup new configuration. You can find it in: %s\n", orm64Dir());
-
-  return 1;
 }
 
 int orm64GetSoftwarePath(lua_State *L) {

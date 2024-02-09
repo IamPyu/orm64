@@ -6,7 +6,7 @@
 static int windows = 0;
 
 static int newWindow(lua_State *L) {
-  Graphics *window = lua_newuserdata(L, sizeof(Graphics));
+  GraphicsWindow *window = lua_newuserdata(L, sizeof(GraphicsWindow));
 
   luaL_getmetatable(L, "graphics");
   lua_setmetatable(L, -2);
@@ -32,7 +32,7 @@ static int listWindows(lua_State *L) {
 }
 
 static int initWindow(lua_State *L) {
-  Graphics *window = lua_touserdata(L, -1);
+  GraphicsWindow *window = lua_touserdata(L, -1);
   InitWindow(window->width, window->height, window->title);
   InitAudioDevice();
   
