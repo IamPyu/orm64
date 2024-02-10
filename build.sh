@@ -7,7 +7,7 @@ echo $(xxd -i src/doc/api.md) >> src/res.h
 echo '#endif' >> src/res.h
 
 CC='clang'
-CFLAGS+='-Wall -std=gnu18'
+CFLAGS+='-Wall -std=gnu18 -Ilib/raygui/src'
 CFLAGS+=" $(pkg-config --libs --cflags libedit luajit ncurses raylib gtk4)"
 
 SRC="$(find src -name "*.c")"
