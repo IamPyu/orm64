@@ -26,8 +26,8 @@ int reloadConfiguration(lua_State *L) {
     printf("(Re)Loaded configuration\n");
   } else {
     printf("Configuration file not found.\n");
-    printf("To create your configuration folder run: orm64.setup_config()\n");
-    printf("Falling back to default configuration.\n");
+    printf("Falling back to default configuration and creating default configuration.\n");
+    luaL_dostring(L, "orm64.setup_config()");
   }
 
   return 0;
@@ -92,7 +92,7 @@ int luaCreateUser(lua_State *L) {
     FILE *file = fopen(strcat(p, "/.password"), "w");
     
     if (file != NULL) {
-      fwrite(password, strlen(password)-1, 1, file);
+      fwrite(password, strlen(password), 1, file);
       fflush(file);
     }
     

@@ -34,17 +34,25 @@ int userLogin(User *user) {
   if (stat(passwordPath, &st) != -1) {
     FILE *passwordFile = fopen(passwordPath, "r");
     char *contents = readEntireFile(passwordFile);
-    contents[strlen(contents)-1] = '\0';
+    //contents[strlen(contents)-1] = '\0';
 
     const char *password = readline("User password: ");
+    int passwordFailed = false;
+
+      printf("up: %s, rp: %s", password, contents);
+
     if (strcmp(contents, password) == 0) {
       printf("Password correct.\n");
     } else {
       printf("Password incorrect.\n");
-      return -1;
+      passwordFailed = true;
     }
     
     free((void*)contents);
+
+    if (passwordFailed) {
+      return -1;
+    }
   } else {
     printf("User does not have a password.\n");
   }
