@@ -1,6 +1,7 @@
 #include "user.h"
 #include "lua.h"
 #include "util.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -63,7 +64,21 @@ int userLogin(User *user) {
 
 User *loggedInUser;
 
-int changePassword(lua_State *L) {
+static int refreshUser(lua_State *L) {
+  char passwordPath[STRING_SIZE];
+  sprintf(passwordPath, "%s/home/%s/.password", orm64Dir(), loggedInUser->username);
+  FILE *file = fopen(passwordPath, "r");
+  
+  if (file != NULL) {
+    const char *contents = readEntireFile(file);
+    loggedInUser->password = contents;
+    free((void*)contents);
+  }
+
+  return 0;
+}
+
+static int changePassword(lua_State *L) {
   const char *newPassword = luaL_checkstring(L, 1); 
   const char *oldPassword = luaL_checkstring(L, 2);
   char passwordPath[STRING_SIZE];
@@ -78,6 +93,8 @@ int changePassword(lua_State *L) {
         printf("Changed password from: '%s' to '%s'.\n", oldPassword, newPassword);
         fwrite(newPassword, strlen(newPassword), 1, file);
         fflush(file);
+
+        refreshUser(NULL);
       } else {
         printf("Please enter your current password as a second parameter.\n");
         fwrite(loggedInUser->password, strlen(loggedInUser->password), 1, file);
@@ -92,8 +109,15 @@ int changePassword(lua_State *L) {
   return 0;
 }
 
+static int getPassword(lua_State *L) {
+  lua_pushstring(L, loggedInUser->password);
+  return 1;
+}
+
 static struct luaL_Reg userlib[] = {
   {"changePassword", changePassword},
+  {"getPassword", getPassword},
+  {"refreshUser", refreshUser},
   {NULL, NULL}
 };
 
