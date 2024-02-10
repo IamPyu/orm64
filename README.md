@@ -10,7 +10,6 @@ Because I had enough of making FizzBuzz projects!
 
 ## Dependencies
 
-
 In order to use this program you will need the dependencies listed below:
 
 - Unix based system, (MacOS and Linux tested, unsure about BSDs)
@@ -32,7 +31,7 @@ In order to use this program you will need the dependencies listed below:
     - [ ] Terminal Manipulation library
     - [ ] Networking and HTTP library
 - [ ] Plugin system
-- [ ] User files 'n stuff
+- [X] User system
 
 ## History
 
