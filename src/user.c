@@ -1,4 +1,5 @@
 #include "user.h"
+#include "lua.h"
 #include "util.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -39,9 +40,8 @@ int userLogin(User *user) {
     const char *password = readline("User password: ");
     int passwordFailed = false;
 
-      printf("up: %s, rp: %s", password, contents);
-
     if (strcmp(contents, password) == 0) {
+      user->password = password;
       printf("Password correct.\n");
     } else {
       printf("Password incorrect.\n");
@@ -59,4 +59,47 @@ int userLogin(User *user) {
   
   printf("Logged into: %s\n", login);
   return 0;
+}
+
+User *loggedInUser;
+
+int changePassword(lua_State *L) {
+  const char *newPassword = luaL_checkstring(L, 1); 
+  const char *oldPassword = luaL_checkstring(L, 2);
+  char passwordPath[STRING_SIZE];
+  sprintf(passwordPath, "%s/home/%s/.password", orm64Dir(), loggedInUser->username);
+  
+  struct stat st;
+  if (stat(passwordPath, &st) != -1) {
+    FILE *file = fopen(passwordPath, "w");
+    
+    if (file != NULL) {
+      if (strcmp(loggedInUser->password, oldPassword) == 0) {
+        printf("Changed password from: '%s' to '%s'.\n", oldPassword, newPassword);
+        fwrite(newPassword, strlen(newPassword), 1, file);
+        fflush(file);
+      } else {
+        printf("Please enter your current password as a second parameter.\n");
+        fwrite(loggedInUser->password, strlen(loggedInUser->password), 1, file);
+      }
+    }
+
+    fclose(file);
+  } else {
+    printf("what?\n");
+  }
+  
+  return 0;
+}
+
+static struct luaL_Reg userlib[] = {
+  {"changePassword", changePassword},
+  {NULL, NULL}
+};
+
+void setupOrm64Users(Orm64Lua *lua, User *pUser) {
+  loggedInUser = pUser;
+  luaL_openlib(lua->L, "user", userlib, 0);
+
+  
 }

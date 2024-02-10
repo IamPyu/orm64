@@ -1,4 +1,5 @@
 #pragma once
+#include "lua.h"
 
 typedef struct {
   const char *username;
@@ -7,3 +8,4 @@ typedef struct {
 
 User *createUser();
 int userLogin(User *user);
+void setupOrm64Users(Orm64Lua *lua, User *user);

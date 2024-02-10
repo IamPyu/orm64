@@ -17,6 +17,7 @@ int main(int argc, const char **argv) {
   printf("If running for the first time, login to `guest` and use orm64.create_user(name, password) in the repl\n");
   while (1) {
     if (userLogin(user) != -1) {
+      setupOrm64Users(lua, user); 
       repl(lua);
       goto exit;
     } else {

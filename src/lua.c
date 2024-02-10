@@ -7,6 +7,7 @@
 #include <unistd.h>
 
 #include "lua.h"
+#include "apis/socket.h"
 #include "util.h"
 
 #include "apis/graphics.h"
@@ -90,6 +91,7 @@ int luaCreateUser(lua_State *L) {
 
   if (password != NULL) {
     char *p = userDirectory;
+
     FILE *file = fopen(strcat(p, "/.password"), "w");
     
     if (file != NULL) {
@@ -166,6 +168,7 @@ void setupOrm64Core(Orm64Lua *lua) {
   
   // External Orm64 libraries
   setupOrm64Graphics(lua); // Orm64 Graphics
+  setupOrm64Sockets(lua);
 }
 
 void runLua(Orm64Lua *lua, const char *code) {
