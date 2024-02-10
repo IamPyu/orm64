@@ -16,6 +16,10 @@ OUT='bin/orm64'
 mkdir -p bin
 $CC $CFLAGS $SRC -o $OUT
 
+mkdir -p $HOME/.config/orm64/software
+cp -r apps/* $HOME/.config/orm64/software 
+
+
 if [[ $1 -eq 1 && $? -eq 0 ]]; then
     $OUT
 else
