@@ -6,9 +6,10 @@
 #include <string.h>
 #include <unistd.h>
 
-#include "apis/graphics.h"
 #include "lua.h"
 #include "util.h"
+
+#include "apis/graphics.h"
 
 int reloadConfiguration(lua_State *L) {
   FILE *configFile = fopen(strcat(orm64Dir(), "/config.lua"), "r");
