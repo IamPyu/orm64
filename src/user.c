@@ -114,10 +114,24 @@ static int getPassword(lua_State *L) {
   return 1;
 }
 
+static int getUsername(lua_State *L) {
+  lua_pushstring(L, loggedInUser->username);
+  return 1;
+}
+
+static int getPath(lua_State *L) { 
+  char path[STRING_SIZE];
+  sprintf(path, "%s/home/%s", orm64Dir(), loggedInUser->username);
+  lua_pushstring(L, path);
+  return 1;
+}
+
 static struct luaL_Reg userlib[] = {
   {"changePassword", changePassword},
   {"getPassword", getPassword},
+  {"getUsername", getUsername},
   {"refreshUser", refreshUser},
+  {"getPath", getPath},
   {NULL, NULL}
 };
 
