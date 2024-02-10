@@ -124,6 +124,4 @@ static struct luaL_Reg userlib[] = {
 void setupOrm64Users(Orm64Lua *lua, User *pUser) {
   loggedInUser = pUser;
   luaL_openlib(lua->L, "user", userlib, 0);
-
-  
 }
