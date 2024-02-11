@@ -20,13 +20,12 @@ int main(int argc, const char **argv) {
       Orm64Lua *lua = newOrm64Lua(user);
       repl(lua);
       free((void *)lua);
-      goto exit;
+      break;
     } else {
       continue;
     }
   }
 
-exit:
   free((void*)user);
 
   return 0;
