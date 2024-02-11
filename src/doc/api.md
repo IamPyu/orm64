@@ -4,7 +4,7 @@
 
 ## Most used functions and variables: The orm64 table
 
-The first function you will learn from this documententation is the *amazing* the *indestructible* the amazing: `orm64.get_software_path`.
+The first function you will learn from this documententation is the *amazing* the *indestructible* the amazing: `orm64.getSoftwarePath`.
 
 This function returns the path of a specified software.
 
@@ -12,20 +12,32 @@ If the path does NOT exist, it returns nil.
 
 Be sure to use nil-checking before using the result from the function so no bugs appear in your program.
 
-There is also `orm64.setup_config`.
+There is also `orm64.setupConfig`.
 
 If you do not have a configuration setup, run the function for a brand new configuration!
 
-Now we have `orm64.reload_config`.
+Now we have `orm64.reloadConfig`.
 
 It is pretty self explanatory, if you change your configuration while Orm64 is running you do not have to exit Orm64.
 Instead you can run the function and your configuration is "magically" reloaded.
 
-It's not actually magical, as it just resources `~/.orm64.d/config.lua`
+It's not actually magical, as it just re-sources `ORM64_DIR/config.lua`
 
-Git time. You can use `orm64.install_packages` to install your configured packages in your configuration.
+Git time. You can use `orm64.installPackages` to install your configured packages in your configuration.
+
+Now we have `orm64.createUser`
+
+## User API
+
+? This API is requirable, you can use `require()` on it.
+
+The User API allows you to change the properties of your current user.
+
+The first function we have here is `user.getPath`
 
 ## The Graphics and Multimedia APIs
+
+? This API is requirable, you can use `require()` on it.
 
 The whole reason I made Orm64 was to make a simple game console that runs on your computer.
 

@@ -11,6 +11,9 @@ return function()
 
             window:setDrawColor(0, 0, 0, 255)
             window:drawText(user.getUsername(), 0, 0, 22)
+
+            window:setDrawColor(0, 180, 180, 255) 
+            window:drawCircle(330, 80, 70)
         end)
     end
 

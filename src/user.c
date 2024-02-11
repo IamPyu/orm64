@@ -84,27 +84,22 @@ static int changePassword(lua_State *L) {
   char passwordPath[STRING_SIZE];
   sprintf(passwordPath, "%s/home/%s/.password", orm64Dir(), loggedInUser->username);
   
-  struct stat st;
-  if (stat(passwordPath, &st) != -1) {
-    FILE *file = fopen(passwordPath, "w");
-    
-    if (file != NULL) {
-      if (strcmp(loggedInUser->password, oldPassword) == 0) {
-        printf("Changed password from: '%s' to '%s'.\n", oldPassword, newPassword);
-        fwrite(newPassword, strlen(newPassword), 1, file);
-        fflush(file);
+  FILE *file = fopen(passwordPath, "w");
+  
+  if (file != NULL) {
+    if (strcmp(loggedInUser->password, oldPassword) == 0) {
+      printf("Changed password from: '%s' to '%s'.\n", oldPassword, newPassword);
+      fwrite(newPassword, strlen(newPassword), 1, file);
+      fflush(file);
 
-        refreshUser(NULL);
-      } else {
-        printf("Please enter your current password as a second parameter.\n");
-        fwrite(loggedInUser->password, strlen(loggedInUser->password), 1, file);
-      }
+      refreshUser(NULL);
+    } else {
+      printf("Please enter your current password as a second parameter.\n");
+      fwrite(loggedInUser->password, strlen(loggedInUser->password), 1, file);
     }
-
-    fclose(file);
-  } else {
-    printf("what?\n");
   }
+
+  fclose(file);
   
   return 0;
 }

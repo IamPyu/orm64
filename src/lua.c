@@ -153,19 +153,19 @@ void setupOrm64Core(Orm64Lua *lua) {
 
   lua_getglobal(lua->L, "orm64");
   lua_pushcfunction(lua->L, orm64DirectorySetup);
-  lua_setfield(lua->L, -2, "setup_config");
+  lua_setfield(lua->L, -2, "setupConfig");
 
   lua_pushcfunction(lua->L, reloadConfiguration);
-  lua_setfield(lua->L, -2, "reload_config");
+  lua_setfield(lua->L, -2, "reloadConfig");
 
   lua_pushcfunction(lua->L, orm64GetSoftwarePath);
-  lua_setfield(lua->L, -2, "get_software_path");
+  lua_setfield(lua->L, -2, "getSoftwarePath");
 
   lua_pushcfunction(lua->L, orm64InstallPackages);
-  lua_setfield(lua->L, -2, "install_packages");
+  lua_setfield(lua->L, -2, "installPackages");
 
   lua_pushcfunction(lua->L, luaCreateUser);
-  lua_setfield(lua->L, -2, "create_user");
+  lua_setfield(lua->L, -2, "createUser");
   
   // External Orm64 libraries
   setupOrm64Graphics(lua); // Orm64 Graphics

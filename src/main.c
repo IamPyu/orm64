@@ -13,13 +13,14 @@ int main(int argc, const char **argv) {
   User *user = createUser();
   
   printf("Welcome to Orm64! Lets login!\n");
-  printf("If running for the first time, login to `guest` and use orm64.create_user(name, password) in the repl\n");
+  printf("If running for the first time, login to `guest` and use orm64.createUser(name, password) in the REPL\n");
 
   while (1) {
     if (userLogin(user) != -1) {
       Orm64Lua *lua = newOrm64Lua(user);
       repl(lua);
-      free((void *)lua);
+
+      free((void*)lua);
       break;
     } else {
       continue;
