@@ -12,6 +12,7 @@ int setDrawColor(lua_State *L);
 int clearBackground(lua_State *L);
 int drawCircle(lua_State *L);
 int drawRect(lua_State *L);
+int drawText(lua_State *L);
 
 // Input
 int isKeyDown(lua_State *L);

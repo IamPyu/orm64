@@ -60,6 +60,18 @@ int drawRect(lua_State *L) {
   return 0;
 }
 
+int drawText(lua_State *L) {
+  GraphicsWindow *window = luaL_checkudata(L, 1, "graphics");
+
+  const char *text = luaL_checkstring(L, 2);
+  int xPos = luaL_checkinteger(L, 3);
+  int yPos = luaL_checkinteger(L, 4);
+  int size = luaL_checkinteger(L, 5);
+
+  DrawText(text, xPos, yPos, size, window->drawColor);
+  return 0;
+}
+
 int isKeyDown(lua_State *L) {
   luaL_checkudata(L, 1, "graphics");
   int key = luaL_checkinteger(L, 2);
