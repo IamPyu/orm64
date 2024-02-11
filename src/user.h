@@ -1,10 +1,11 @@
 #pragma once
-#include "lua.h"
 
 typedef struct {
   const char *username;
   const char *password;
 } User;
+
+#include "lua.h"
 
 User *createUser();
 int userLogin(User *user);

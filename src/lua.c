@@ -9,6 +9,7 @@
 #include "lua.h"
 #include "apis/socket.h"
 #include "util.h"
+#include "user.h"
 
 #include "apis/graphics.h"
 
@@ -39,10 +40,12 @@ void setupOrm64Core(Orm64Lua *lua);
 
 /// Creates a `Orm64Lua`. Make sure to `free` it when done.
 /// `Orm64Lua`
-Orm64Lua *newOrm64Lua() {
+Orm64Lua *newOrm64Lua(User *pUser) {
   Orm64Lua *lua = (Orm64Lua *)malloc(sizeof(Orm64Lua));
   lua->L = luaL_newstate();
   luaL_openlibs(lua->L);
+  setupOrm64Users(lua, pUser);
+
 
   char package_code[128];
   sprintf(package_code,

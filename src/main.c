@@ -11,22 +11,24 @@ void repl(Orm64Lua *lua);
 
 int main(int argc, const char **argv) {
   User *user = createUser();
-  Orm64Lua *lua = newOrm64Lua();
   
   printf("Welcome to Orm64! Lets login!\n");
   printf("If running for the first time, login to `guest` and use orm64.create_user(name, password) in the repl\n");
+
   while (1) {
     if (userLogin(user) != -1) {
-      setupOrm64Users(lua, user); 
+      Orm64Lua *lua = newOrm64Lua(user);
       repl(lua);
+      free((void *)lua);
       goto exit;
     } else {
       continue;
     }
   }
-    
- exit:
-  free((void *)lua);
+
+exit:
+  free((void*)user);
+
   return 0;
 }
 
