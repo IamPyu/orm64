@@ -1,7 +1,7 @@
+#include <raylib.h>
+
 #include "graphics.h"
 #include "graphics/functions.h"
-
-#include <raylib.h>
 
 static int windows = 0;
 

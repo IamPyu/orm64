@@ -1,11 +1,11 @@
-#include "util.h"
-#include "res.h"
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+
+#include "util.h"
+#include "res.h"
 
 /// Reads all the contents of `ptr`. If failed the function returns an empty
 /// string. `ptr` Is a pointer the the file
@@ -37,6 +37,8 @@ void mkdir2(const char *directory, mode_t mode) {
   struct stat st = {0};
   if (stat(directory, &st) == -1)
     mkdir(directory, mode);
+  else
+   printf("directory already exists.\n");
 }
 
 /// Get the contents of a resource file.

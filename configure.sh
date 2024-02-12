@@ -8,6 +8,3 @@ echo $(xxd -i src/doc/help.md) >> src/res.h
 echo $(xxd -i src/doc/api.md) >> src/res.h
 echo '#endif' >> src/res.h
 
-# preinstalled programs for orm64
-mkdir -p $HOME/.config/orm64/software
-cp -r apps/* $HOME/.config/orm64/software 

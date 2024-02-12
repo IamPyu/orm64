@@ -1,7 +1,8 @@
-#include <editline/readline.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
+#include <editline/readline.h>
 
 #include "lua.h"
 #include "util.h"
@@ -10,6 +11,11 @@
 void repl(Orm64Lua *lua);
 
 int main(int argc, const char **argv) {
+  struct stat st = {0};
+  if (stat(orm64Dir(), &st) == -1) {
+    orm64DirectorySetup(NULL);
+  }
+
   User *user = createUser();
   
   printf("Welcome to Orm64! Lets login!\n");

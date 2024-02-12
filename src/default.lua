@@ -1,14 +1,16 @@
 local user = require("user")
-print(user.getUsername())
+
 --Orm64 configuration
 -- Startup (and exit) Message!
 orm64_options.show_startup_message = true
-orm64_options.startup_message = "Welcome to Orm64"
+
+local currentUser = user.getUsername()
+orm64_options.startup_message = string.format("Welcome to Orm64, %s!", currentUser)
 
 orm64_options.exit_message = ""
 
 -- Prompt
-orm64_options.prompt = "> " -- The prompt, its that text that is printed before your cursor.
+orm64_options.prompt = string.format("%s@orm64> ", currentUser) -- The prompt, its that text that is printed before your cursor.
 
 -- Packages
 orm64_options.packages = {} -- Manage packages by git repo, with the Orm64 Package Manager!

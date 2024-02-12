@@ -1,6 +1,8 @@
+#include <netinet/in.h>
+#include <sys/socket.h>
+
 #include "socket.h"
-//#include <SDL2/SDL_net.h>
 
 void setupOrm64Sockets(Orm64Lua *lua) {
-  
+    
 }

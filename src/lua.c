@@ -1,10 +1,11 @@
 #include <dirent.h>
-#include <luajit-2.1/lauxlib.h>
-#include <luajit-2.1/lua.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+
+//#include <luajit-2.1/lauxlib.h>
+//#include <luajit-2.1/lua.h>
 
 #include "lua.h"
 #include "apis/socket.h"

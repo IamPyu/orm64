@@ -2,7 +2,7 @@
 sh configure.sh
 
 CC='clang'
-CFLAGS+='-Wall -std=gnu18 $(pkg-config --libs --cflags libedit luajit ncurses raylib)'
+CFLAGS+="-Wall -std=gnu18 $(pkg-config --libs --cflags libedit luajit ncurses raylib)"
 
 SRC="$(find src -name "*.c")"
 OUT='bin/orm64'

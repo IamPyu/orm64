@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include <luajit-2.1/lualib.h>
 #include <luajit-2.1/lauxlib.h>
 
