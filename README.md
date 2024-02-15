@@ -19,7 +19,15 @@ In order to use this program you will need the dependencies listed below:
 - pkg-config
 - libedit
 - git
-- sh
+
+## Building
+
+Building requires CMake
+
+Created a directory called `bin`
+
+Inside of it run `cmake ..` and `cmake --build .`
+It should generate the `orm64` executable.
 
 ## Features
 
