@@ -8,12 +8,12 @@
 #include "util.h"
 #include "user.h"
 
-void repl(Orm64Lua *lua);
+int repl(Orm64Lua *lua);
 
 int main(int argc, const char **argv) {
   struct stat st = {0};
   if (stat(strcat(orm64Dir(), "/config.lua"), &st) == -1) {
-    orm64DirectorySetup(NULL);
+    orm64DirectorySetup(NULL);    
   }
 
   User *user = createUser();
@@ -24,21 +24,22 @@ int main(int argc, const char **argv) {
   while (1) {
     if (userLogin(user) != -1) {
       Orm64Lua *lua = newOrm64Lua(user);
-      repl(lua);
-
-      free((void*)lua);
-      break;
+      int exit = repl(lua);
+      free((void *)lua);
+      
+      if (exit) {
+	break;
+      }      
     } else {
       continue;
     }
   }
 
   free((void*)user);
-
   return 0;
 }
 
-void repl(Orm64Lua *lua) {
+int repl(Orm64Lua *lua) {
   lua_getglobal(lua->L, "orm64_options");
   lua_getfield(lua->L, -1, "show_startup_message");
   int showStartupMessage = lua_toboolean(lua->L, -1);
@@ -61,12 +62,20 @@ void repl(Orm64Lua *lua) {
       lua_getfield(lua->L, -1, "exit_message");
       printf("%s\n", lua_tostring(lua->L, -1));
       break;
-    } else if (strcmp(str, "help") == 0) {
+    }
+    else if (strcmp(str, "help") == 0) {
       printf("%s\n", getResString(HELP_FILE));
-    } else if (strcmp(str, "api") == 0) {
+    }
+    else if (strcmp(str, "api") == 0) {
       printf("%s\n", getResString(API_FILE));
-    } else {
+    }
+    else if (strcmp(str, "logout") == 0) {
+      return 0;
+    }
+    else {
       runLua(lua, str);
     }
   }
+
+  return 1;
 }
