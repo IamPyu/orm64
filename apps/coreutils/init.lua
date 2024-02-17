@@ -1,16 +1,21 @@
+local user = require("user")
 local function ls(p)
-  local user = require("user")
-  local path = user.getPath() .. "/"
-  os.execute("ls -a " .. path .. (p ~= nil and p or ""))
+   local path = user.getPath() .. "/"
+   os.execute("ls -a " .. path .. (p ~= nil and p or ""))
 end
 
 local function touch(p)
-  local user = require("user")
-  local path = user.getPath() .. "/"
-  os.execute("touch " .. path .. p)
+   local path = user.getPath() .. "/"
+   os.execute("touch " .. path .. p)
+end
+
+local function mkdir(p)
+   local path = user.getPath() .. "/"
+   os.execute("mkdir " .. path .. p)
 end
 
 return {
   ls = ls,
-  touch = touch
+  touch = touch,
+  mkdir = mkdir
 }

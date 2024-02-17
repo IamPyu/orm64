@@ -7,7 +7,7 @@ orm64_options.show_startup_message = true
 local currentUser = user.getUsername()
 orm64_options.startup_message = string.format("Welcome to Orm64, %s!", currentUser)
 
-orm64_options.exit_message = ""
+orm64_options.exit_message = string.format("Goodbye, %s!", currentUser)
 
 -- Prompt
 orm64_options.prompt = string.format("%s@orm64> ", currentUser) -- The prompt, its that text that is printed before your cursor.

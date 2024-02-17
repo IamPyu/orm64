@@ -36,8 +36,8 @@ int userLogin(User *user) {
   if (stat(passwordPath, &st) != -1) {
     FILE *passwordFile = fopen(passwordPath, "r");
     char *contents = readEntireFile(passwordFile);
-    //contents[strlen(contents)-1] = '\0';
-
+    fclose(passwordFile);
+    
     const char *password = readline("User password: ");
     int passwordFailed = false;
 
@@ -75,6 +75,8 @@ static int refreshUser(lua_State *L) {
     free((void*)contents);
   }
 
+  fclose(file);
+  
   return 0;
 }
 

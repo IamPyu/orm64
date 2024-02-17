@@ -22,18 +22,18 @@ int reloadConfiguration(lua_State *L) {
     luaL_loadstring(L, config);
     if (lua_pcall(L, 0, 0, 0)) {
       const char *errormsg = lua_tostring(L, -1);
-      printf("An error occured in the configuration file: %s\n", errormsg);
+			printf("An error occured in the configuration file: %s\n", errormsg);
     }
 
     free((void *)config);
-    fclose(configFile);
     printf("(Re)Loaded configuration\n");
   } else {
     printf("Configuration file not found.\n");
     printf("Falling back to default configuration and creating default configuration.\n");
     luaL_dostring(L, "orm64.setup_config()");
   }
-
+  
+  fclose(configFile);
   return 0;
 }
 

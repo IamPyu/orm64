@@ -17,7 +17,6 @@ char *readEntireFile(FILE *ptr) {
   if (ptr != NULL) {
     fseek(ptr, 0, SEEK_SET); 
     fread(contents, size, 1, ptr);
-    //contents[size] = '0';
   }
 
   return contents;
@@ -27,7 +26,7 @@ char *readEntireFile(FILE *ptr) {
 char *orm64Dir() {
   char directory[STRING_SIZE];
   sprintf(directory, "%s/%s", getenv("HOME"), ".config/orm64");
-
+  
   char *p = directory;
   return p;
 }
@@ -37,8 +36,6 @@ void mkdir2(const char *directory, mode_t mode) {
   struct stat st = {0};
   if (stat(directory, &st) == -1)
     mkdir(directory, mode);
-  else
-   printf("directory already exists.\n");
 }
 
 /// Get the contents of a resource file.
@@ -91,6 +88,8 @@ int orm64DirectorySetup(lua_State *L) {
     char *config = getResString(DEFAULT_CONFIG);
     fwrite(config, strlen(config), 1, configFile);
   }
+
+  fclose(configFile);
 
   printf("Setup new configuration. You can find it in: %s\n", orm64Dir());
 
