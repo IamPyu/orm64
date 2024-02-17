@@ -13,9 +13,9 @@ Because I had enough of making FizzBuzz projects!
 In order to use this program you will need the dependencies listed below:
 
 - Unix based system, (MacOS and Linux tested, unsure about BSDs)
-- [[LuaJIT][luajit.org]]
-- [[Raylib][raylib.com]]
-- [[ncurses][invisible-island.net/ncurses]]
+- [[https://luajit.org]]
+- [[https://raylib.com]]
+- [[invisible-island.net/ncurses]]
 - pkg-config
 - libedit
 - git
@@ -39,9 +39,9 @@ Simply use `build.sh`
 
 * History
 
-I first wrote this in [[Rust][https://rust-lang.org]].
+I first wrote this in [[https://rust-lang.org]].
 
-But of course I had issues with the borrow checker and the [[mlua][https://github.com/mlua-rs/mlua]] API
+But of course I had issues with the borrow checker and the [[https://github.com/mlua-rs/mlua]] API
 
 So I decided to rewrite Orm64 in C, since C lets you do just about anything in any way you want.
 
