@@ -20,7 +20,7 @@ int main(int argc, const char **argv) {
   
   printf("Welcome to Orm64! Lets login!\n");
   printf("If running for the first time, login to `guest` and use orm64.createUser(name, password) in the REPL\n");
-
+  
   while (1) {
     if (userLogin(user) != -1) {
       Orm64Lua *lua = newOrm64Lua(user);
