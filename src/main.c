@@ -43,7 +43,7 @@ int repl(Orm64Lua *lua) {
   lua_getglobal(lua->L, "orm64_options");
   lua_getfield(lua->L, -1, "show_startup_message");
   int showStartupMessage = lua_toboolean(lua->L, -1);
-
+  
   if (showStartupMessage) {
     lua_getglobal(lua->L, "orm64_options");
     lua_getfield(lua->L, -1, "startup_message");

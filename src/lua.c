@@ -4,15 +4,12 @@
 #include <string.h>
 #include <unistd.h>
 
-//#include <luajit-2.1/lauxlib.h>
-//#include <luajit-2.1/lua.h>
-
 #include "lua.h"
-#include "apis/socket.h"
 #include "util.h"
 #include "user.h"
 
 #include "apis/graphics.h"
+#include "apis/socket.h"
 
 int reloadConfiguration(lua_State *L) {
   FILE *configFile = fopen(strcat(orm64Dir(), "/config.lua"), "r");
