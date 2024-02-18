@@ -12,7 +12,7 @@
 #include "apis/socket.h"
 
 int reloadConfiguration(lua_State *L) {
-  FILE *configFile = fopen(strcat(orm64Dir(), "/config.lua"), "r");
+  FILE *configFile = fopen(strcat(orm64_dir(), "/config.lua"), "r");
 
   if (configFile != NULL) {
     const char *config = readEntireFile(configFile);
@@ -46,14 +46,14 @@ Orm64Lua *newOrm64Lua(User *pUser) {
 
 
   char package_code[128];
-  sprintf(package_code, "package.path = package.path .. ';%s/software/?/init.lua'", orm64Dir());
+  sprintf(package_code, "package.path = package.path .. ';%s/software/?/init.lua'", orm64_dir());
   luaL_dostring(lua->L, package_code);
 
   setupOrm64Core(lua);
 
   lua_createtable(lua->L, 0, 0);
   lua_setglobal(lua->L, "orm64_options");
-
+  
   char *config = getResString(DEFAULT_CONFIG);
   luaL_dostring(lua->L, config);
 
@@ -64,7 +64,7 @@ Orm64Lua *newOrm64Lua(User *pUser) {
 
 int orm64GetSoftwarePath(lua_State *L) {
   char path[STRING_SIZE];
-  sprintf(path, "%s/software/%s", orm64Dir(), lua_tostring(L, -1));
+  sprintf(path, "%s/software/%s", orm64_dir(), lua_tostring(L, -1));
 
   if (access(path, F_OK) == 0) {
     DIR *directory = opendir(path);
@@ -85,7 +85,7 @@ int luaCreateUser(lua_State *L) {
   char *password = (char*)lua_tostring(L, -1);
 
   char userDirectory[STRING_SIZE];
-  sprintf(userDirectory, "%s/home/%s", orm64Dir(), login);
+  sprintf(userDirectory, "%s/home/%s", orm64_dir(), login);
   mkdir2(userDirectory, 0700);
 
   if (password != NULL) {
@@ -118,7 +118,7 @@ int orm64InstallPackages(lua_State *L) {
         lua_pop(L, 1);
 
         char path[STRING_SIZE];
-        sprintf(path, "%s/software/%s", orm64Dir(), packageName);
+        sprintf(path, "%s/software/%s", orm64_dir(), packageName);
         mkdir2(path, 0700);
 
         chdir(path);

@@ -40,6 +40,7 @@ Inside of it run *meson ..* and then run *meson compile*
 - [ ] File system
 - [ ] Plugin system
 - [x] User system
+- [ ] Bloated library with improved libc and functions for interacting with Orm64
 
 * History
 

@@ -4,6 +4,8 @@
 #include <sys/stat.h>
 #include <luajit-2.1/lua.h>
 
+#include "ormlib/ormlib.h"
+
 #define STRING_SIZE 32767 * 16
 #define DEFAULT_USER "guest"
 
@@ -11,8 +13,6 @@
 #define false 0
 
 char *readEntireFile(FILE *ptr);
-char *orm64Dir();
-void mkdir2(const char *directory, mode_t mode);
 
 enum ResFile { DEFAULT_CONFIG, HELP_FILE, API_FILE };
 

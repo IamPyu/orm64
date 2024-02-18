@@ -4,6 +4,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
+#include "ormlib/ormlib.h"
 #include "util.h"
 #include "res.h"
 
@@ -20,21 +21,6 @@ char *readEntireFile(FILE *ptr) {
   return contents;
 }
 
-/// Returns the Orm64 directory.
-char *orm64Dir() {
-  char directory[STRING_SIZE];
-  sprintf(directory, "%s/%s", getenv("HOME"), ".config/orm64");
-  
-  char *p = directory;
-  return p;
-}
-
-/// Creates a directory if it does not already exist.
-void mkdir2(const char *directory, mode_t mode) {
-  struct stat st = {0};
-  if (stat(directory, &st) == -1)
-    mkdir(directory, mode);
-}
 
 /// Get the contents of a resource file.
 /// Resource files are from `res.h`
@@ -72,15 +58,15 @@ char *getResString(enum ResFile file) {
 }
 
 int orm64DirectorySetup(lua_State *L) {
-  mkdir2(orm64Dir(), 0700);
-  mkdir2(strcat(orm64Dir(), "/software"), 0700);
-  mkdir2(strcat(orm64Dir(), "/home"), 0700);
+  mkdir2(orm64_dir(), 0700);
+  mkdir2(strcat(orm64_dir(), "/software"), 0700);
+  mkdir2(strcat(orm64_dir(), "/home"), 0700);
 
   char defaultUserPath[STRING_SIZE];
   sprintf(defaultUserPath, "/home/%s", DEFAULT_USER);
-  mkdir2(strcat(orm64Dir(), defaultUserPath), 0700);
+  mkdir2(strcat(orm64_dir(), defaultUserPath), 0700);
 
-  FILE *configFile = fopen(strcat(orm64Dir(), "/config.lua"), "w");
+  FILE *configFile = fopen(strcat(orm64_dir(), "/config.lua"), "w");
 
   if (configFile != NULL) {
     char *config = getResString(DEFAULT_CONFIG);
@@ -89,7 +75,7 @@ int orm64DirectorySetup(lua_State *L) {
 
   fclose(configFile);
 
-  printf("Setup new configuration. You can find it in: %s\n", orm64Dir());
+  printf("Setup new configuration. You can find it in: %s\n", orm64_dir());
 
   return 0;
 }

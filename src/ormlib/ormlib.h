@@ -1,20 +1,16 @@
 #pragma once
-#include <dirent.h>
-#include <stdio.h>
-#include <sys/stat.h>
-#include <luajit-2.1/lua.h>
 
-#define STRING_SIZE 32767 * 16
-#define DEFAULT_USER "guest"
+#include <sys/types.h>
 
-#define true 1
-#define false 0
 
-char *readEntireFile(FILE *ptr);
-char *orm64Dir();
+// Create a directory
 void mkdir2(const char *directory, mode_t mode);
 
-enum ResFile { DEFAULT_CONFIG, HELP_FILE, API_FILE };
 
-char *getResString(enum ResFile file);
-int orm64DirectorySetup(lua_State *L);
+// --- Orm64 ---
+
+// Create and Orm64 User
+void orm64_createuser(const char *name, const char *password);
+
+// Return the Orm64 Directory
+char *orm64_dir();

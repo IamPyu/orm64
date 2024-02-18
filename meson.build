@@ -13,9 +13,10 @@ src = [
   'src/main.c',
   'src/lua.c',
   'src/user.c',
+  'src/util.c',
   'src/apis/graphics.c',
   'src/apis/socket.c',
-  'src/apis/graphics/functions.c',
+  'src/apis/graphics/functions.c'
 ]
 
 executable('orm64', src, dependencies: deps, link_with: ormlib)
