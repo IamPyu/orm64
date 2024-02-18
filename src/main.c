@@ -5,7 +5,8 @@
 #include <editline/readline.h>
 
 #include "lua.h"
-#include "util.h"
+#include "ormlib/ormlib.h"
+//#include "util.h"
 #include "user.h"
 
 int repl(Orm64Lua *lua);

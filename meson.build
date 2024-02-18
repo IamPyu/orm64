@@ -1,7 +1,6 @@
 project('orm64', 'c')
 
-
-orm64lib = library('orm64lib', 'src/util.c')
+ormlib = library('ormlib', 'src/ormlib/ormlib.c')
 
 deps = [
   dependency('libedit'),
@@ -19,4 +18,4 @@ src = [
   'src/apis/graphics/functions.c',
 ]
 
-executable('orm64', src, dependencies: deps, link_with: orm64lib)
+executable('orm64', src, dependencies: deps, link_with: ormlib)

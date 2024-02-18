@@ -4,8 +4,8 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
-#include "util.h"
-#include "res.h"
+#include "ormlib.h"
+#include "../res.h"
 
 /// Reads all the contents of `ptr`. If failed the function returns an empty
 /// string. `ptr` Is a pointer the the file
