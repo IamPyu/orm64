@@ -22,7 +22,11 @@ In order to use this program you will need the dependencies listed below:
 
 * Building
 
-Simply use `build.sh`
+Building requires Meson
+
+Make a directory called *bin*
+
+Inside of it run *meson ..* and then run *meson compile*
 
 * TODO Roadmap
 - [x] Lua REPL
