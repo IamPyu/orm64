@@ -167,7 +167,7 @@ void setupOrm64Core(Orm64Lua *lua) {
   
   // External Orm64 libraries
   setupOrm64Graphics(lua); // Orm64 Graphics
-  setupOrm64Sockets(lua);
+  setupOrm64Sockets(lua);  // Orm64 Sockets
 }
 
 void runLua(Orm64Lua *lua, const char *code) {

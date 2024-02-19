@@ -29,9 +29,9 @@ Make a directory called *bin*
 Inside of it run *meson ..* and then run *meson compile*
 
 * TODO Roadmap
-- [x] Lua REPL
-- [x] Application, and Libraries
-- [x] Package manager (To install apps and libraries)
+- [X] Lua REPL
+- [X] Application, and Libraries
+- [X] Package manager (To install apps and libraries)
 - [-] An API with a bunch of modules to create lots of things
   - [X] Graphics and Multimedia layer
   - [ ] Terminal Manipulation library
@@ -39,8 +39,8 @@ Inside of it run *meson ..* and then run *meson compile*
   - [X] User interaction library
 - [ ] File system
 - [ ] Plugin system
-- [x] User system
-- [ ] Bloated library with improved libc and functions for interacting with Orm64
+- [X] User system
+- [X] C/C++ Library for interacting with Orm64
 
 * History
 

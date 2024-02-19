@@ -13,7 +13,7 @@ int repl(Orm64Lua *lua);
 int main(int argc, const char **argv) {
   struct stat st = {0};
   if (stat(strcat(orm64_dir(), "/config.lua"), &st) == -1) {
-    orm64DirectorySetup(NULL);    
+    orm64DirectorySetup(NULL);
   }
 
   User *user = createUser();
