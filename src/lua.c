@@ -19,7 +19,7 @@ int reloadConfiguration(lua_State *L) {
     luaL_loadstring(L, config);
     if (lua_pcall(L, 0, 0, 0)) {
       const char *errormsg = lua_tostring(L, -1);
-			printf("An error occured in the configuration file: %s\n", errormsg);
+      printf("An error occured in the configuration file: %s\n", errormsg);
     }
 
     free((void *)config);
