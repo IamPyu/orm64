@@ -23,5 +23,7 @@ src = [
   'src/apis/graphics/functions.c',
 ]
 
-run_command('sh', 'configure.sh')
+
+
+
 executable('orm64', src, dependencies: deps, link_with: ormlib)
