@@ -81,7 +81,7 @@ static struct luaL_Reg graphicslib_m[] = {
     {"close", closeWindow},
     {"draw", windowDraw},
     {"shouldClose", windowShouldClose},
-    
+
     // All the other functions
     {"toggleFullscreen", toggleFullscreen},
     {"setTargetFPS", setTargetFPS},
@@ -92,9 +92,10 @@ static struct luaL_Reg graphicslib_m[] = {
     {"drawText", drawText},
     {"isKeyDown", isKeyDown},
     {"isKeyUp", isKeyUp},
+    {"isMouseButtonPressed", isMouseButtonPressed},
+    {"isMouseButtonReleased", isMouseButtonReleased},
 
-    {NULL, NULL}
-};
+    {NULL, NULL}};
 
 void setupOrm64Graphics(Orm64Lua *lua) {
   luaL_newmetatable(lua->L, "graphics");
@@ -183,4 +184,21 @@ void setupOrm64Graphics(Orm64Lua *lua) {
   defkey(COMMA);
   defkey(EQUAL);
   defkey(MINUS);
+
+  lua_newtable(lua->L);
+  lua_setglobal(lua->L, "graphics_mousebutton");
+  lua_getglobal(lua->L, "graphics_mousebutton");
+
+#define defmouse(x)                   \
+  lua_pushinteger(lua->L, MOUSE_BUTTON_##x); \
+  lua_setfield(lua->L, -2, #x)
+
+  defmouse(LEFT);
+  defmouse(RIGHT);
+  defmouse(MIDDLE);
+
+  defmouse(SIDE);
+  defmouse(BACK);
+  defmouse(FORWARD);
+  defmouse(EXTRA);
 }

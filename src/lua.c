@@ -13,7 +13,7 @@
 
 int reloadConfiguration(lua_State *L) {
   FILE *configFile = fopen(strcat(orm64_dir(), "/config.lua"), "r");
-
+  
   if (configFile != NULL) {
     const char *config = readEntireFile(configFile);
     luaL_loadstring(L, config);
@@ -67,12 +67,7 @@ int orm64GetSoftwarePath(lua_State *L) {
   sprintf(path, "%s/software/%s", orm64_dir(), lua_tostring(L, -1));
 
   if (access(path, F_OK) == 0) {
-    DIR *directory = opendir(path);
-    if (directory != NULL) {
-      lua_pushstring(L, path);
-    } else {
-      lua_pushnil(L);
-    }
+		lua_pushstring(L, path);
   } else {
     lua_pushnil(L);
   }

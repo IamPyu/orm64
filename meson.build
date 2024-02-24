@@ -4,16 +4,16 @@ if host_machine.system() == 'windows'
   error('Orm64 and Ormlib are for *NIX system only. I do not plan to add Windows support.')
 endif
 
-ormlib = library('ormlib', 'src/ormlib/ormlib.c')
+ormlib = library('ormlib', [
+  'src/ormlib/ormlib.c'
+], install: true)
 
-deps = [
-  dependency('libedit'),
-  dependency('luajit'),
-  dependency('raylib'),
-  dependency('ncurses'),
-]
+install_subdir('default', install_dir: '~/.config/orm64')
+install_headers('src/ormlib/ormlib.h')
 
-src = [
+run_command('sh', 'configure.sh')
+
+executable('orm64', [
   'src/main.c',
   'src/lua.c',
   'src/user.c',
@@ -21,7 +21,9 @@ src = [
   'src/apis/graphics.c',
   'src/apis/socket.c',
   'src/apis/graphics/functions.c',
-]
-
-run_command('configure.sh')
-executable('orm64', src, dependencies: deps, link_with: ormlib)
+], dependencies: [
+  dependency('libedit'),
+  dependency('luajit'),
+  dependency('raylib'),
+  dependency('ncurses'),
+], link_with: ormlib, install: true)

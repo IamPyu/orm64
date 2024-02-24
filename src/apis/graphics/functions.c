@@ -97,3 +97,29 @@ int isKeyUp(lua_State *L) {
 
   return 1;
 }
+
+int isMouseButtonPressed(lua_State *L) {
+  luaL_checkudata(L, 1, "graphics");
+  int key = luaL_checkinteger(L, 2);
+
+  if (IsMouseButtonPressed(key)) {
+    lua_pushboolean(L, 1);
+  } else {
+    lua_pushboolean(L, 0);
+  }
+
+  return 1;
+}
+
+int isMouseButtonReleased(lua_State *L) {
+  luaL_checkudata(L, 1, "graphics");
+  int key = luaL_checkinteger(L, 2);
+
+  if (IsMouseButtonReleased(key)) {
+    lua_pushboolean(L, 1);
+  } else {
+    lua_pushboolean(L, 0);
+  }
+
+  return 1;
+}

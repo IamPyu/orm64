@@ -12,7 +12,7 @@ User *createUser() {
   User *user = malloc(sizeof(User));
   user->username = "";
   user->password = "";
-  
+
   return user;
 }
 
@@ -23,7 +23,7 @@ int userLogin(User *user) {
 
   struct stat st = {0};
   if (stat(userPath, &st) != -1) {
-    user->username = login;
+    user->username = (char*)login;
   } else {
     printf("User '%s' does not exist. Try using the default user: %s\n", login, DEFAULT_USER);
     return -1;
@@ -42,7 +42,7 @@ int userLogin(User *user) {
     int passwordFailed = false;
 
     if (strcmp(contents, password) == 0) {
-      user->password = password;
+      user->password = (char*)password;
       printf("Password correct.\n");
     } else {
       printf("Password incorrect.\n");
@@ -71,7 +71,7 @@ static int refreshUser(lua_State *L) {
   
   if (file != NULL) {
     const char *contents = readEntireFile(file);
-    loggedInUser->password = contents;
+    loggedInUser->password = (char*)contents;
     free((void*)contents);
   }
 
