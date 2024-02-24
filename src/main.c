@@ -21,15 +21,37 @@ int main(int argc, const char **argv) {
   printf("Welcome to Orm64! Lets login!\n");
   printf("If running for the first time, login to `guest` and use orm64.createUser(name, password) in the REPL\n");
   
-  while (1) {
+  for (;;) {
     if (userLogin(user) != -1) {
       Orm64Lua *lua = newOrm64Lua(user);
-      int exit = repl(lua);
-      free((void *)lua);
       
-      if (exit) {
-	break;
-      }      
+      if (argc < 2) {
+        int exit = repl(lua);
+
+        if (exit) {
+          break;
+        }
+      } else {
+        const char *mode = argv[1];
+        if (strcmp(mode, "script") == 0) {
+          if (argc >= 2) {
+            FILE *f = fopen(argv[2], "r");
+            if (f != NULL) {
+              const char *contents = readEntireFile(f);
+              runLua(lua, contents);
+              free((void*)contents);
+            } else {
+              printf("Failed to open file: %s\n", argv[2]);
+            }
+          }
+        } else if (strcmp(mode, "help") == 0) {
+          printf("Commands: script");
+        }
+
+        break;
+      }
+
+      free((void *)lua);
     } else {
       continue;
     }
@@ -74,6 +96,7 @@ int repl(Orm64Lua *lua) {
     }
     else {
       runLua(lua, str);
+			//printf(": %s\n", lua_tostring(lua->L, -1));
     }
   }
 

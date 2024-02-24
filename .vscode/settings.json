@@ -1,0 +1,4 @@
+{
+    "mesonbuild.configureOnOpen": true,
+    "C_Cpp.default.compileCommands": "/Users/mixer/code/projects/orm64/builddir/compile_commands.json"
+}
