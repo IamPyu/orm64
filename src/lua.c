@@ -45,7 +45,6 @@ Orm64Lua *newOrm64Lua(User *pUser) {
   luaL_openlibs(lua->L);
   setupOrm64Users(lua, pUser);
 
-
   char package_code[128];
   sprintf(package_code, "package.path = package.path .. ';%s/software/?/init.lua'", orm64_dir());
   luaL_dostring(lua->L, package_code);
