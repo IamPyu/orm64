@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <curses.h>
 #include <editline/readline.h>
 
 #include "lua.h"
@@ -11,6 +12,10 @@
 int repl(Orm64Lua *lua);
 
 int main(int argc, const char **argv) {
+  initscr(); cbreak(); noecho();
+  nonl(); intrflush(stdscr, false); 
+  keypad(stdscr, FALSE);
+
   struct stat st = {0};
   if (stat(strcat(orm64_dir(), "/config.lua"), &st) == -1) {
     orm64DirectorySetup(NULL);
@@ -18,8 +23,10 @@ int main(int argc, const char **argv) {
 
   User *user = createUser();
   
-  printf("Welcome to Orm64! Lets login!\n");
-  printf("If running for the first time, login to `guest` and use orm64.createUser(name, password) in the REPL\n");
+  
+  printw("Welcome to Orm64! Lets login!\n");
+  printw("If running for the first time, login to `guest` and use orm64.createUser(name, password) in the REPL\nOr use the orm64util CLI command.\n");
+  refresh();
   
   for (;;) {
     if (userLogin(user) != -1) {
@@ -42,10 +49,12 @@ int main(int argc, const char **argv) {
               free((void*)contents);
             } else {
               printf("Failed to open file: %s\n", argv[2]);
+              refresh();
             }
           }
         } else if (strcmp(mode, "help") == 0) {
           printf("Commands: script");
+          refresh();
         }
 
         break;
@@ -58,6 +67,8 @@ int main(int argc, const char **argv) {
   }
 
   free((void*)user);
+  endwin();
+
   return 0;
 }
 
