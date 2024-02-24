@@ -8,11 +8,12 @@ ormlib = library('ormlib', [
   'src/ormlib/ormlib.c'
 ], install: true)
 
-install_subdir('default', install_dir: '~/.config/orm64')
+run_command('chmod', '+x', 'install.sh')
+meson.add_install_script('install.sh')
+
 install_headers('src/ormlib/ormlib.h')
 
 run_command('sh', 'configure.sh')
-
 executable('orm64', [
   'src/main.c',
   'src/lua.c',
