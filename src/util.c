@@ -21,7 +21,6 @@ char *readEntireFile(FILE *ptr) {
   return contents;
 }
 
-
 /// Get the contents of a resource file.
 /// Resource files are from `res.h`
 char *getResString(enum ResFile file) {

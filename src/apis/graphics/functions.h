@@ -1,25 +1,28 @@
 #include "../graphics.h"
 #include "../../lua.h"
+#include "../../util.h"
 
 #include <raylib.h>
 
 // Window
 
-int toggleFullscreen(lua_State *L);
-int setTargetFPS(lua_State *L);
+defun(toggleFullscreen);
+defun(setTargetFPS);
 
 // Drawing
 
-int setDrawColor(lua_State *L);
-int clearBackground(lua_State *L);
-int drawCircle(lua_State *L);
-int drawRect(lua_State *L);
-int drawText(lua_State *L);
+defun(setDrawColor);
+defun(clearBackground);
+defun(drawCircle);
+defun(drawRect);
+defun(drawText);
 
 // Input
 
-int isKeyDown(lua_State *L);
-int isKeyUp(lua_State *L);
+defun(isKeyDown);
+defun(isKeyUp);
 
-int isMouseButtonPressed(lua_State *L);
-int isMouseButtonReleased(lua_State *L);
+defun(isMouseButtonPressed);
+defun(isMouseButtonReleased);
+defun(isMouseButtonDown);
+defun(isMouseButtonUp);

@@ -14,7 +14,15 @@ install_headers('src/ormlib/ormlib.h')
 run_command('chmod', '+x', 'scripts/install.sh')
 meson.add_install_script('scripts/install.sh')
 
-# Orm64
+# Orm64 and Orm64Util
+
+deps = [
+  dependency('libedit'),
+  dependency('luajit'),
+  dependency('raylib'),
+  dependency('ncurses'),
+]
+
 run_command('sh', 'scripts/configure.sh')
 executable('orm64', [
   'src/main.c',
@@ -24,9 +32,9 @@ executable('orm64', [
   'src/apis/graphics.c',
   'src/apis/socket.c',
   'src/apis/graphics/functions.c',
-], dependencies: [
-  dependency('libedit'),
-  dependency('luajit'),
-  dependency('raylib'),
-  dependency('ncurses'),
-], link_with: ormlib, install: true)
+], dependencies: deps, link_with: ormlib, install: true)
+
+executable('orm64util', [
+  'src/orm64util/orm64util.c',
+  'src/orm64util/ormutil.c'
+], dependencies: deps, link_with: ormlib, install: true)

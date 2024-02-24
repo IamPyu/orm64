@@ -24,11 +24,14 @@ In order to use this program you will need the dependencies listed below:
 
 Building requires Meson
 
-Make a directory called *bin*
+Make a directory called *bin* or if it is already there, just *cd* into it.
 
 Inside of it run *meson ..* and then run *meson compile*
 
+If you also want to install Orm64, run *meson install* in the build directory
+
 * TODO Roadmap
+
 - [X] Lua REPL
 - [X] Application, and Libraries
 - [X] Package manager (To install apps and libraries)

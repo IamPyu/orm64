@@ -94,6 +94,8 @@ static struct luaL_Reg graphicslib_m[] = {
     {"isKeyUp", isKeyUp},
     {"isMouseButtonPressed", isMouseButtonPressed},
     {"isMouseButtonReleased", isMouseButtonReleased},
+    {"isMouseButtonDown", isMouseButtonDown},
+    {"isMouseButtonUp", isMouseButtonUp},
 
     {NULL, NULL}};
 
