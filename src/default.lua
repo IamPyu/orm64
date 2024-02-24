@@ -2,11 +2,11 @@ local user = require("user")
 
 --Orm64 configuration
 -- Startup (and exit) Message!
-orm64_options.show_startup_message = true
+orm64_options.show_startup_message = true -- Change whether the startup message should show.
 
-local currentUser = user.getUsername()
-orm64_options.startup_message = string.format("Welcome to Orm64, %s!", currentUser)
-orm64_options.exit_message = string.format("Goodbye, %s!", currentUser)
+local currentUser = user.getUsername() -- Get the current user's username.
+orm64_options.startup_message = string.format("Welcome to Orm64, %s!", currentUser) -- Configure the startup message here.
+orm64_options.exit_message = string.format("Goodbye, %s!", currentUser) -- Configure the exit message here.
 
 -- Prompt
 orm64_options.prompt = string.format("%s@orm64> ", currentUser) -- The prompt, its that text that is printed before your cursor.
