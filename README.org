@@ -37,7 +37,6 @@ If you also want to install Orm64, run *meson install* in the build directory
 - [X] Package manager (To install apps and libraries)
 - [-] An API with a bunch of modules to create lots of things
   - [X] Graphics and Multimedia layer
-  - [ ] Terminal Manipulation library
   - [ ] Networking and HTTP library
   - [X] User interaction library
 - [ ] File system
