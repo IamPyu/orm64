@@ -15,8 +15,6 @@ In order to use this program you will need the dependencies listed below:
 - Unix based system, (MacOS and Linux tested, unsure about BSDs)
 - [[https://luajit.org]]
 - [[https://raylib.com]]
-- [[https://invisible-island.net/ncurses]]
-- pkg-config
 - libedit
 - git
 
