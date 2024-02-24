@@ -5,7 +5,12 @@ return function ()
 
   while not window:shouldClose() do
     window:draw(function()
-      window:clearBackground(255, 255, 255, 255)
+      window:setDrawColor(255, 255, 255, 255)
+      window:clearBackground()
+      
+      if window:isMouseButtonPressed(graphics_mousebutton.LEFT) then
+        print(32)
+      end
     end)
   end
 

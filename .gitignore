@@ -1,2 +1,3 @@
 /src/res.h
+/tests/*.out
 *.DS_Store
