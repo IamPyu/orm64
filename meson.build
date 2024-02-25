@@ -37,6 +37,3 @@ executable('orm64util', [
   'src/orm64util/orm64util.c',
   'src/orm64util/ormutil.c'
 ], dependencies: deps, link_with: ormlib, install: true)
-
-# Build and run tests (Make sure tests are not interactive!!!)
-run_command('python3', 'tests/build.py', capture: true)

@@ -17,6 +17,7 @@ In order to use this program you will need the dependencies listed below:
 - [[https://raylib.com]]
 - libedit
 - git
+- python3 (For running tests)
 
 * Building
 

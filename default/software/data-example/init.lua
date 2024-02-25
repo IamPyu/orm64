@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 ---@param data string
 return function(data)
   local dir = orm64.getSoftwarePath("data-example")
