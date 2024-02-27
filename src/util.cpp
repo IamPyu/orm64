@@ -11,7 +11,7 @@
 char *readEntireFile(FILE *ptr) {
   fseek(ptr, 0, SEEK_END); 
   long size = ftell(ptr);
-  char *contents = (char *)malloc(size + 1);
+  char *contents = new char[size + 1];
 
   if (ptr != NULL) {
     fseek(ptr, 0, SEEK_SET); 

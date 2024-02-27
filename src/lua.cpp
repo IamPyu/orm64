@@ -40,7 +40,7 @@ void setupOrm64Core(Orm64Lua *lua);
 /// Creates a `Orm64Lua`. Make sure to `free` it when done.
 /// `Orm64Lua`
 Orm64Lua *newOrm64Lua(User *pUser) {
-  Orm64Lua *lua = (Orm64Lua *)malloc(sizeof(Orm64Lua));
+  Orm64Lua *lua = new Orm64Lua[sizeof(Orm64Lua)];
   lua->L = luaL_newstate();
   luaL_openlibs(lua->L);
   setupOrm64Users(lua, pUser);

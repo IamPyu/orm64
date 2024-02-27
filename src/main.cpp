@@ -45,7 +45,7 @@ int main(int argc, const char **argv) {
             if (f != NULL) {
               const char *contents = readEntireFile(f);
               runLua(lua, contents);
-              free((void*)contents);
+              delete contents; 
             } else {
               printf("Failed to open file: %s\n", argv[2]);
               // refresh();
@@ -59,13 +59,13 @@ int main(int argc, const char **argv) {
         break;
       }
 
-      free((void *)lua);
+      delete lua;
     } else {
       continue;
     }
   }
 
-  free((void*)user);
+  delete user;
   // endwin();
 
   return 0;

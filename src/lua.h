@@ -1,7 +1,9 @@
 #pragma once
 
-#include <luajit-2.1/lualib.h>
-#include <luajit-2.1/lauxlib.h>
+extern "C" {
+  #include <luajit-2.1/lualib.h>
+  #include <luajit-2.1/lauxlib.h>
+}
 
 #include <stdlib.h>
 #include <string.h>

@@ -15,7 +15,7 @@ int setTargetFPS(lua_State *L) {
 }
 
 int setDrawColor(lua_State *L) {
-  GraphicsWindow *window = luaL_checkudata(L, 1, "graphics");
+  GraphicsWindow *window = (GraphicsWindow*)luaL_checkudata(L, 1, "graphics");
 
   int red = luaL_checkinteger(L, 2);
   int green = luaL_checkinteger(L, 3);
@@ -31,14 +31,14 @@ int setDrawColor(lua_State *L) {
 }
 
 int clearBackground(lua_State *L) {
-  GraphicsWindow *window = luaL_checkudata(L, 1, "graphics");
+  GraphicsWindow *window = (GraphicsWindow*)luaL_checkudata(L, 1, "graphics");
   ClearBackground(window->drawColor);
 
   return 0;
 }
 
 int drawCircle(lua_State *L) {
-  GraphicsWindow *window = luaL_checkudata(L, 1, "graphics");
+  GraphicsWindow *window = (GraphicsWindow*)luaL_checkudata(L, 1, "graphics");
 
   int xPos = luaL_checkinteger(L, 2);
   int yPos = luaL_checkinteger(L, 3);
@@ -49,7 +49,7 @@ int drawCircle(lua_State *L) {
 }
 
 int drawRect(lua_State *L) {
-  GraphicsWindow *window = luaL_checkudata(L, 1, "graphics");
+  GraphicsWindow *window = (GraphicsWindow*)luaL_checkudata(L, 1, "graphics");
 
   int xPos = luaL_checkinteger(L, 2);
   int yPos = luaL_checkinteger(L, 3);
@@ -61,7 +61,7 @@ int drawRect(lua_State *L) {
 }
 
 int drawText(lua_State *L) {
-  GraphicsWindow *window = luaL_checkudata(L, 1, "graphics");
+  GraphicsWindow *window = (GraphicsWindow*)luaL_checkudata(L, 1, "graphics");
 
   const char *text = luaL_checkstring(L, 2);
   int xPos = luaL_checkinteger(L, 3);

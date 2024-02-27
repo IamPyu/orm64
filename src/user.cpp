@@ -9,7 +9,7 @@
 #include <editline/readline.h>
 
 User *createUser() {
-  User *user = malloc(sizeof(User));
+  User *user = new User[sizeof(User)];
   user->username = "";
   user->password = "";
 
