@@ -1,12 +1,12 @@
 #pragma once
 #include "../lua.h"
 
-typedef struct {
+struct TcpListener {
   
-} TcpListener;
+};
 
-typedef struct {
+struct TcpStream {
   
-} TcpStream;
+};
 
 void setupOrm64Sockets(Orm64Lua *lua);

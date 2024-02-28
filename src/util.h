@@ -16,7 +16,7 @@
 
 char *readEntireFile(FILE *ptr);
 
-enum ResFile { DEFAULT_CONFIG, HELP_FILE, API_FILE };
+enum class ResFile { DEFAULT_CONFIG, HELP_FILE, API_FILE };
 
 char *getResString(enum ResFile file);
 defun(orm64DirectorySetup);

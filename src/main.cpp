@@ -96,10 +96,10 @@ int repl(Orm64Lua *lua) {
       break;
     }
     else if (strcmp(str, "help") == 0) {
-      printf("%s\n", getResString(HELP_FILE));
+      printf("%s\n", getResString(ResFile::HELP_FILE));
     }
     else if (strcmp(str, "api") == 0) {
-      printf("%s\n", getResString(API_FILE));
+      printf("%s\n", getResString(ResFile::API_FILE));
     }
     else if (strcmp(str, "logout") == 0) {
       return 0;

@@ -8,9 +8,9 @@ extern "C" {
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct {
+struct Orm64Lua {
   lua_State *L;
-} Orm64Lua;
+};
 
 #include "user.h"
 
