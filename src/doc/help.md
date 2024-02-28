@@ -32,12 +32,10 @@ This stores data important to Orm64 and should not be used by software.
 Software should use there own data directory.
 
 We cant go on about directories without talking about the `home` directory.
-This contains all the files, created by: *drumroll* You!
+This contains all the users, created by: *drumroll* You!
 An operating system that has a filesystem cannot go without a user directory.
 
 Now lets talk more about the `config.lua` and teach you how to configure Orm64!
-
-
 
 ## APIs
 

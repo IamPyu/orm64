@@ -26,3 +26,5 @@ defun(isMouseButtonPressed);
 defun(isMouseButtonReleased);
 defun(isMouseButtonDown);
 defun(isMouseButtonUp);
+
+defun(getMousePos);

@@ -27,17 +27,20 @@ Git time. You can use `orm64.installPackages` to install your configured package
 
 Now we have `orm64.createUser`
 
+It creates a user with the arguments USERNAME and PASSWORD
+
 ## User API
 
-? This API is requirable, you can use `require()` on it.
+* This API is requirable, you can use `require()` on it.
 
 The User API allows you to change the properties of your current user.
 
 The first function we have here is `user.getPath`
+It gives you the path of your current user.
 
 ## The Graphics and Multimedia APIs
 
-? This API is requirable, you can use `require()` on it.
+* This API is requirable, you can use `require()` on it.
 
 The whole reason I made Orm64 was to make a simple game console that runs on your computer.
 
@@ -68,7 +71,7 @@ window:close()
 
 That is the code for a basic window.
 
-Save your code in ~/.orm64.d/software/mywindow/init.lua
+Save your code in ~/.config/orm64/software/mywindow/init.lua
 
 And in Orm64 run `require("mywindow")`
 
@@ -102,7 +105,7 @@ typedef struct {
 
     lua_CFunction draw;
     Color drawColor;    
-} Graphics;
+} GraphicsWindow;
 ```
 
 So you can see we have the title, width and height variables.

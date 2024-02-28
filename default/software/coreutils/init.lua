@@ -1,5 +1,5 @@
 local user = require("user")
-local function ls(p)
+local function ls(f)
    local path = user.getPath() .. "/"
    os.execute("ls -a " .. path .. (p ~= nil and p or ""))
 end
@@ -14,8 +14,19 @@ local function mkdir(p)
    os.execute("mkdir " .. path .. p)
 end
 
+local function cat(f)
+  local path = string.format("%s/%s", user.getPath(), f)
+  local file = io.open(path, "r")
+  if file ~= nil then
+    print(file:read("a"))
+  else
+    print(string.format("Failed to open file: %s", f))
+  end
+end
+
 return {
   ls = ls,
   touch = touch,
-  mkdir = mkdir
+  mkdir = mkdir,
+  cat = cat
 }

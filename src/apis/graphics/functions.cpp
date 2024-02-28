@@ -149,3 +149,15 @@ int isMouseButtonUp(lua_State *L) {
 
   return 1;
 }
+
+int getMousePos(lua_State *L) {
+  luaL_checkudata(L, 1, "graphics");
+
+  int x = GetMouseX();
+  int y = GetMouseY();
+
+  lua_pushinteger(L, (lua_Integer)x);
+  lua_pushinteger(L, (lua_Integer)y);
+
+  return 2;
+}
