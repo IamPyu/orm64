@@ -188,25 +188,6 @@ int getMousePos(lua_State *L) {
   return 2;
 }
 
-#include <pthread.h>
-void *playSoundThread(void *vargp) {
-  const char *path = (const char*)vargp;
-  Sound sound = LoadSound(path);
-  PlaySound(sound);
-  return (void*)0;
-}
-
-int playSound(lua_State *L) {
-  luaL_checkudata(L, 1, "graphics");
-
-  const char *path = luaL_checkstring(L, 2);
-  pthread_t tid;
-  pthread_create(&tid, NULL, playSoundThread, (void*)path);
-  
-  return 0;
-}
-
-
 #define isGpButton(fn)							\
   luaL_checkudata(L, 1, "graphics");			\
   int gamepad = luaL_checkinteger(L, 2);		\

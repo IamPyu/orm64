@@ -3,14 +3,16 @@ return function()
 
    if path ~= nil then
 	  local graphics = require("graphics")
+	  local multimedia = require("multimedia")
 	  local window = graphics.new(800, 600, "Sounds")
+	  multimedia.init()
 	  window:init()
 
 	  
 	  while not window:shouldClose() do
 		 if window:isKeyPressed(graphics_keys.SPACE) then
 			print(path)
-			window:playSound(path.."/sound.mp3")
+			multimedia.playSound(path.."/sound.mp3")
 		 end
 		 
 		 window:draw(function()
@@ -23,5 +25,6 @@ return function()
 	  end
 
 	  window:close()
+	  multimedia.close()
   end
 end

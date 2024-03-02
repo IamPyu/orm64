@@ -1,4 +1,5 @@
 return function ()
+   local multimedia = require("multimedia")
    local graphics = require("graphics")
    local window = graphics.new(1200, 800, "Gamepads")
 
@@ -15,6 +16,7 @@ return function ()
 	  math.random(0, 255)
    }
 
+   multimedia.init()
    window:init()
    window:setTargetFPS(60)
    
@@ -47,7 +49,7 @@ return function ()
 	  if window:isGamepadButtonPressed(0, graphics_gamepadbutton.B) then
 		 local path = orm64.getSoftwarePath("sounds")
 		 if path ~= nil then
-			window:playSound(path.."/sound.mp3")
+			multimedia.playSound(path.."/sound.mp3")
 		 end
 	  end
 	  
@@ -64,4 +66,7 @@ return function ()
 			window:drawRect(0, 400, 180, 800-400)
 	  end)
    end
+
+   window:close()
+   multimedia.close()
 end

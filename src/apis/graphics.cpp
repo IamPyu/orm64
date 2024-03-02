@@ -34,7 +34,6 @@ static int listWindows(lua_State *L) {
 static int initWindow(lua_State *L) {
   GraphicsWindow *window = (GraphicsWindow*)lua_touserdata(L, -1);
   InitWindow(window->width, window->height, window->title);
-  InitAudioDevice();
   
   return 1;
 }
@@ -44,7 +43,6 @@ static int closeWindow(lua_State *L) {
 
   windows--;
   CloseWindow();
-  CloseAudioDevice();
   
   return 1;
 }
@@ -70,13 +68,13 @@ static int windowDraw(lua_State *L) {
   return 1;
 }
 
-static struct luaL_Reg graphicslib_f[] = {
+static const struct luaL_Reg graphicslib_f[] = {
     {"new", newWindow}, 
     {"windows", listWindows}, 
     {NULL, NULL}
 };
 
-static struct luaL_Reg graphicslib_m[] = {
+static const struct luaL_Reg graphicslib_m[] = {
     // Core functions
     {"init", initWindow},
     {"close", closeWindow},
@@ -100,13 +98,13 @@ static struct luaL_Reg graphicslib_m[] = {
     {"isMouseButtonDown", isMouseButtonDown},
     {"isMouseButtonUp", isMouseButtonUp},
     {"getMousePos", getMousePos},
-	{"playSound", playSound},
 	{"isGamepadButtonPressed", isGamepadButtonPressed},
 	{"isGamepadButtonReleased", isGamepadButtonReleased},
 	{"isGamepadButtonDown", isGamepadButtonDown},
 	{"isGamepadButtonUp", isGamepadButtonUp},
 
-    {NULL, NULL}};
+    {NULL, NULL}
+};
 
 void setupOrm64Graphics(Orm64Lua *lua) {
   luaL_newmetatable(lua->L, "graphics");

@@ -31,10 +31,6 @@ defun(isMouseButtonUp);
 
 defun(getMousePos);
 
-// Audio
-
-defun(playSound);
-
 // Gamepads
 
 defun(isGamepadButtonPressed);

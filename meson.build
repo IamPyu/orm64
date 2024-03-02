@@ -32,6 +32,7 @@ executable('orm64', [
   'src/util.cpp',
   'src/apis/graphics.cpp',
   'src/apis/socket.cpp',
+  'src/apis/multimedia.cpp',
   'src/apis/graphics/functions.cpp',
 ], dependencies: deps, link_with: ormlib, install: true)
 

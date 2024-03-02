@@ -10,6 +10,7 @@
 
 #include "apis/graphics.h"
 #include "apis/socket.h"
+#include "apis/multimedia.h"
 
 int reloadConfiguration(lua_State *L) {
   FILE *configFile = fopen(strcat(orm64_dir(), "/config.lua"), "r");
@@ -124,7 +125,7 @@ int orm64InstallPackages(lua_State *L) {
 		"git init; git remote add origin %s; git remote set-url origin %s; git branch -m main; git reset --hard; git pull origin HEAD --force", url, url);
 
         char fullCmd[STRING_SIZE];
-        sprintf(fullCmd, "cd %s; %s", path, cmd);
+        sprintf(fullCmd, "cd %s; %s > /dev/null", path, cmd);
 
         system(fullCmd); // system fixed my entire package manager lol.
       } else {
@@ -163,6 +164,7 @@ void setupOrm64Core(Orm64Lua *lua) {
   // External Orm64 libraries
   setupOrm64Graphics(lua); // Orm64 Graphics
   setupOrm64Sockets(lua);  // Orm64 Sockets
+  setupOrm64Multimedia(lua); // Orm64 Multimedia
 }
 
 void runLua(Orm64Lua *lua, const char *code) {
