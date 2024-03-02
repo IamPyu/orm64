@@ -2,5 +2,6 @@
 /src/res.h
 # no compiled binaries!
 /tests/*.out
+/result
 # why.
 *.DS_Store
