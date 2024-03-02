@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
-#include <curses.h>
 #include <editline/readline.h>
 
 #include "lua.h"
@@ -63,28 +62,29 @@ int main(int argc, const char **argv) {
 }
 
 int repl(Orm64Lua *lua) {
-  lua_getglobal(lua->L, "orm64_options");
-  lua_getfield(lua->L, -1, "show_startup_message");
 
-  int showStartupMessage = lua_toboolean(lua->L, -1);
+#define getOption(T, t, v, x)					\
+  lua_getglobal(lua->L, "orm64_options");		\
+  lua_getfield(lua->L, -1, #x);					\
+  T v = lua_to##t (lua->L, -1)
   
-  if (showStartupMessage) {
-    lua_getglobal(lua->L, "orm64_options");
-    lua_getfield(lua->L, -1, "startup_message");
-    printf("%s\n", lua_tostring(lua->L, -1));
+  getOption(const int, boolean, showMessages, show_messages);
+  getOption(const char*, string, startupMessage, startup_message);
+  getOption(const char*, string, exitMessage, exit_message);
+  getOption(const char*, string, prompt, prompt);
+  
+  if (showMessages) {
+	printf("%s\n", startupMessage);
   }
 
   for (;;) {
-    lua_getglobal(lua->L, "orm64_options");
-    lua_getfield(lua->L, -1, "prompt");
-
-    char *str = readline(lua_tostring(lua->L, -1));
+    const char *str = (const char*)readline(prompt);
     add_history(str);
 
     if (strcmp(str, "exit") == 0) {
-      lua_getglobal(lua->L, "orm64_options");
-      lua_getfield(lua->L, -1, "exit_message");
-      printf("%s\n", lua_tostring(lua->L, -1));
+	  if (showMessages) {
+		printf("%s\n", exitMessage);
+	  }
       break;
     }
     else if (strcmp(str, "help") == 0) {
@@ -94,11 +94,13 @@ int repl(Orm64Lua *lua) {
       printf("%s\n", getResString(ResFile::API_FILE));
     }
     else if (strcmp(str, "logout") == 0) {
+	  if (showMessages) {
+		printf("%s\n", exitMessage);
+	  }
       return 0;
     }
     else {
       runLua(lua, str);
-			//printf(": %s\n", lua_tostring(lua->L, -1));
     }
   }
 

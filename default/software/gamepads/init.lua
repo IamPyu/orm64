@@ -6,6 +6,7 @@ return function ()
    local Y = 300
    local Size = 45
    local Speed = 5
+   
    math.randomseed(os.time())
    local Color = {
 	  math.random(0, 255),
