@@ -11,6 +11,7 @@ Because I had enough of making FizzBuzz projects!
 * License
 
 Project licensed under the MIT License.
+
 Textures (made by me) are licensed under CC by 4.0
 
 * Dependencies
