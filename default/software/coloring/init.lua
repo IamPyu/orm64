@@ -1,5 +1,4 @@
 return function ()
-
   local graphics = require("graphics")
   local window = graphics.new(800, 600, "Coloring")
   window:init()
@@ -16,18 +15,26 @@ return function ()
   while not window:shouldClose() do
     if window:isMouseButtonDown(graphics_mousebutton.LEFT) then
       local x, y = window:getMousePos()
-      table.insert(colors, {x, y})
+      table.insert(colors, {x, y, false})
+    end
+
+	if window:isMouseButtonDown(graphics_mousebutton.RIGHT) then
+      local x, y = window:getMousePos()
+      table.insert(colors, {x, y, true})
     end
 
     window:draw(function()
       window:setDrawColor(255, 255, 255, 255)
       window:clearBackground()
 
-      window:setDrawColor(color[1], color[2], color[3], 255)
-
       for _, v in pairs(colors) do
-        window:drawCircle(v[1], v[2], size)
-      end
+		 if v[3] then
+			window:setDrawColor(255, 255, 255, 255) -- Eraser
+		 else
+			window:setDrawColor(color[1], color[2], color[3], 255)
+		 end
+		 window:drawCircle(v[1], v[2], size)
+	  end
     end)
   end
 

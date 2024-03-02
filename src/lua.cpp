@@ -54,7 +54,7 @@ Orm64Lua *newOrm64Lua(User *pUser) {
   lua_createtable(lua->L, 0, 0);
   lua_setglobal(lua->L, "orm64_options");
   
-  char *config = getResString(DEFAULT_CONFIG);
+  char *config = getResString(ResFile::DEFAULT_CONFIG);
   luaL_dostring(lua->L, config);
 
   reloadConfiguration(lua->L);

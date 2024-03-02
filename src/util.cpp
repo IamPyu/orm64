@@ -27,21 +27,21 @@ char *getResString(enum ResFile file) {
   char str[STRING_SIZE] = "";
 
   switch (file) {
-  case DEFAULT_CONFIG: {
+  case ResFile::DEFAULT_CONFIG: {
     char *txt = (char *)src_default_lua;
     txt[src_default_lua_len] = '\0';
     strcpy(str, txt);
     break;
   }
 
-  case HELP_FILE: {
+  case ResFile::HELP_FILE: {
     char *txt = (char *)src_doc_help_md;
     txt[src_doc_help_md_len] = '\0';
     strcpy(str, txt);
     break;
   }
 
-  case API_FILE: {
+  case ResFile::API_FILE: {
     char *txt = (char *)src_doc_api_md;
     txt[src_doc_api_md_len] = '\0';
     strcpy(str, txt);
@@ -68,7 +68,7 @@ int orm64DirectorySetup(lua_State *L) {
   FILE *configFile = fopen(strcat(orm64_dir(), "/config.lua"), "w");
 
   if (configFile != NULL) {
-    char *config = getResString(DEFAULT_CONFIG);
+    char *config = getResString(ResFile::DEFAULT_CONFIG);
     fwrite(config, strlen(config), 1, configFile);
   }
 
