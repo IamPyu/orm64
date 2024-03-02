@@ -14,6 +14,11 @@ install_headers('src/ormlib/ormlib.h')
 
 # User Data and Configuration
 run_command('chmod', '+x', 'scripts/install.sh')
+
+if get_option('debug_install') == true
+  run_command('sh', 'scripts/install.sh')
+endif
+
 meson.add_install_script('scripts/install.sh')
 
 # Orm64 and Orm64Util
