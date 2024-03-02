@@ -207,3 +207,29 @@ int playSound(lua_State *L) {
 }
 
 
+#define isGpButton(fn)							\
+  luaL_checkudata(L, 1, "graphics");			\
+  int gamepad = luaL_checkinteger(L, 2);		\
+  int btn = luaL_checkinteger(L, 3);			\
+  if (fn(gamepad, btn))							\
+	lua_pushboolean(L, 1);						\
+  else											\
+	lua_pushboolean(L, 0);						\
+  return 1;
+  
+
+int isGamepadButtonPressed(lua_State *L) {
+  isGpButton(IsGamepadButtonPressed);
+}
+
+int isGamepadButtonReleased(lua_State *L) {
+  isGpButton(IsGamepadButtonReleased);
+}
+
+int isGamepadButtonDown(lua_State *L) {
+  isGpButton(IsGamepadButtonDown);
+}
+
+int isGamepadButtonUp(lua_State *L) {
+  isGpButton(IsGamepadButtonUp);
+}

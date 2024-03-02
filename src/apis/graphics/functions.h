@@ -34,3 +34,10 @@ defun(getMousePos);
 // Audio
 
 defun(playSound);
+
+// Gamepads
+
+defun(isGamepadButtonPressed);
+defun(isGamepadButtonReleased);
+defun(isGamepadButtonDown);
+defun(isGamepadButtonUp);

@@ -101,6 +101,10 @@ static struct luaL_Reg graphicslib_m[] = {
     {"isMouseButtonUp", isMouseButtonUp},
     {"getMousePos", getMousePos},
 	{"playSound", playSound},
+	{"isGamepadButtonPressed", isGamepadButtonPressed},
+	{"isGamepadButtonReleased", isGamepadButtonReleased},
+	{"isGamepadButtonDown", isGamepadButtonDown},
+	{"isGamepadButtonUp", isGamepadButtonUp},
 
     {NULL, NULL}};
 
@@ -209,4 +213,43 @@ void setupOrm64Graphics(Orm64Lua *lua) {
   defmouse(BACK);
   defmouse(FORWARD);
   defmouse(EXTRA);
+  
+  lua_newtable(lua->L);
+  lua_setglobal(lua->L, "graphics_gamepadbutton");
+  lua_getglobal(lua->L, "graphics_gamepadbutton");
+
+#define defgamepad(x)							\
+  lua_pushinteger(lua->L, GAMEPAD_BUTTON_##x);	\
+  lua_setfield(lua->L, -2, #x);
+
+  // Restructure Raylib definitions
+  // D-Pad
+#define GAMEPAD_BUTTON_LEFT GAMEPAD_BUTTON_LEFT_FACE_LEFT
+#define GAMEPAD_BUTTON_RIGHT GAMEPAD_BUTTON_LEFT_FACE_RIGHT
+#define GAMEPAD_BUTTON_UP GAMEPAD_BUTTON_LEFT_FACE_UP
+#define GAMEPAD_BUTTON_DOWN GAMEPAD_BUTTON_LEFT_FACE_DOWN
+
+  // ABXY (XBOX), random shapes (PlayStation)
+#define GAMEPAD_BUTTON_A GAMEPAD_BUTTON_RIGHT_FACE_DOWN
+#define GAMEPAD_BUTTON_B GAMEPAD_BUTTON_RIGHT_FACE_RIGHT
+#define GAMEPAD_BUTTON_X GAMEPAD_BUTTON_RIGHT_FACE_LEFT
+#define GAMEPAD_BUTTON_Y GAMEPAD_BUTTON_RIGHT_FACE_UP
+
+  defgamepad(LEFT);
+  defgamepad(RIGHT);
+  defgamepad(UP);
+  defgamepad(DOWN);
+
+  defgamepad(A);
+  defgamepad(B);
+  defgamepad(X);
+  defgamepad(Y);
+
+  defgamepad(LEFT_TRIGGER_1);
+  defgamepad(LEFT_TRIGGER_2);
+  defgamepad(RIGHT_TRIGGER_1);
+  defgamepad(RIGHT_TRIGGER_2);
+
+  defgamepad(LEFT_THUMB);
+  defgamepad(RIGHT_THUMB);
 }

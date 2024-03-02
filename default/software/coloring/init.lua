@@ -1,16 +1,15 @@
 return function ()
   local graphics = require("graphics")
   local window = graphics.new(800, 600, "Coloring")
-  window:init()
 
   local size = DRAW_SIZE or 20
   local color = DRAW_COLOR or {0, 0, 0}
-  local colors = {
-
-  }
+  local colors = {}
 
   print("Set DRAW_SIZE variable to a number to change the drawing size!")
   print("Set DRAW_COLOR variable to a RGB table to change the drawing color!")
+
+  window:init()
 
   while not window:shouldClose() do
     if window:isMouseButtonDown(graphics_mousebutton.LEFT) then
