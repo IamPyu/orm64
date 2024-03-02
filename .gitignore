@@ -1,3 +1,6 @@
+# res.h is too big to be included in the source tree
 /src/res.h
+# no compiled binaries!
 /tests/*.out
+# why.
 *.DS_Store

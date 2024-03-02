@@ -1,4 +1,5 @@
 local user = require("user")
+
 local function ls(f)
    local path = user.getPath() .. "/"
    os.execute("ls -a " .. path .. (p ~= nil and p or ""))

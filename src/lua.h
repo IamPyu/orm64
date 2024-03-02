@@ -16,3 +16,4 @@ struct Orm64Lua {
 
 Orm64Lua *newOrm64Lua(User *pUser);
 void runLua(Orm64Lua *lua, const char *code);
+int orm64InstallPackages(lua_State *L); 
