@@ -58,8 +58,10 @@ return function ()
 			window:clearBackground()
 
 			-- Player
-			window:setDrawColor(Color[1], Color[2], Color[3], Color[4])
-			window:drawCircle(X, Y, Size)
+			window:setDrawColor(255, 255, 255, 255)
+			
+			local path = orm64.getSoftwarePath("gamepads")
+			window:drawTextureExtra(path.."/dirt.png", X, Y, 0, 20)
 
 			-- House
 			window:setDrawColor(40, 0, 0, 255)

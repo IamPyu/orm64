@@ -8,6 +8,11 @@ It's kinda like those fantasy game consoles, except its meant to be an enitre OS
 
 Because I had enough of making FizzBuzz projects!
 
+* License
+
+Project licensed under the MIT License.
+Textures (made by me) are licensed under CC by 4.0
+
 * Dependencies
 
 In order to use this program you will need the dependencies listed below:

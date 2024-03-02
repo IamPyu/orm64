@@ -61,10 +61,6 @@ int orm64DirectorySetup(lua_State *L) {
   mkdir2(strcat(orm64_dir(), "/software"), 0700);
   mkdir2(strcat(orm64_dir(), "/home"), 0700);
 
-  /* char defaultUserPath[STRING_SIZE]; */
-  /* sprintf(defaultUserPath, "/home/%s", DEFAULT_USER); */
-  /* mkdir2(strcat(orm64_dir(), defaultUserPath), 0700); */
-
   FILE *configFile = fopen(strcat(orm64_dir(), "/config.lua"), "w");
 
   if (configFile != NULL) {

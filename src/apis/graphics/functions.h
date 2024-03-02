@@ -2,8 +2,6 @@
 #include "../../lua.h"
 #include "../../util.h"
 
-//#include <raylib.h>
-
 // Window
 
 defun(toggleFullscreen);
@@ -16,6 +14,8 @@ defun(clearBackground);
 defun(drawCircle);
 defun(drawRect);
 defun(drawText);
+defun(drawTexture);
+defun(drawTextureExtra);
 
 // Input
 

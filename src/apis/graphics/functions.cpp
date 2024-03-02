@@ -214,3 +214,35 @@ int isGamepadButtonDown(lua_State *L) {
 int isGamepadButtonUp(lua_State *L) {
   isGpButton(IsGamepadButtonUp);
 }
+
+int drawTexture(lua_State *L) {
+  GraphicsWindow *window =  (GraphicsWindow*)luaL_checkudata(L, 1, "graphics");
+
+  const char *path = luaL_checkstring(L, 2);
+  const int X = luaL_checkinteger(L, 3);
+  const int Y = luaL_checkinteger(L, 4);
+
+  Texture texture = LoadTexture(path);
+  DrawTexture(texture, X, Y, window->drawColor);
+  
+  return 0;
+}
+
+int drawTextureExtra(lua_State *L) {
+  GraphicsWindow *window = (GraphicsWindow*)luaL_checkudata(L, 1, "graphics");
+
+  const char *path = luaL_checkstring(L, 2);
+  const int X = luaL_checkinteger(L, 3);
+  const int Y = luaL_checkinteger(L, 4);
+  const float rotation = luaL_checknumber(L, 5);
+  const float scale = luaL_checknumber(L, 6);
+
+  Texture texture = LoadTexture(path);
+  Vector2 pos = {0};
+  pos.x = X;
+  pos.y = Y;
+  
+  DrawTextureEx(texture, pos, rotation, scale, window->drawColor);
+  
+  return 0;
+}

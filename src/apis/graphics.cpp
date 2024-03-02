@@ -89,6 +89,8 @@ static const struct luaL_Reg graphicslib_m[] = {
     {"drawCircle", drawCircle},
     {"drawRect", drawRect},
     {"drawText", drawText},
+	{"drawTexture", drawTexture},
+	{"drawTextureExtra", drawTextureExtra},
     {"isKeyDown", isKeyDown},
     {"isKeyUp", isKeyUp},
 	{"isKeyPressed", isKeyPressed},
