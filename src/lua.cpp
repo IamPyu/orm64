@@ -37,7 +37,7 @@ int reloadConfiguration(lua_State *L) {
 
 void setupOrm64Core(Orm64Lua *lua);
 
-/// Creates a `Orm64Lua`. Make sure to `free` it when done.
+/// Creates a `Orm64Lua`. Make sure to delete it when done.
 /// `Orm64Lua`
 Orm64Lua *newOrm64Lua(User *pUser) {
   Orm64Lua *lua = new Orm64Lua[sizeof(Orm64Lua)];
@@ -46,7 +46,7 @@ Orm64Lua *newOrm64Lua(User *pUser) {
   setupOrm64Users(lua, pUser);
 
   char package_code[128];
-  sprintf(package_code, "package.path = package.path .. ';%s/software/?/init.lua'", orm64_dir());
+  snprintf(package_code, 128, "package.path = package.path .. ';%s/software/?/init.lua;%s/scripts/?.lua'", orm64_dir(), orm64_dir());
   luaL_dostring(lua->L, package_code);
 
   setupOrm64Core(lua);

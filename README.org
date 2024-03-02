@@ -33,16 +33,16 @@ If you also want to install Orm64, run *meson install* in the build directory
 
 - [X] Lua REPL
 - [X] Application, and Libraries
-- [X] Package manager (To install apps and libraries)
+- [X] Package manager
 - [-] An API with a bunch of modules to create lots of things
   - [X] Graphics and Multimedia layer
   - [ ] Networking and HTTP library
   - [X] User interaction library
 - [ ] File system
-- [ ] Plugin system
 - [X] User system
 - [X] C/C++ Library for interacting with Orm64
-
+- [ ] Advanced Configuration
+  
 * History
 
 I first wrote this in [[https://rust-lang.org]].
@@ -53,3 +53,10 @@ So I decided to rewrite Orm64 in C, since C lets you do just about anything in a
 
 I found pointers and memory allocation (Thanks to my experience in Rust) easy and I ended up really liking C. 
 I guess from now on I will write most of my projects in C!
+
+I rewrote this in C++ a month after the C rewrite for some nice features like the *new* and *delete* keywords and lambdas.
+
+* Other stuff
+
+This project *probably* has a bunch of crappy code.
+But don't blame me it's my first big C/C++ project in 2 years.
