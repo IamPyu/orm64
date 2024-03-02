@@ -44,7 +44,8 @@ static int closeWindow(lua_State *L) {
 
   windows--;
   CloseWindow();
-
+  CloseAudioDevice();
+  
   return 1;
 }
 
@@ -92,11 +93,14 @@ static struct luaL_Reg graphicslib_m[] = {
     {"drawText", drawText},
     {"isKeyDown", isKeyDown},
     {"isKeyUp", isKeyUp},
+	{"isKeyPressed", isKeyPressed},
+    {"isKeyReleased", isKeyReleased},
     {"isMouseButtonPressed", isMouseButtonPressed},
     {"isMouseButtonReleased", isMouseButtonReleased},
     {"isMouseButtonDown", isMouseButtonDown},
     {"isMouseButtonUp", isMouseButtonUp},
     {"getMousePos", getMousePos},
+	{"playSound", playSound},
 
     {NULL, NULL}};
 
@@ -152,6 +156,7 @@ void setupOrm64Graphics(Orm64Lua *lua) {
   defkey(DOWN);
 
   defkey(ESCAPE);
+  defkey(SPACE);
   defkey(TAB);
   defkey(CAPS_LOCK);
   defkey(ENTER);

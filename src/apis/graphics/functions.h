@@ -2,7 +2,7 @@
 #include "../../lua.h"
 #include "../../util.h"
 
-#include <raylib.h>
+//#include <raylib.h>
 
 // Window
 
@@ -21,6 +21,8 @@ defun(drawText);
 
 defun(isKeyDown);
 defun(isKeyUp);
+defun(isKeyPressed);
+defun(isKeyReleased);
 
 defun(isMouseButtonPressed);
 defun(isMouseButtonReleased);
@@ -28,3 +30,7 @@ defun(isMouseButtonDown);
 defun(isMouseButtonUp);
 
 defun(getMousePos);
+
+// Audio
+
+defun(playSound);
