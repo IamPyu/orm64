@@ -10,8 +10,8 @@
 
 User *createUser() {
   User *user = new User[sizeof(User)];
-  user->username = "";
-  user->password = "";
+  user->username = (char*)"";
+  user->password = (char*)"";
 
   return user;
 }
@@ -49,7 +49,7 @@ int userLogin(User *user) {
       passwordFailed = true;
     }
     
-    free((void*)contents);
+	delete contents;
 
     if (passwordFailed) {
       return -1;

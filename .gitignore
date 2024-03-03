@@ -5,3 +5,4 @@
 /result
 # why.
 *.DS_Store
+.cache

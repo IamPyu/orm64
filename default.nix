@@ -1,5 +1,6 @@
 with import <nixpkgs> {}; stdenv.mkDerivation {
-  name = "env";
+  name = "orm64";
+  pname = "orm64";
   src = ./.;
   nativeBuildInputs = [ pkg-config python3 meson ninja xxd ];
   buildInputs = [
@@ -9,6 +10,11 @@ with import <nixpkgs> {}; stdenv.mkDerivation {
     git
   ];
 
-  buildPhase = "meson setup .. && meson compile";
+  buildPhase = "meson setup .. --reconfigure && meson compile";
   installPhase = "meson install";
+
+  meta = {
+    homepage = "https://gitlab.com/IamPyu/orm64";
+    description = "Orm64 System";
+  };
 }

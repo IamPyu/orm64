@@ -19,6 +19,7 @@ if get_option('debug_install') == true
   run_command('sh', 'scripts/install.sh')
 endif
 
+
 meson.add_install_script('scripts/install.sh')
 
 # Orm64 and Orm64Util
