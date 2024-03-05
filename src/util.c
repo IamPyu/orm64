@@ -11,7 +11,7 @@
 char *readEntireFile(FILE *ptr) {
   fseek(ptr, 0, SEEK_END); 
   long size = ftell(ptr);
-  char *contents = new char[size + 1];
+  char *contents = (char*)malloc(size + 1);
 
   if (ptr != NULL) {
     fseek(ptr, 0, SEEK_SET); 
@@ -27,21 +27,21 @@ char *getResString(enum ResFile file) {
   char str[STRING_SIZE] = "";
 
   switch (file) {
-  case ResFile::DEFAULT_CONFIG: {
+  case DEFAULT_CONFIG: {
     char *txt = (char *)src_default_lua;
     txt[src_default_lua_len] = '\0';
     strcpy(str, txt);
     break;
   }
 
-  case ResFile::HELP_FILE: {
+  case HELP_FILE: {
     char *txt = (char *)src_doc_help_md;
     txt[src_doc_help_md_len] = '\0';
     strcpy(str, txt);
     break;
   }
 
-  case ResFile::API_FILE: {
+  case API_FILE: {
     char *txt = (char *)src_doc_api_md;
     txt[src_doc_api_md_len] = '\0';
     strcpy(str, txt);
@@ -64,7 +64,7 @@ int orm64DirectorySetup(lua_State *L) {
   FILE *configFile = fopen(strcat(orm64_dir(), "/config.lua"), "w");
 
   if (configFile != NULL) {
-    char *config = getResString(ResFile::DEFAULT_CONFIG);
+    char *config = getResString(DEFAULT_CONFIG);
     fwrite(config, strlen(config), 1, configFile);
   }
 

@@ -6,7 +6,7 @@
 
 #include "ormlib/ormlib.h"
 
-#define STRING_SIZE 32767 * 16
+#define STRING_SIZE 512 * sizeof(char*)
 #define DEFAULT_USER "guest"
 
 #define defun(name) int name(lua_State *L);
@@ -16,7 +16,7 @@
 
 char *readEntireFile(FILE *ptr);
 
-enum class ResFile { DEFAULT_CONFIG, HELP_FILE, API_FILE };
+enum ResFile { DEFAULT_CONFIG, HELP_FILE, API_FILE };
 
 char *getResString(enum ResFile file);
 defun(orm64DirectorySetup);

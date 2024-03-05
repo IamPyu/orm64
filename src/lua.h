@@ -1,17 +1,15 @@
 #pragma once
 
-extern "C" {
 #include <lualib.h>
 #include <lauxlib.h>
 #include <luajit.h>
-}
 
 #include <stdlib.h>
 #include <string.h>
 
-struct Orm64Lua {
+typedef struct {
   lua_State *L;
-};
+} Orm64Lua;
 
 #include "user.h"
 

@@ -16,6 +16,12 @@ int main(int argc, const char **argv) {
     orm64DirectorySetup(NULL);
   }
 
+  #if defined(DEBUG_MODE)
+  printf("Orm64 compiled with Debug mode!\n");
+  printf("Info: \n");
+  printf("String Size: %d\n", STRING_SIZE);
+  #endif
+  
   User *user = createUser();
   
   printf("Welcome to Orm64! Lets login!\n");
@@ -39,7 +45,7 @@ int main(int argc, const char **argv) {
             if (f != NULL) {
               const char *contents = readEntireFile(f);
               runLua(lua, contents);
-              delete contents; 
+              free((void*)contents); 
             } else {
               printf("Failed to open file: %s\n", argv[2]);
             }
@@ -50,13 +56,13 @@ int main(int argc, const char **argv) {
         break;
       }
 
-      delete lua;
+      free((void*)lua);
     } else {
       continue;
     }
   }
 
-  delete user;
+  free((void*)user);
 
   return 0;
 }
@@ -88,10 +94,10 @@ int repl(Orm64Lua *lua) {
       break;
     }
     else if (strcmp(str, "help") == 0) {
-      printf("%s\n", getResString(ResFile::HELP_FILE));
+      printf("%s\n", getResString(HELP_FILE));
     }
     else if (strcmp(str, "api") == 0) {
-      printf("%s\n", getResString(ResFile::API_FILE));
+      printf("%s\n", getResString(API_FILE));
     }
     else if (strcmp(str, "logout") == 0) {
 	  if (showMessages) {

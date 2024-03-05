@@ -1,3 +1,9 @@
+{debug ? false}:
+
+let
+  debugArg = if debug then "-Ddebug_install=true" else "-Ddebug_install=false";
+in
+
 with import <nixpkgs> {}; stdenv.mkDerivation {
   name = "orm64";
   pname = "orm64";
@@ -10,7 +16,7 @@ with import <nixpkgs> {}; stdenv.mkDerivation {
     git
   ];
 
-  buildPhase = "meson setup .. --reconfigure && meson compile";
+  buildPhase = "meson setup .. --reconfigure && meson configure ${debugArg} && meson compile";
   installPhase = "meson install";
 
   meta = {

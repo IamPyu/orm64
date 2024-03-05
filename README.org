@@ -4,6 +4,8 @@ A simple, lua-based, fantasy operating system.
 
 It's kinda like those fantasy game consoles, except its meant to be an enitre OS.
 
+If you want to called Orm64 like AArch64 you can say OOrch64 (It is terrible dont use this name)
+
 * Why?
 
 Because I had enough of making FizzBuzz projects!
@@ -35,7 +37,13 @@ Inside of it run *meson ..* and then run *meson compile*
 
 If you also want to install Orm64, run *meson install* in the build directory
 
-* TODO Roadmap
+** Using Nix
+
+You can build with Nix, simply use *nix-build*
+
+You can enable debug info in Orm64 using *nix-build --arg debug true* :)
+
+* Roadmap
 
 - [X] Lua REPL
 - [X] Application, and Libraries

@@ -1,9 +1,9 @@
 #pragma once
 
-struct User {
+typedef struct {
   char *username;
   char *password;
-};
+} User;
 
 #include "lua.h"
 

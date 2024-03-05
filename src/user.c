@@ -9,10 +9,9 @@
 #include <editline/readline.h>
 
 User *createUser() {
-  User *user = new User[sizeof(User)];
+  User *user = (User*)malloc(sizeof(User));
   user->username = (char*)"";
   user->password = (char*)"";
-
   return user;
 }
 
@@ -20,7 +19,7 @@ int userLogin(User *user) {
   const char *login = readline("User login: ");
   char userPath[STRING_SIZE];
   sprintf(userPath, "%s/home/%s", orm64_dir(), login);
-
+  
   struct stat st = {0};
   if (stat(userPath, &st) != -1) {
     user->username = (char*)login;
@@ -49,7 +48,7 @@ int userLogin(User *user) {
       passwordFailed = true;
     }
     
-	delete contents;
+	free((void*)contents);
 
     if (passwordFailed) {
       return -1;
