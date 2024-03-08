@@ -4,44 +4,6 @@ A simple, lua-based, fantasy operating system.
 
 It's kinda like those fantasy game consoles, except its meant to be an enitre OS.
 
-If you want to called Orm64 like AArch64 you can say OOrch64 (It is terrible dont use this name)
-
-* Why?
-
-Because I had enough of making FizzBuzz projects!
-
-* License
-
-Project licensed under the MIT License.
-
-Textures (made by me) are licensed under CC by 4.0
-
-* Dependencies
-
-In order to use this program you will need the dependencies listed below:
-
-- Unix based system, (MacOS and Linux tested, unsure about BSDs)
-- [[https://luajit.org]]
-- [[https://raylib.com]]
-- libedit
-- git
-- python3 (For running tests)
-
-* Building
-
-Building requires Meson
-
-Make a directory called *bin* or if it is already there, just *cd* into it.
-
-Inside of it run *meson ..* and then run *meson compile*
-
-If you also want to install Orm64, run *meson install* in the build directory
-
-** Using Nix
-
-You can build with Nix, simply use *nix-build*
-
-You can enable debug info in Orm64 using *nix-build --arg debug true* :)
 
 * Roadmap
 

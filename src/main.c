@@ -18,8 +18,9 @@ int main(int argc, const char **argv) {
 
   #if defined(DEBUG_MODE)
   printf("Orm64 compiled with Debug mode!\n");
-  printf("Info: \n");
-  printf("String Size: %d\n", STRING_SIZE);
+  printf("String Size: %lu\n", STRING_SIZE);
+  printf("Default User: %s\n", DEFAULT_USER);
+  printf("End of debug information\n");
   #endif
   
   User *user = createUser();

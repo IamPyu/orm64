@@ -16,6 +16,7 @@ void *playSoundThread(void *vargp) {
   const char *path = (const char*)vargp;
   Sound sound = LoadSound(path);
   PlaySound(sound);
+  WaitTime(sound.frameCount);
   return (void*)0;
 }
 

@@ -4,9 +4,9 @@
 #include <stdio.h>
 #include <sys/stat.h>
 
-#include "ormlib/ormlib.h"
+#include "orm64lib/orm64lib.h"
 
-#define STRING_SIZE 512 * sizeof(char*)
+#define STRING_SIZE 512 * sizeof(char*) // DO NOT MODIFY THE SIZE OF
 #define DEFAULT_USER "guest"
 
 #define defun(name) int name(lua_State *L);

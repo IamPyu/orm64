@@ -4,7 +4,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
-#include "ormlib/ormlib.h"
+#include "orm64lib/orm64lib.h"
 #include "util.h"
 #include "res.h"
 

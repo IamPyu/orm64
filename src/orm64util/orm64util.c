@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "../ormlib/ormlib.h"
+#include "../orm64lib/orm64lib.h"
 #include "ormutil.h"
 
 int main(int argc, const char **argv) {

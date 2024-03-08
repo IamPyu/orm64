@@ -3,7 +3,7 @@
 #include <string.h>
 #include <sys/stat.h>
 
-#include "ormlib.h"
+#include "orm64lib.h"
 #include "../util.h"
 
 void mkdir2(const char *directory, mode_t mode) {
