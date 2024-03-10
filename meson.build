@@ -15,6 +15,7 @@ if get_option('debug_install') == true
 endif
 
 install_subdir('default', install_dir: 'etc/orm64/')
+meson.add_install_script('scripts/doc.sh')
 
 # Orm64lib
 orm64lib = library('orm64lib', [
