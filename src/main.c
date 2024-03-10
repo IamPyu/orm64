@@ -6,7 +6,7 @@
 
 #include "lua.h"
 #include "util.h"
-#include "user.h"
+#include "orm64lib/orm64lib.h"
 
 int repl(Orm64Lua *lua);
 
@@ -29,6 +29,7 @@ int main(int argc, const char **argv) {
   printf("If running Orm64 for the first time, use `man 1 orm64util` to learn how to create a user.");
  
   #if defined(ENABLE_BLOAT)
+  #include "user.h"
   User *user = createUser();
   
   for (;;) {
