@@ -6,16 +6,21 @@ if host_machine.system() == 'windows'
   error('Orm64, Orm64Util, and Ormlib are for *NIX system only. I do not plan to add Windows support.')
 endif
 
-# User Data and Configuration
-run_command('chmod', '+x', 'scripts/install.sh')
+# Build options
 
 if get_option('debug_install') == true
   run_command('sh', 'scripts/install.sh')
   add_project_arguments(['-DDEBUG_MODE'], language: 'c')
 endif
 
+# User Data and Configuration
+
+## Default Configuration
 install_subdir('default', install_dir: 'etc/orm64/')
+
+## Manpages
 meson.add_install_script('scripts/doc.sh')
+install_subdir('man/man', install_dir: 'share/')
 
 # Orm64lib
 orm64lib = library('orm64lib', [

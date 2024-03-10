@@ -1,8 +1,13 @@
 # res.h is too big to be included in the source tree
 /src/res.h
+
 # no compiled binaries!
 /tests/*.out
 /result
+
 # why.
 *.DS_Store
 .cache
+
+# ignore generated manpages
+man/man
