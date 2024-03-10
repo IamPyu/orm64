@@ -1,9 +1,10 @@
 project('orm64', 'c')
-
 add_project_arguments(['-std=c11'], language: 'c')
 
+# Windows support notice
+
 if host_machine.system() == 'windows'
-  error('Orm64, Orm64Util, and Ormlib are for *NIX system only. I do not plan to add Windows support.')
+  error('Orm64, Orm64Util, and Orm64lib are for *NIX system only. I do not plan to add Windows support.')
 endif
 
 # Build options
@@ -42,8 +43,8 @@ executable('orm64', [
   'src/lua.c',
   'src/user.c',
   'src/util.c',
-  'src/apis/graphics.c',
   'src/apis/socket.c',
+  'src/apis/graphics.c',
   'src/apis/multimedia.c',
   'src/apis/graphics/functions.c',
 ], dependencies: deps, link_with: orm64lib, install: true)

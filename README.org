@@ -4,6 +4,13 @@ A simple, lua-based, fantasy operating system.
 
 It's kinda like those fantasy game consoles, except its meant to be an enitre OS.
 
+* Update March 9th 2024
+
+The term "fantasy console" or "fantasy operating system" for Orm64 does not make sense.
+
+Instead Orm64 will be labelled as "an API layer for creating Software with Lua.".
+
+Which makes features like "Users" useless and bloated, /*which is good*/.
 
 * Roadmap
 

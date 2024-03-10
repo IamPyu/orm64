@@ -24,12 +24,11 @@ int main(int argc, const char **argv) {
   printf("Default User: %s\n", DEFAULT_USER);
   printf("End of debug information\n");
   #endif
+
+  printf("Welcome to Orm64! Lets login!\n");
+  printf("If running Orm64 for the first time, use `man 1 orm64util` to learn how to create a user.");
   
   User *user = createUser();
-  
-  printf("Welcome to Orm64! Lets login!\n");
-  printf("If running for use the orm64util CLI command to create a user.\n");
-  printf("Example: orm64util newuser guest mypassword\n");
   
   for (;;) {
     if (userLogin(user) != -1) {
