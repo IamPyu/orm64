@@ -13,8 +13,8 @@ int repl(Orm64Lua *lua);
 int main(int argc, const char **argv) {
   struct stat st = {0};
   if (stat(strcat(orm64_dir(), "/config.lua"), &st) == -1) {
-	printf("No configuration found, copy default configuration from INSTALL_DIR/etc/orm64/default to ~/.config/orm64\n");
-	printf("And create ~/.config/orm64/config.lua\n");
+	  printf("No configuration found, copy default configuration from INSTALL_DIR/etc/orm64/default to ~/.config/orm64\n");
+	  printf("And create ~/.config/orm64/config.lua\n");
     orm64DirectorySetup(NULL);
   }
 
@@ -27,54 +27,35 @@ int main(int argc, const char **argv) {
 
   printf("Welcome to Orm64! Lets login!\n");
   printf("If running Orm64 for the first time, use `man 1 orm64util` to learn how to create a user.");
-  
+ 
+  #if defined(ENABLE_BLOAT)
   User *user = createUser();
   
   for (;;) {
     if (userLogin(user) != -1) {
       Orm64Lua *lua = newOrm64Lua(user);
-      
-      if (argc < 2) {
-        int exit = repl(lua);
-
-        if (exit) {
-          break;
-        }
-      } else {
-        const char *mode = argv[1];
-        if (strcmp(mode, "script") == 0) {
-          if (argc >= 2) {
-            FILE *f = fopen(argv[2], "r");
-            if (f != NULL) {
-              const char *contents = readEntireFile(f);
-              runLua(lua, contents);
-              free((void*)contents);
-            } else {
-              printf("Failed to open file: %s\n", argv[2]);
-            }
-          }
-        } else if (strcmp(mode, "help") == 0) {
-          printf("Commands: script\n");
-        }
-        break;
-      }
-
+      int exit = repl(lua);
       free((void*)lua);
     } else {
       continue;
     }
   }
-
   free((void*)user);
+  #else
+  Orm64Lua *lua = newOrm64Lua(NULL);
+  repl(lua);
+  free((void*)lua);
+  #endif
+
   
   return 0;
 }
 
 int repl(Orm64Lua *lua) {
 
-#define getOption(T, t, v, x)					\
-  lua_getglobal(lua->L, "orm64_options");		\
-  lua_getfield(lua->L, -1, #x);					\
+#define getOption(T, t, v, x)\
+  lua_getglobal(lua->L, "orm64_options");\
+  lua_getfield(lua->L, -1, #x);\
   T v = lua_to##t (lua->L, -1)
   
   getOption(const int, boolean, showMessages, show_messages);
@@ -83,7 +64,7 @@ int repl(Orm64Lua *lua) {
   getOption(const char*, string, prompt, prompt);
   
   if (showMessages) {
-	printf("%s\n", startupMessage);
+	  printf("%s\n", startupMessage);
   }
 
   for (;;) {
@@ -91,9 +72,9 @@ int repl(Orm64Lua *lua) {
     add_history(str);
 
     if (strcmp(str, "exit") == 0) {
-	  if (showMessages) {
-		printf("%s\n", exitMessage);
-	  }
+	    if (showMessages) {
+		    printf("%s\n", exitMessage);
+	    }
       break;
     }
     else if (strcmp(str, "help") == 0) {
@@ -103,11 +84,11 @@ int repl(Orm64Lua *lua) {
       printf("%s\n", getResString(API_FILE));
     }
     else if (strcmp(str, "logout") == 0) {
-	  if (showMessages) {
-		printf("%s\n", exitMessage);
-	  }
-      return 0;
-    }
+	    if (showMessages) {
+		    printf("%s\n", exitMessage);
+	    }
+        return 0;
+      }
     else {
       runLua(lua, str);
     }

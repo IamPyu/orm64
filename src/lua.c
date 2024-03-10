@@ -7,6 +7,7 @@
 #include "lua.h"
 #include "util.h"
 #include "user.h"
+#include "orm64lib/orm64lib.h"
 
 #include "apis/graphics.h"
 #include "apis/socket.h"
@@ -44,7 +45,10 @@ Orm64Lua *newOrm64Lua(User *pUser) {
   Orm64Lua *lua = (Orm64Lua*)malloc(sizeof(Orm64Lua));
   lua->L = luaL_newstate();
   luaL_openlibs(lua->L);
+
+#if defined(ENABLE_BLOAT)
   setupOrm64Users(lua, pUser);
+#endif
 
   char package_code[128];
   snprintf(package_code, 128, "package.path = package.path .. ';%s/software/?/init.lua;%s/scripts/?.lua'", orm64_dir(), orm64_dir());
@@ -76,6 +80,7 @@ int orm64GetSoftwarePath(lua_State *L) {
   return 1;
 }
 
+#if defined(ENABLE_BLOAT)
 int luaCreateUser(lua_State *L) {
   const char *login = lua_tostring(L, -2);
   char *password = (char*)lua_tostring(L, -1);
@@ -99,6 +104,7 @@ int luaCreateUser(lua_State *L) {
   
   return 0;
 }
+#endif
 
 int orm64InstallPackages(lua_State *L) {
   lua_getglobal(L, "orm64_options");
@@ -158,8 +164,10 @@ void setupOrm64Core(Orm64Lua *lua) {
   lua_pushcfunction(lua->L, orm64InstallPackages);
   lua_setfield(lua->L, -2, "installPackages");
 
+#if defined(ENABLE_BLOAT)
   lua_pushcfunction(lua->L, luaCreateUser);
   lua_setfield(lua->L, -2, "createUser");
+#endif
   
   // External Orm64 libraries
   setupOrm64Graphics(lua); // Orm64 Graphics

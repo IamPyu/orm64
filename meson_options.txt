@@ -1,1 +1,2 @@
 option('debug_install', type: 'boolean', value: false)
+option('enable_bloat', type: 'boolean', value: true)

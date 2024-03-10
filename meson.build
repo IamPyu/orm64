@@ -10,8 +10,11 @@ endif
 # Build options
 
 if get_option('debug_install') == true
-  run_command('sh', 'scripts/install.sh')
   add_project_arguments(['-DDEBUG_MODE'], language: 'c')
+endif
+
+if get_option('enable_bloat') == true
+  add_project_arguments(['-DENABLE_BLOAT'], language: 'c')
 endif
 
 # User Data and Configuration

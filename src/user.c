@@ -1,6 +1,7 @@
 #include "user.h"
 #include "lua.h"
 #include "util.h"
+#include "orm64lib/orm64lib.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -48,7 +49,7 @@ int userLogin(User *user) {
       passwordFailed = true;
     }
     
-	free((void*)contents);
+	  free((void*)contents);
 
     if (passwordFailed) {
       return -1;
