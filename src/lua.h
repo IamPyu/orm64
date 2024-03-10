@@ -4,9 +4,6 @@
 #include <lauxlib.h>
 #include <luajit.h>
 
-#include <stdlib.h>
-#include <string.h>
-
 typedef struct {
   lua_State *L;
 } Orm64Lua;

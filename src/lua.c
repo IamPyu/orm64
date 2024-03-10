@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <dlfcn.h>
 
 #include "lua.h"
 #include "util.h"
@@ -69,7 +70,7 @@ Orm64Lua *newOrm64Lua(User *pUser) {
 
 int orm64GetSoftwarePath(lua_State *L) {
   char path[STRING_SIZE];
-  sprintf(path, "%s/software/%s", orm64_dir(), lua_tostring(L, -1));
+  snprintf(path, sizeof(path), "%s/software/%s", orm64_dir(), lua_tostring(L, -1));
 
   if (access(path, F_OK) == 0) {
 		lua_pushstring(L, path);
@@ -77,6 +78,39 @@ int orm64GetSoftwarePath(lua_State *L) {
     lua_pushnil(L);
   }
 
+  return 1;
+}
+
+int orm64LoadPlugin(lua_State *L) {
+  const char *pluginName = luaL_checkstring(L, 1);
+  char pluginPath[STRING_SIZE];
+  snprintf(pluginPath, sizeof(pluginPath), "%s/plugins/%s.so", orm64_dir(), pluginName);
+
+  void *handle = dlopen(pluginPath, 0);
+  void (*initFunction)(void);
+  char *error;
+
+  if (!handle) {
+    fprintf(stderr, "%s\n", dlerror());
+    lua_pushboolean(L, 0);
+    return 1;
+  }
+  dlerror(); // Clear errors
+  
+  char initFunctionName[STRING_SIZE];
+  snprintf(initFunctionName, sizeof(initFunctionName), "orm64Setup%s", pluginName);
+
+  initFunction = (void(*)(void))dlsym(handle, initFunctionName);
+
+  error = dlerror();
+  if (error != NULL) {
+    fprintf(stderr, "%s\n", error);
+    lua_pushboolean(L, 0);
+    return 1;
+  }
+  initFunction();
+
+  lua_pushboolean(L, 1);
   return 1;
 }
 
@@ -163,6 +197,9 @@ void setupOrm64Core(Orm64Lua *lua) {
 
   lua_pushcfunction(lua->L, orm64InstallPackages);
   lua_setfield(lua->L, -2, "installPackages");
+
+  lua_pushcfunction(lua->L, orm64LoadPlugin);
+  lua_setfield(lua->L, -2, "loadPlugin");
 
 #if defined(ENABLE_BLOAT)
   lua_pushcfunction(lua->L, luaCreateUser);

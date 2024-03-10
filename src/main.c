@@ -37,6 +37,10 @@ int main(int argc, const char **argv) {
       Orm64Lua *lua = newOrm64Lua(user);
       int exit = repl(lua);
       free((void*)lua);
+
+      if (exit) {
+        break;
+      }
     } else {
       continue;
     }
