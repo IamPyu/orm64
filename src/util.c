@@ -61,15 +61,6 @@ int orm64DirectorySetup(lua_State *L) {
   mkdir2(strcat(orm64_dir(), "/software"), 0700);
   mkdir2(strcat(orm64_dir(), "/home"), 0700);
 
-  FILE *configFile = fopen(strcat(orm64_dir(), "/config.lua"), "w");
-
-  if (configFile != NULL) {
-    char *config = getResString(DEFAULT_CONFIG);
-    fwrite(config, strlen(config), 1, configFile);
-  }
-
-  fclose(configFile);
-
   printf("Setup new configuration. You can find it in: %s\n", orm64_dir());
 
   return 0;

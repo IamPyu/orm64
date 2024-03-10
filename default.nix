@@ -14,6 +14,7 @@ with import <nixpkgs> {}; stdenv.mkDerivation {
     luajit
     libedit
     git
+    janet
   ];
 
   buildPhase = "meson setup .. --reconfigure && meson configure ${debugArg} && meson compile";

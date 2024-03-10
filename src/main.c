@@ -13,6 +13,8 @@ int repl(Orm64Lua *lua);
 int main(int argc, const char **argv) {
   struct stat st = {0};
   if (stat(strcat(orm64_dir(), "/config.lua"), &st) == -1) {
+	printf("No configuration found, copy default configuration from INSTALL_DIR/etc/orm64/default to ~/.config/orm64\n");
+	printf("And create ~/.config/orm64/config.lua\n");
     orm64DirectorySetup(NULL);
   }
 
@@ -26,7 +28,8 @@ int main(int argc, const char **argv) {
   User *user = createUser();
   
   printf("Welcome to Orm64! Lets login!\n");
-  printf("If running for the first time, login to `guest` and use orm64.createUser(name, password) in the REPL\nOr use the orm64util CLI command.\n");
+  printf("If running for use the orm64util CLI command to create a user.\n");
+  printf("Example: orm64util newuser guest mypassword\n");
   
   for (;;) {
     if (userLogin(user) != -1) {
@@ -46,13 +49,13 @@ int main(int argc, const char **argv) {
             if (f != NULL) {
               const char *contents = readEntireFile(f);
               runLua(lua, contents);
-              free((void*)contents); 
+              free((void*)contents);
             } else {
               printf("Failed to open file: %s\n", argv[2]);
             }
           }
         } else if (strcmp(mode, "help") == 0) {
-          printf("Commands: script");
+          printf("Commands: script\n");
         }
         break;
       }
@@ -64,7 +67,7 @@ int main(int argc, const char **argv) {
   }
 
   free((void*)user);
-
+  
   return 0;
 }
 

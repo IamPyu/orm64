@@ -14,7 +14,7 @@ if get_option('debug_install') == true
   add_project_arguments(['-DDEBUG_MODE'], language: 'c')
 endif
 
-meson.add_install_script('scripts/install.sh')
+install_subdir('default', install_dir: 'etc/orm64/')
 
 # Orm64lib
 orm64lib = library('orm64lib', [
