@@ -16,7 +16,6 @@ Which makes features like "Users" useless and bloated, *which is good*.
 
 - [X] Lua REPL
 - [X] Application, and Libraries
-- [X] Package manager
 - [-] An API with a bunch of modules to create lots of things
   - [X] Graphics and Multimedia layer
   - [ ] Networking and HTTP library
