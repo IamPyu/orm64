@@ -1,7 +1,11 @@
-{debug ? false}:
+{
+  debug ? false,
+  bloat ? true
+}:
 
 let
   debugArg = if debug then "-Ddebug_install=true" else "-Ddebug_install=false";
+  bloatArg = if bloat then "-Denable_bloat=true" else "-Denable_bloat=false";
 in
 
 with import <nixpkgs> {}; stdenv.mkDerivation {
@@ -17,7 +21,7 @@ with import <nixpkgs> {}; stdenv.mkDerivation {
     janet
   ];
 
-  buildPhase = "meson setup .. --reconfigure && meson configure ${debugArg} && meson compile";
+  buildPhase = "meson setup .. --reconfigure && meson configure ${debugArg} ${bloatArg} && meson compile";
   installPhase = "meson install";
   
   meta = {

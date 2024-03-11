@@ -26,7 +26,7 @@ int main(int argc, const char **argv) {
   #endif
 
   printf("Welcome to Orm64! Lets login!\n");
-  printf("If running Orm64 for the first time, use `man 1 orm64util` to learn how to create a user.");
+  printf("If running Orm64 for the first time, use `man 1 orm64util` to learn how to create a user.\n");
  
   #if defined(ENABLE_BLOAT)
   #include "user.h"
