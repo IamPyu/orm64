@@ -28,12 +28,14 @@ Media created by me in this project are licensed under also under the MIT licens
 ### APIs
 
 - [X] Graphics and Multimedia API
-- [X] User system and user interaction API (Bloated build only)
+- [X] User interaction API (Bloated build only)
 - [ ] Networking and HTTP API 
 
-#### Users
+### Usage and Users
 
-- [ ] File system
+- [X] User system (Bloated build only)
+- [ ] File system for Users (Bloated build only)
+- [ ] 
 
 ### Configuration
 

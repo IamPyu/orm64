@@ -1,8 +1,13 @@
+if user == nil then
+  print("Orm64 coreutils Application requires bloat mode.")
+  return 1
+end
+
 local user = require("user")
 
 local function ls(f)
    local path = user.getPath() .. "/"
-   os.execute("ls -a " .. path .. (p ~= nil and p or ""))
+   os.execute("ls -a " .. path .. (f ~= nil and f or ""))
 end
 
 local function touch(p)
