@@ -10,7 +10,14 @@ The term "fantasy console" or "fantasy operating system" for Orm64 does not make
 
 Instead Orm64 will be labelled as "an API layer for creating Software with Lua.".
 
-Which makes features like "Users" useless and bloated, *which is good*.
+Which makes features like "Users" useless and bloated, *which is good (Just kidding!)*.
+
+## License and Contributing
+
+Orm64 is licensed under the MIT License. You are free to copy, modify, distribute, and sublicense this project.
+
+Media created by me in this project are licensed under also under the MIT license because I don't want to use another license.
+
 
 ## Roadmap
 
