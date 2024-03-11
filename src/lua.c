@@ -114,6 +114,12 @@ int orm64LoadPlugin(lua_State *L) {
   return 1;
 }
 
+int orm64BuildPlugins(lua_State *L) {
+
+
+  return 0;
+}
+
 #if defined(ENABLE_BLOAT)
 int luaCreateUser(lua_State *L) {
   const char *login = lua_tostring(L, -2);
