@@ -7,3 +7,5 @@ doc(){
 }
 
 doc orm64
+doc orm64util
+doc orm64Api
