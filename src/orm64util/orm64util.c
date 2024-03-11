@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 
 #include "../orm64lib/orm64lib.h"
 #include "ormutil.h"

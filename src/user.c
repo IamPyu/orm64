@@ -19,7 +19,7 @@ User *createUser() {
 int userLogin(User *user) {
   const char *login = readline("User login: ");
   char userPath[STRING_SIZE];
-  sprintf(userPath, "%s/home/%s", orm64_dir(), login);
+  snprintf(userPath, sizeof(userPath), "%s/home/%s", orm64_dir(), login);
   
   struct stat st = {0};
   if (stat(userPath, &st) != -1) {
@@ -66,7 +66,7 @@ User *loggedInUser;
 
 static int refreshUser(lua_State *L) {
   char passwordPath[STRING_SIZE];
-  sprintf(passwordPath, "%s/home/%s/.password", orm64_dir(), loggedInUser->username);
+  snprintf(passwordPath, sizeof(passwordPath), "%s/home/%s/.password", orm64_dir(), loggedInUser->username);
   FILE *file = fopen(passwordPath, "r");
   
   if (file != NULL) {
@@ -84,7 +84,7 @@ static int changePassword(lua_State *L) {
   const char *newPassword = luaL_checkstring(L, 1); 
   const char *oldPassword = luaL_checkstring(L, 2);
   char passwordPath[STRING_SIZE];
-  sprintf(passwordPath, "%s/home/%s/.password", orm64_dir(), loggedInUser->username);
+  snprintf(passwordPath, sizeof(passwordPath), "%s/home/%s/.password", orm64_dir(), loggedInUser->username);
   
   FILE *file = fopen(passwordPath, "w");
   
@@ -118,7 +118,7 @@ static int getUsername(lua_State *L) {
 
 static int getPath(lua_State *L) { 
   char path[STRING_SIZE];
-  sprintf(path, "%s/home/%s", orm64_dir(), loggedInUser->username);
+  snprintf(path, sizeof(path), "%s/home/%s", orm64_dir(), loggedInUser->username);
   lua_pushstring(L, path);
   return 1;
 }

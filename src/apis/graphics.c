@@ -75,37 +75,37 @@ static const struct luaL_Reg graphicslib_f[] = {
 };
 
 static const struct luaL_Reg graphicslib_m[] = {
-    // Core functions
-    {"init", initWindow},
-    {"close", closeWindow},
-    {"draw", windowDraw},
-    {"shouldClose", windowShouldClose},
+  // Core functions
+  {"init", initWindow},
+  {"close", closeWindow},
+  {"draw", windowDraw},
+  {"shouldClose", windowShouldClose},
 
-    // All the other functions
-    {"toggleFullscreen", toggleFullscreen},
-    {"setTargetFPS", setTargetFPS},
-    {"setDrawColor", setDrawColor},
-    {"clearBackground", clearBackground},
-    {"drawCircle", drawCircle},
-    {"drawRect", drawRect},
-    {"drawText", drawText},
+  // All the other functions
+  {"toggleFullscreen", toggleFullscreen},
+  {"setTargetFPS", setTargetFPS},
+  {"setDrawColor", setDrawColor},
+  {"clearBackground", clearBackground},
+  {"drawCircle", drawCircle},
+  {"drawRect", drawRect},
+  {"drawText", drawText},
 	{"drawTexture", drawTexture},
 	{"drawTextureExtra", drawTextureExtra},
-    {"isKeyDown", isKeyDown},
-    {"isKeyUp", isKeyUp},
+  {"isKeyDown", isKeyDown},
+  {"isKeyUp", isKeyUp},
 	{"isKeyPressed", isKeyPressed},
-    {"isKeyReleased", isKeyReleased},
-    {"isMouseButtonPressed", isMouseButtonPressed},
-    {"isMouseButtonReleased", isMouseButtonReleased},
-    {"isMouseButtonDown", isMouseButtonDown},
-    {"isMouseButtonUp", isMouseButtonUp},
-    {"getMousePos", getMousePos},
+  {"isKeyReleased", isKeyReleased},
+  {"isMouseButtonPressed", isMouseButtonPressed},
+  {"isMouseButtonReleased", isMouseButtonReleased},
+  {"isMouseButtonDown", isMouseButtonDown},
+  {"isMouseButtonUp", isMouseButtonUp},
+  {"getMousePos", getMousePos},
 	{"isGamepadButtonPressed", isGamepadButtonPressed},
 	{"isGamepadButtonReleased", isGamepadButtonReleased},
 	{"isGamepadButtonDown", isGamepadButtonDown},
 	{"isGamepadButtonUp", isGamepadButtonUp},
 
-    {NULL, NULL}
+  {NULL, NULL}
 };
 
 void setupOrm64Graphics(Orm64Lua *lua) {

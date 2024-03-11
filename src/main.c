@@ -27,7 +27,7 @@ int main(int argc, const char **argv) {
   printf("Bloat is enabled, featuers like users can be used.\n");
 #endif
 
-  printf("End of debug information\n");
+  printf("End of debug information\n\n\n");
 #endif
 
   printf("Welcome to Orm64! Lets login!\n");
@@ -51,11 +51,11 @@ int main(int argc, const char **argv) {
     }
   }
   free((void*)user);
-  #else
+#else
   Orm64Lua *lua = newOrm64Lua(NULL);
   repl(lua);
   free((void*)lua);
-  #endif
+#endif
 
   
   return 0;

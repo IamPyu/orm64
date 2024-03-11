@@ -1,4 +1,8 @@
 # Welcome to Orm64!
+
+THIS DOCUMENTATION IS OLD AND SHOULD NOT BE USED. (it still has some left over parts from the rust version for goodness sakes)
+INSTEAD USE THE ORM64 MANPAGES.
+
 It seems like you need help!
 
 ## Shell

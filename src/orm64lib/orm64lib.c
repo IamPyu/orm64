@@ -16,7 +16,7 @@ void mkdir2(const char *directory, mode_t mode) {
 
 char *orm64_dir() {
   char directory[STRING_SIZE];
-  sprintf(directory, "%s/%s", getenv("HOME"), ".config/orm64");
+  snprintf(directory, STRING_SIZE, "%s/%s", getenv("HOME"), ".config/orm64");
   
   char *p = directory;
   return p;
@@ -24,7 +24,7 @@ char *orm64_dir() {
 
 void orm64_createuser(const char *login, const char *password) {
   char userDirectory[STRING_SIZE];
-  sprintf(userDirectory, "%s/home/%s", orm64_dir(), login);
+  snprintf(userDirectory, STRING_SIZE, "%s/home/%s", orm64_dir(), login);
   mkdir2(userDirectory, 0700);
 
   if (password != NULL) {

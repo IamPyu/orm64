@@ -1,5 +1,8 @@
 # The API
 
+THIS DOCUMENTATION IS OLD AND SHOULD NOT BE USED.
+INSTEAD USE THE ORM64 MANPAGES.
+
 * You are not limited to this API as users can create their own libraries.
 
 ## Most used functions and variables: The orm64 table

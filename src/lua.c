@@ -190,18 +190,22 @@ int orm64InstallPackages(lua_State *L) {
         lua_pop(L, 1);
 
         char path[STRING_SIZE];
-        sprintf(path, "%s/software/%s", orm64_dir(), packageName);
+        snprintf(path, sizeof(path), "%s/software/%s", orm64_dir(), packageName);
         mkdir2(path, 0700);
 
         chdir(path);
         char cmd[STRING_SIZE];
 	
         printf("Package Info{URL: %s, PackageName: %s, Path: %s}\n", url, packageName, path);
-        sprintf(cmd, 
-		"git init; git remote add origin %s; git remote set-url origin %s; git branch -m main; git reset --hard; git pull origin HEAD --force", url, url);
+        snprintf(cmd,
+          sizeof(cmd),
+		      "git init; git remote add origin %s; git remote set-url origin %s; git branch -m main; git reset --hard; git pull origin HEAD --force", 
+          url, 
+          url
+        );
 
         char fullCmd[STRING_SIZE];
-        sprintf(fullCmd, "cd %s; %s > /dev/null", path, cmd);
+        snprintf(fullCmd, sizeof(fullCmd), "cd %s; %s > /dev/null", path, cmd);
 
         system(fullCmd); // system fixed my entire package manager lol.
       } else {
