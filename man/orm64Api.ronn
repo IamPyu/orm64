@@ -1,4 +1,4 @@
-The Orm64 Core API
+orm64Api(1) Orm64 API
 ===
 
 ## Plugins

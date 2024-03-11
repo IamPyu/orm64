@@ -1,8 +1,8 @@
-orm64util
+orm64util(1) - Utilities for Orm64
 ===
 	
 ## SYNOPSIS
-	orm64 ...
+	orm64util ...
 
 ## DESCRIPTION
 	Utilities for Orm64
