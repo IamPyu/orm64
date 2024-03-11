@@ -10,3 +10,16 @@ Orm64 has to built in functions for loading and building plugins.
 
 "orm64.loadPlugin(PLUGIN_NAME)" tries to find PLUGIN_NAME.so in ~/.config/orm64/plugins if it does, 
 it will load the plugin and run the C function orm64SetupPLUGIN_NAME where PLUGIN_NAME is replaced with the argument you specified.
+
+## Packages
+
+"orm64.installPackages()" installs all packages in the table "orm64_options.packages".
+
+"orm64.getSoftwarePath(PACKAGE_NAME)" gets the location of PACKAGE_NAME or returns nil if its not found.
+
+## Configuration
+
+"orm64.setupConfig()" setups a new default configuration for you. 
+But you will need to copy everything in INSTALL_DIR/etc/orm64/default to ~/.config/orm64 to get preinstalled software, plugins and more.
+
+"orm64.reloadConfig()" reloads your configuration.
