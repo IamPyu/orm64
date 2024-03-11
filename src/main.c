@@ -81,6 +81,7 @@ int repl(Orm64Lua *lua) {
     const char *str = (const char*)readline(prompt);
     add_history(str);
 
+
     if (strcmp(str, "exit") == 0) {
 	    if (showMessages) {
 		    printf("%s\n", exitMessage);

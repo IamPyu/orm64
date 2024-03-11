@@ -14,8 +14,6 @@ it will load the plugin and run the C function orm64SetupPLUGIN_NAME where PLUGI
 
 ## Packages
 
-"orm64.installPackages()" installs all packages in the table "orm64_options.packages".
-
 "orm64.getSoftwarePath(PACKAGE_NAME)" gets the location of PACKAGE_NAME or returns nil if its not found.
 
 ## Configuration

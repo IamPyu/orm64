@@ -4,6 +4,8 @@
 #include <string.h>
 #include <unistd.h>
 #include <dlfcn.h>
+#include <ctype.h>
+#include <editline/readline.h>
 
 #include "lua.h"
 #include "util.h"
@@ -176,55 +178,6 @@ int luaCreateUser(lua_State *L) {
 }
 #endif
 
-int orm64InstallPackages(lua_State *L) {
-  lua_getglobal(L, "orm64_options");
-  lua_getfield(L, -1, "packages");
-
-  lua_pushnil(L);
-
-  while (lua_next(L, 2)) {
-    if (lua_isstring(L, -2)) {
-      const char *packageName = lua_tostring(L, -2);
-      if (lua_isstring(L, -1)) {
-        const char *url = lua_tostring(L, -1);
-        lua_pop(L, 1);
-
-        char path[STRING_SIZE];
-        snprintf(path, sizeof(path), "%s/software/%s", orm64_dir(), packageName);
-        mkdir2(path, 0700);
-
-        chdir(path);
-        char cmd[STRING_SIZE];
-	
-        printf("Package Info{URL: %s, PackageName: %s, Path: %s}\n", url, packageName, path);
-        snprintf(cmd,
-          sizeof(cmd),
-		      "git init -C %s; git remote add origin %s -C %s; git remote set-url origin %s -C %s; git branch -m main -C %s; git reset --hard -C %s; git pull origin HEAD --force -C %s",
-          path,
-          url,
-          path,
-          url,
-          path,
-          path,
-          path,
-          path
-        );
-
-        char fullCmd[STRING_SIZE];
-        snprintf(fullCmd, sizeof(fullCmd), "%s > /dev/null", cmd);
-
-        system(fullCmd); // system fixed my entire package manager lol.
-      } else {
-        printf("Invalid package value. It must be a string.\n");
-      }
-    } else {
-      printf("Invalid package key. It must be a string.\n");
-    }
-  }
-
-  return 0;
-}
-
 // The core functions of Orm64
 void setupOrm64Core(Orm64Lua *lua) {
   // Functions and variables under the "orm64" table
@@ -240,9 +193,6 @@ void setupOrm64Core(Orm64Lua *lua) {
 
   lua_pushcfunction(lua->L, orm64GetSoftwarePath);
   lua_setfield(lua->L, -2, "getSoftwarePath");
-
-  lua_pushcfunction(lua->L, orm64InstallPackages);
-  lua_setfield(lua->L, -2, "installPackages");
 
   lua_pushcfunction(lua->L, orm64LoadPlugin);
   lua_setfield(lua->L, -2, "loadPlugin");
