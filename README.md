@@ -23,15 +23,25 @@ Media created by me in this project are licensed under also under the MIT licens
 
 - [X] Lua REPL
 - [X] Application, and Libraries
-- [-] An API with a bunch of modules to create lots of things
-  - [X] Graphics and Multimedia layer
-  - [ ] Networking and HTTP library
-  - [X] User interaction library
-- [ ] File system
-- [X] User system
 - [X] C/C++ Library for interacting with Orm64
-- [ ] Advanced Configuration
-  
+
+### APIs
+
+- [X] Graphics and Multimedia API
+- [X] User system and user interaction API (Bloated build only)
+- [ ] Networking and HTTP API 
+
+#### Users
+
+- [ ] File system
+
+### Configuration
+
+- [X] Configuration via Lua
+- [X] Plugins via C
+- [ ] Lots of configuratin options
+- [ ] More features for Plugins
+
 ## History
 
 I first wrote this in [Rust](https://rust-lang.org).
