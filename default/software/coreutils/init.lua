@@ -1,6 +1,11 @@
-if user == nil then
+---@diagnostic disable: undefined-global
+
+local function bloatNotice()
   print("Orm64 coreutils Application requires bloat mode.")
-  return 1
+end
+
+if user == nil then
+  return bloatNotice
 end
 
 local user = require("user")
