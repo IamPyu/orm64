@@ -35,7 +35,7 @@ Media created by me in this project are licensed under also under the MIT licens
 
 - [X] User system (Bloated build only)
 - [ ] File system for Users (Bloated build only)
-- [ ] 
+- [ ] User utilites (Bloated build only) 
 
 ### Configuration
 
