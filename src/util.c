@@ -8,6 +8,19 @@
 #include "util.h"
 #include "res.h"
 
+// Taken from: https://stackoverflow.com/questions/43163677/how-do-i-strip-a-file-extension-from-a-string-in-c 
+void stripFileExtension(char *fname) {
+  char *end = fname + strlen(fname);
+
+  while (end > fname && *end != '.') {
+    --end;
+  }
+
+  if (end > fname) {
+    *end = '\0';
+  }
+}
+
 char *readEntireFile(FILE *ptr) {
   fseek(ptr, 0, SEEK_END); 
   long size = ftell(ptr);

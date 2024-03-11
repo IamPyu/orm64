@@ -115,7 +115,37 @@ int orm64LoadPlugin(lua_State *L) {
 }
 
 int orm64BuildPlugins(lua_State *L) {
+  char path[STRING_SIZE];
+  snprintf(path, sizeof(path), "%s/plugins", orm64_dir());
 
+  DIR *dir = opendir(path);
+
+  struct dirent *pDirent;
+  if (dir != NULL) {
+    while ((pDirent = readdir(dir)) != NULL) {
+      const char *fileName = pDirent->d_name;
+      const char *extension = strrchr(fileName, '.');
+      if (strcmp(extension, ".c") == 0) {
+        char compileCommand[STRING_SIZE];
+        
+        char fileNameClone[1024];
+        strncpy(fileNameClone, fileName, sizeof(fileNameClone));
+        stripFileExtension(fileNameClone);
+
+        snprintf(compileCommand,
+          sizeof(compileCommand),
+          "cc -fPIC -shared %s/plugins/%s -o %s/plugins/%s.so",
+          orm64_dir(),
+          fileName,
+          orm64_dir(),
+          fileNameClone
+        );
+
+        printf("Building plugin '%s' with compiled command:\n'%s'\n", fileNameClone, compileCommand);
+        system(compileCommand);
+      }
+    }
+  }
 
   return 0;
 }
@@ -206,6 +236,9 @@ void setupOrm64Core(Orm64Lua *lua) {
 
   lua_pushcfunction(lua->L, orm64LoadPlugin);
   lua_setfield(lua->L, -2, "loadPlugin");
+
+  lua_pushcfunction(lua->L, orm64BuildPlugins);
+  lua_setfield(lua->L, -2, "buildPlugins");
 
 #if defined(ENABLE_BLOAT)
   lua_pushcfunction(lua->L, luaCreateUser);

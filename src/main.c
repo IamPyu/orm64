@@ -18,12 +18,17 @@ int main(int argc, const char **argv) {
     orm64DirectorySetup(NULL);
   }
 
-  #if defined(DEBUG_MODE)
+
+#if defined(DEBUG_MODE)
   printf("Orm64 compiled with Debug mode!\n");
   printf("String Size: %lu\n", STRING_SIZE);
   printf("Default User: %s\n", DEFAULT_USER);
+#if defined(ENABLE_BLOAT)
+  printf("Bloat is enabled, featuers like users can be used.\n");
+#endif
+
   printf("End of debug information\n");
-  #endif
+#endif
 
   printf("Welcome to Orm64! Lets login!\n");
   printf("If running Orm64 for the first time, use `man 1 orm64util` to learn how to create a user.\n");

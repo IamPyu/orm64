@@ -14,9 +14,11 @@
 #define true 1
 #define false 0
 
+void stripFileExtension(char *fname);
 char *readEntireFile(FILE *ptr);
 
 enum ResFile { DEFAULT_CONFIG, HELP_FILE, API_FILE };
 
 char *getResString(enum ResFile file);
+
 defun(orm64DirectorySetup);

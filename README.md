@@ -1,18 +1,18 @@
-#+TITLE: orm64
+# orm64
 
 A simple, lua-based, fantasy operating system.
 
 It's kinda like those fantasy game consoles, except its meant to be an enitre OS.
 
-* Update March 9th 2024
+## Update March 9th 2024
 
 The term "fantasy console" or "fantasy operating system" for Orm64 does not make sense.
 
 Instead Orm64 will be labelled as "an API layer for creating Software with Lua.".
 
-Which makes features like "Users" useless and bloated, /*which is good*/.
+Which makes features like "Users" useless and bloated, *which is good*.
 
-* Roadmap
+## Roadmap
 
 - [X] Lua REPL
 - [X] Application, and Libraries
@@ -26,11 +26,11 @@ Which makes features like "Users" useless and bloated, /*which is good*/.
 - [X] C/C++ Library for interacting with Orm64
 - [ ] Advanced Configuration
   
-* History
+## History
 
-I first wrote this in [[https://rust-lang.org]].
+I first wrote this in [Rust](https://rust-lang.org).
 
-But of course I had issues with the borrow checker and the [[https://github.com/mlua-rs/mlua]] API
+But of course I had issues with the borrow checker and the [mlua](https://github.com/mlua-rs/mlua) API
 
 So I decided to rewrite Orm64 in C, since C lets you do just about anything in any way you want.
 
@@ -39,7 +39,9 @@ I guess from now on I will write most of my projects in C!
 
 I rewrote this in C++ a month after the C rewrite for some nice features like the *new* and *delete* keywords and lambdas.
 
-* Other stuff
+I later discovered that C++ is an unholy abomination of a language and rewrote it in C again.
 
-This project *probably* has a bunch of crappy code.
+## Other stuff
+
+This project **probably** has a bunch of crappy code.
 But don't blame me it's my first big C/C++ project in 2 years.
