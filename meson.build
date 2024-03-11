@@ -23,8 +23,7 @@ endif
 install_subdir('default', install_dir: 'etc/orm64/')
 
 ## Manpages
-meson.add_install_script('scripts/doc.sh')
-install_subdir('man/man', install_dir: 'share/')
+meson.add_install_script('scripts/man.py')
 
 # Orm64lib
 orm64lib = library('orm64lib', [

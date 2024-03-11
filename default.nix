@@ -12,7 +12,7 @@ with import <nixpkgs> {}; stdenv.mkDerivation {
   name = "orm64";
   pname = "orm64";
   src = ./.;
-  nativeBuildInputs = [ pkg-config python3 meson ninja xxd pandoc ];
+  nativeBuildInputs = [ pkg-config python3 meson ninja xxd ronn ];
   buildInputs = [
     raylib
     luajit

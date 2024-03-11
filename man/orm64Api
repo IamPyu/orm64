@@ -1,0 +1,21 @@
+.\" generated with Ronn-NG/v0.10.1
+.\" http://github.com/apjanke/ronn-ng/tree/0.10.1
+.TH "ORM64API" "" "January 1980" ""
+.SH "Plugins"
+Orm64 has a feature called "Plugins", unlike packages written in Lua, plugins are written and compiled in C\.
+.br
+.P
+Orm64 has to built in functions for loading and building plugins\.
+.br
+.P
+"orm64\.buildPlugins()" builds or rebuilds all plugins in ~/\.config/orm64/plugins\.
+.P
+"orm64\.loadPlugin(PLUGIN_NAME)" tries to find PLUGIN_NAME\.so in ~/\.config/orm64/plugins if it does, it will load the plugin and run the C function orm64SetupPLUGIN_NAME where PLUGIN_NAME is replaced with the argument you specified\.
+.SH "Packages"
+"orm64\.installPackages()" installs all packages in the table "orm64_options\.packages"\.
+.P
+"orm64\.getSoftwarePath(PACKAGE_NAME)" gets the location of PACKAGE_NAME or returns nil if its not found\.
+.SH "Configuration"
+"orm64\.setupConfig()" setups a new default configuration for you\. But you will need to copy everything in INSTALL_DIR/etc/orm64/default to ~/\.config/orm64 to get preinstalled software, plugins and more\.
+.P
+"orm64\.reloadConfig()" reloads your configuration\.
