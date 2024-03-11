@@ -1,3 +1,4 @@
+#if defined(ENABLE_BLOAT)
 #include "user.h"
 #include "lua.h"
 #include "util.h"
@@ -136,3 +137,4 @@ void setupOrm64Users(Orm64Lua *lua, User *pUser) {
   loggedInUser = pUser;
   luaL_openlib(lua->L, "user", userlib, 0);
 }
+#endif
