@@ -1,13 +1,13 @@
-# NAME
-	orm64util
+orm64util
+===
 	
-# SYNOPSIS
+## SYNOPSIS
 	orm64 ...
 
-# DESCRIPTION
+## DESCRIPTION
 	Utilities for Orm64
 	
-# EXAMPLES
+## EXAMPLES
 	$ orm64util newuser "myname" "mypassword"
 		Creates a user called: "myname" with password: "mypassword"
 		

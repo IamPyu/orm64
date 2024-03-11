@@ -1,12 +1,11 @@
-<h1>The Orm64 Core Api</h1>
+The Orm64 Core API
+===
 
-<h2>Plugins</h2>
+## Plugins
 
 Orm64 has a feature called "Plugins", unlike packages written in Lua, plugins are written and compiled in C.
-<br>
 
 Orm64 has to built in functions for loading and building plugins.
-<br>
 
 "orm64.buildPlugins()" builds or rebuilds all plugins in ~/.config/orm64/plugins.
 
