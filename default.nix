@@ -18,7 +18,8 @@ with import <nixpkgs> {}; stdenv.mkDerivation {
     luajit
     libedit
     git
-    janet
+    SDL2
+    SDL2_net
   ];
 
   buildPhase = "meson setup .. --reconfigure && meson configure ${debugArg} ${bloatArg} && meson compile";

@@ -1,4 +1,4 @@
-nix-build -arg debug true -arg bloat false $@
+nix-build --arg debug true --arg bloat false $@
 sudo rm -rf ~/.config/orm64
 mkdir -p ~/.config/orm64
 

@@ -37,6 +37,8 @@ deps = [
   dependency('libedit'),
   dependency('luajit'),
   dependency('raylib'),
+  dependency('sdl2'),
+  dependency('sdl2_net')
 ]
 
 run_command('sh', 'scripts/configure.sh')
