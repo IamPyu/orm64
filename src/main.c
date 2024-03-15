@@ -13,8 +13,8 @@ int repl(Orm64Lua *lua);
 int main(int argc, const char **argv) {
   struct stat st = {0};
   if (stat(strcat(orm64_dir(), "/config.lua"), &st) == -1) {
-	  printf("No configuration found, copy default configuration from INSTALL_DIR/etc/orm64/default to ~/.config/orm64\n");
-	  printf("And create ~/.config/orm64/config.lua\n");
+    printf("No configuration found, copy default configuration from INSTALL_DIR/etc/orm64/default to ~/.config/orm64\n");
+    printf("And create ~/.config/orm64/config.lua\n");
     orm64DirectorySetup(NULL);
   }
 
@@ -32,11 +32,11 @@ int main(int argc, const char **argv) {
 
   printf("Welcome to Orm64! Lets login!\n");
   printf("If running Orm64 for the first time, use `man 1 orm64util` to learn how to create a user.\n");
- 
+
   #if defined(ENABLE_BLOAT)
   #include "user.h"
   User *user = createUser();
-  
+
   for (;;) {
     if (userLogin(user) != -1) {
       Orm64Lua *lua = newOrm64Lua(user);
@@ -57,7 +57,6 @@ int main(int argc, const char **argv) {
   free((void*)lua);
 #endif
 
-  
   return 0;
 }
 
@@ -67,12 +66,12 @@ int repl(Orm64Lua *lua) {
   lua_getglobal(lua->L, "orm64_options");\
   lua_getfield(lua->L, -1, #x);\
   T v = lua_to##t (lua->L, -1)
-  
+
   getOption(const int, boolean, showMessages, show_messages);
   getOption(const char*, string, startupMessage, startup_message);
   getOption(const char*, string, exitMessage, exit_message);
   getOption(const char*, string, prompt, prompt);
-  
+
   if (showMessages) {
 	  printf("%s\n", startupMessage);
   }
