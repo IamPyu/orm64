@@ -4,7 +4,6 @@
 #include <string.h>
 #include <unistd.h>
 #include <dlfcn.h>
-#include <ctype.h>
 #include <editline/readline.h>
 
 #include "lua.h"
@@ -18,7 +17,7 @@
 
 int reloadConfiguration(lua_State *L) {
   FILE *configFile = fopen(strcat(orm64_dir(), "/config.lua"), "r");
-  
+
   if (configFile != NULL) {
     const char *config = readEntireFile(configFile);
     luaL_loadstring(L, config);
@@ -35,7 +34,7 @@ int reloadConfiguration(lua_State *L) {
     printf("Falling back to default configuration and creating default configuration.\n");
     luaL_dostring(L, "orm64.setup_config()");
   }
-  
+
   fclose(configFile);
   return 0;
 }
@@ -54,14 +53,16 @@ Orm64Lua *newOrm64Lua(User *pUser) {
 #endif
 
   char package_code[128];
-  snprintf(package_code, 128, "package.path = package.path .. ';?.lua;%s/software/?/init.lua;%s/scripts/?.lua'", orm64_dir(), orm64_dir());
+  snprintf(package_code, 128, "package.path = package.path .. ';?.lua;%s/software/?/init.lua;%s/scripts/?.lua';'", orm64_dir(), orm64_dir());
+
+
   luaL_dostring(lua->L, package_code);
 
   setupOrm64Core(lua);
 
   lua_createtable(lua->L, 0, 0);
   lua_setglobal(lua->L, "orm64_options");
-  
+
   char *config = getResString(DEFAULT_CONFIG);
   luaL_dostring(lua->L, config);
 
@@ -98,7 +99,7 @@ int orm64LoadPlugin(lua_State *L) {
     return 1;
   }
   dlerror(); // Clear errors
-  
+
   char initFunctionName[STRING_SIZE];
   snprintf(initFunctionName, sizeof(initFunctionName), "orm64Setup%s", pluginName);
 
@@ -129,18 +130,21 @@ int orm64BuildPlugins(lua_State *L) {
       const char *extension = strrchr(fileName, '.');
       if (strcmp(extension, ".c") == 0) {
         char compileCommand[STRING_SIZE];
-        
+
         char fileNameClone[1024];
         strncpy(fileNameClone, fileName, sizeof(fileNameClone));
         stripFileExtension(fileNameClone);
 
         snprintf(compileCommand,
-          sizeof(compileCommand),
-          "cc -fPIC -shared %s/plugins/%s -o %s/plugins/%s.so",
-          orm64_dir(),
-          fileName,
-          orm64_dir(),
-          fileNameClone
+                 sizeof(compileCommand),
+                 "cc -fPIC -shared %s/plugins/%s -o %s/plugins/%s.so -I%s/include -L%s/lib -lluajit-5.1",
+                 orm64_dir(),
+                 fileName,
+                 orm64_dir(),
+                 fileNameClone,
+                 LUAJIT_PREFIX,
+                 LUAJIT_PREFIX,
+                 LUAJIT_VERSION_
         );
 
         printf("Building plugin '%s' with compiled command:\n'%s'\n", fileNameClone, compileCommand);
@@ -165,15 +169,15 @@ int luaCreateUser(lua_State *L) {
     char *p = userDirectory;
 
     FILE *file = fopen(strcat(p, "/.password"), "w");
-    
+
     if (file != NULL) {
       fwrite(password, strlen(password), 1, file);
       fflush(file);
     }
-    
+
     fclose(file);
   }
-  
+
   return 0;
 }
 #endif
@@ -204,7 +208,7 @@ void setupOrm64Core(Orm64Lua *lua) {
   lua_pushcfunction(lua->L, luaCreateUser);
   lua_setfield(lua->L, -2, "createUser");
 #endif
-  
+
   // External Orm64 libraries
   setupOrm64Graphics(lua); // Orm64 Graphics
   setupOrm64Sockets(lua);  // Orm64 Sockets
@@ -213,7 +217,7 @@ void setupOrm64Core(Orm64Lua *lua) {
 
 void runLua(Orm64Lua *lua, const char *code) {
   luaL_loadstring(lua->L, code);
-  
+
   if (lua_pcall(lua->L, 0, 1, 0)) {
     const char *errormsg = lua_tostring(lua->L, -1);
     printf("Failed to run Lua code: %s\n", errormsg);

@@ -6,6 +6,8 @@
 
 //#include "orm64lib/orm64lib.h"
 
+#define luajit_p()
+
 #define STRING_SIZE 512 * sizeof(char*) // DO NOT MODIFY THE SIZE OF
 #define DEFAULT_USER "guest"
 

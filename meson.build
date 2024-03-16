@@ -17,6 +17,12 @@ if get_option('enable_bloat') == true
   add_project_arguments(['-DENABLE_BLOAT'], language: 'c')
 endif
 
+luajit_dep = dependency('luajit')
+prefix = luajit_dep.get_variable('prefix')
+
+add_project_arguments(['-DLUAJIT_PREFIX="'+prefix+'"'], language: 'c')
+add_project_arguments(['-DLUAJIT_VERSION_="'+luajit_dep.version()+'"'], language: 'c')
+
 # User Data and Configuration
 
 ## Default Configuration
@@ -33,9 +39,12 @@ install_headers('src/orm64lib/orm64lib.h')
 
 # Orm64 and Orm64Util
 
+
+
+
 deps = [
+  luajit_dep,
   dependency('libedit'),
-  dependency('luajit'),
   dependency('raylib'),
   dependency('sdl2'),
   dependency('sdl2_net')
