@@ -143,8 +143,7 @@ int orm64BuildPlugins(lua_State *L) {
                  orm64_dir(),
                  fileNameClone,
                  LUAJIT_PREFIX,
-                 LUAJIT_PREFIX,
-                 LUAJIT_VERSION_
+                 LUAJIT_PREFIX
         );
 
         printf("Building plugin '%s' with compiled command:\n'%s'\n", fileNameClone, compileCommand);
