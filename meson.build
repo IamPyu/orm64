@@ -21,7 +21,6 @@ luajit_dep = dependency('luajit')
 prefix = luajit_dep.get_variable('prefix')
 
 add_project_arguments(['-DLUAJIT_PREFIX="'+prefix+'"'], language: 'c')
-add_project_arguments(['-DLUAJIT_VERSION_="'+luajit_dep.version()+'"'], language: 'c')
 
 # User Data and Configuration
 

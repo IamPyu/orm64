@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-void orm64SetupmyPlugin() {
+void orm64SetupMyPlugin() {
   for (int i = 0; i < 5; i++) {
     printf("Hello, world %d!\n", (i + 1));
   }
