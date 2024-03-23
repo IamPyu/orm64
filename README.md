@@ -4,6 +4,8 @@ A simple, lua-based, fantasy operating system.
 
 It's kinda like those fantasy game consoles, except its meant to be an enitre OS.
 
+Here is the [wiki](https://gitlab.com/IamPyu/orm64/~/wikis/home)
+
 ## Update March 9th 2024
 
 The term "fantasy console" or "fantasy operating system" for Orm64 does not make sense.
@@ -29,13 +31,13 @@ Media created by me in this project are licensed under also under the MIT licens
 
 - [X] Graphics and Multimedia API
 - [X] User interaction API (Bloated build only)
-- [ ] Networking and HTTP API 
+- [ ] Networking and HTTP API
 
 ### Usage and Users
 
 - [X] User system (Bloated build only)
 - [ ] File system for Users (Bloated build only)
-- [ ] User utilites (Bloated build only) 
+- [ ] User utilites (Bloated build only)
 
 ### Configuration
 
@@ -52,7 +54,7 @@ But of course I had issues with the borrow checker and the [mlua](https://github
 
 So I decided to rewrite Orm64 in C, since C lets you do just about anything in any way you want.
 
-I found pointers and memory allocation (Thanks to my experience in Rust) easy and I ended up really liking C. 
+I found pointers and memory allocation (Thanks to my experience in Rust) easy and I ended up really liking C.
 I guess from now on I will write most of my projects in C!
 
 I rewrote this in C++ a month after the C rewrite for some nice features like the *new* and *delete* keywords and lambdas.
