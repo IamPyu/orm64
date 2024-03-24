@@ -30,8 +30,8 @@ int main(int argc, const char **argv) {
   printf("End of debug information\n\n\n");
 #endif
 
-  #if defined(ENABLE_BLOAT)
-  printf("Welcome to Orm64! Lets login!\n");
+#if defined(ENABLE_BLOAT)
+  printf("Orm64 Login\n");
   printf("If running Orm64 for the first time, use `man 1 orm64util` to learn how to create a user.\n");
 
   #include "user.h"
@@ -52,7 +52,6 @@ int main(int argc, const char **argv) {
   }
   free((void*)user);
 #else
-  printf("Welcome to Orm64\n");
   Orm64Lua *lua = newOrm64Lua(NULL);
   repl(lua);
   free((void*)lua);
@@ -63,9 +62,9 @@ int main(int argc, const char **argv) {
 
 int repl(Orm64Lua *lua) {
 
-#define getOption(T, t, v, x)\
+#define getOption(T, t, v, n)\
   lua_getglobal(lua->L, "orm64_options");\
-  lua_getfield(lua->L, -1, #x);\
+  lua_getfield(lua->L, -1, #n);\
   T v = lua_to##t (lua->L, -1)
 
   getOption(const int, boolean, showMessages, show_messages);
