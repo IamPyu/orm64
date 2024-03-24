@@ -4,7 +4,7 @@ A simple, lua-based, fantasy operating system.
 
 It's kinda like those fantasy game consoles, except its meant to be an enitre OS.
 
-Here is the [wiki](https://gitlab.com/IamPyu/orm64/-/wikis/home)
+Here is the [wiki](https://gitlab.com/IamPyu/orm64/-/wikis/home).
 
 ## Update March 9th 2024
 
@@ -20,6 +20,16 @@ Orm64 is licensed under the MIT License. You are free to copy, modify, distribut
 
 Media created by me in this project are licensed under also under the MIT license because I don't want to use another license.
 
+## Using
+
+Check the [wiki](https://gitlab.com/IamPyu/orm64/-/wikis/home) to learn how to use Orm64!
+
+The wiki contains information like:
+
+- Building Orm64
+- Conifguring Orm64
+- The Orm64 APIs
+- And more!
 
 ## Roadmap
 
@@ -44,22 +54,9 @@ Media created by me in this project are licensed under also under the MIT licens
 - [X] Configuration via Lua
 - [X] Plugins via C
 - [ ] Lots of configuratin options
-- [ ] More features for Plugins
 
-## History
-
-I first wrote this in [Rust](https://rust-lang.org).
-
-But of course I had issues with the borrow checker and the [mlua](https://github.com/mlua-rs/mlua) API
-
-So I decided to rewrite Orm64 in C, since C lets you do just about anything in any way you want.
-
-I found pointers and memory allocation (Thanks to my experience in Rust) easy and I ended up really liking C.
-I guess from now on I will write most of my projects in C!
-
-I rewrote this in C++ a month after the C rewrite for some nice features like the *new* and *delete* keywords and lambdas.
-
-I later discovered that C++ is an unholy abomination of a language and rewrote it in C again.
+#### Plugin Features 
+- [X] Link with LuaJIT
 
 ## Other stuff
 

@@ -99,7 +99,7 @@ int repl(Orm64Lua *lua) {
 	    }
         return 0;
     } else if (strcmp(str, "wiki") == 0) {
-      extern void OpenURL(const char*);
+      extern void OpenURL(const char*); /* Linked with libraylib */
       OpenURL("https://gitlab.com/IamPyu/orm64/-/wikis/home"); /* Send user to online wiki */
     }
     else {

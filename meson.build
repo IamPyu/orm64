@@ -1,14 +1,12 @@
 project('orm64', 'c')
-add_project_arguments(['-std=c11'], language: 'c')
+add_project_arguments(['-std=c99'], language: 'c')
 
 # Windows support notice
-
 if host_machine.system() == 'windows'
-  error('Orm64, Orm64Util, and Orm64lib are for *NIX system only. I do not plan to add Windows support.')
+  error('Orm64, Orm64Util, and Orm64lib are for *NIX systems only. I do not plan to add Windows support.')
 endif
 
 # Build options
-
 if get_option('debug_install') == true
   add_project_arguments(['-DDEBUG_MODE'], language: 'c')
 endif
@@ -45,8 +43,6 @@ deps = [
   dependency('sdl2'),
   dependency('sdl2_net')
 ]
-
-
 
 run_command('sh', 'scripts/configure.sh')
 executable('orm64', [
