@@ -4,7 +4,7 @@ A simple, lua-based, fantasy operating system.
 
 It's kinda like those fantasy game consoles, except its meant to be an enitre OS.
 
-Here is the [wiki](https://gitlab.com/IamPyu/orm64/~/wikis/home)
+Here is the [wiki](https://gitlab.com/IamPyu/orm64/-/wikis/home)
 
 ## Update March 9th 2024
 
