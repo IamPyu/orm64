@@ -38,9 +38,6 @@ install_headers('src/orm64lib/orm64lib.h')
 
 # Orm64 and Orm64Util
 
-
-
-
 deps = [
   luajit_dep,
   dependency('libedit'),
@@ -49,19 +46,26 @@ deps = [
   dependency('sdl2_net')
 ]
 
+
+
 run_command('sh', 'scripts/configure.sh')
 executable('orm64', [
   'src/main.c',
   'src/lua.c',
   'src/user.c',
   'src/util.c',
+  'src/server/server.c',
   'src/apis/socket.c',
   'src/apis/graphics.c',
   'src/apis/multimedia.c',
   'src/apis/graphics/functions.c',
-], dependencies: deps, link_with: orm64lib, install: true)
+], dependencies: deps, link_with: [
+  orm64lib, 
+], install: true)
 
 executable('orm64util', [
   'src/orm64util/orm64util.c',
   'src/orm64util/ormutil.c'
-], dependencies: deps, link_with: orm64lib, install: true)
+], dependencies: deps, link_with: [
+  orm64lib,
+], install: true)
