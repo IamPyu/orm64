@@ -3,7 +3,7 @@
 
 #include "ormutil.h"
 
-// Private utilites
+/* Private utilites */
 
 void print(const char *str) {
   if (str != NULL) {
@@ -13,7 +13,7 @@ void print(const char *str) {
   }
 }
 
-// ormutil.h functions
+/* ormutil.h functions */
 
 int streq(const char *s1, const char *s2) {
     if (strcmp(s1, s2) == 0) {

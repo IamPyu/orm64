@@ -8,7 +8,7 @@
 #include "util.h"
 #include "res.h"
 
-// Taken from: https://stackoverflow.com/questions/43163677/how-do-i-strip-a-file-extension-from-a-string-in-c 
+/* Taken from: https://stackoverflow.com/questions/43163677/how-do-i-strip-a-file-extension-from-a-string-in-c */
 void stripFileExtension(char *fname) {
   char *end = fname + strlen(fname);
 
@@ -34,8 +34,7 @@ char *readEntireFile(FILE *ptr) {
   return contents;
 }
 
-/// Get the contents of a resource file.
-/// Resource files are from `res.h`
+/* Get the contents of a resource file. */
 char *getResString(enum ResFile file) {
   char str[STRING_SIZE] = "";
 

@@ -98,7 +98,10 @@ int repl(Orm64Lua *lua) {
 		    printf("%s\n", exitMessage);
 	    }
         return 0;
-      }
+    } else if (strcmp(str, "wiki") == 0) {
+      extern void OpenURL(const char*);
+      OpenURL("https://gitlab.com/IamPyu/orm64/-/wikis/home"); /* Send user to online wiki */
+    }
     else {
       runLua(lua, str);
     }

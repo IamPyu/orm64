@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <sys/stat.h>
 
-#define STRING_SIZE 512 * sizeof(char*) // DO NOT MODIFY THE SIZEOF OPERATOR
+#define STRING_SIZE 512 * sizeof(char*) /* DO NOT MODIFY THE SIZEOF OPERATOR */
 #define DEFAULT_USER "guest"
 
 #define defun(name) int name(lua_State *L);
